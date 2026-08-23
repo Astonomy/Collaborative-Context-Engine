@@ -1,0 +1,15 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/shared" },
+    { "path": "packages/domain" },
+    { "path": "packages/context-engine" },
+    { "path": "packages/application" },
+    { "path": "packages/api-contracts" },
+    { "path": "packages/database" },
+    { "path": "packages/model-provider" },
+    { "path": "packages/agents" },
+    { "path": "packages/test-support" }
+  ]
+}
+

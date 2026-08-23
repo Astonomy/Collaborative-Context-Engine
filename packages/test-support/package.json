@@ -1,0 +1,19 @@
+{
+  "name": "@cce/test-support",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@cce/application": "workspace:*",
+    "@cce/context-engine": "workspace:*",
+    "@cce/domain": "workspace:*",
+    "@cce/shared": "workspace:*"
+  }
+}

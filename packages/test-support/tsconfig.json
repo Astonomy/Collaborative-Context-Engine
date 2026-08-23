@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.package.json",
+  "compilerOptions": { "types": ["node"] },
+  "include": ["src/**/*.ts"],
+  "references": [
+    { "path": "../shared" },
+    { "path": "../domain" },
+    { "path": "../context-engine" },
+    { "path": "../application" }
+  ]
+}

@@ -1,0 +1,51 @@
+[
+  {
+    "name": "new disjoint fact",
+    "existing": null,
+    "proposal": { "kind": "fact", "key": "deployment.runtime", "value": "Docker", "scope": { "tags": [] } },
+    "expectedBucket": "clean",
+    "expectedClassification": "C0"
+  },
+  {
+    "name": "allow-listed object expansion",
+    "existing": { "kind": "fact", "key": "database.primary", "value": { "technology": "PostgreSQL" }, "scope": { "tags": [] } },
+    "proposal": { "kind": "fact", "key": "database.primary", "value": { "extension": "pgvector" }, "scope": { "tags": [] } },
+    "expectedBucket": "clean",
+    "expectedClassification": "C1"
+  },
+  {
+    "name": "uncertain overlapping scope",
+    "existing": { "kind": "fact", "key": "database.primary", "value": "PostgreSQL", "scope": { "environment": "production", "tags": [] } },
+    "proposal": { "kind": "fact", "key": "database.primary", "value": "MySQL", "scope": { "component": "api", "tags": [] } },
+    "expectedBucket": "conflict",
+    "expectedClassification": "C2"
+  },
+  {
+    "name": "mutually exclusive decision",
+    "existing": { "kind": "decision", "key": "database.primary", "value": "PostgreSQL", "scope": { "tags": [] } },
+    "proposal": { "kind": "decision", "key": "database.primary", "value": "MySQL", "scope": { "tags": [] } },
+    "expectedBucket": "conflict",
+    "expectedClassification": "C3"
+  },
+  {
+    "name": "explicit supersession",
+    "existing": { "kind": "fact", "key": "database.primary", "value": "PostgreSQL 17", "scope": { "tags": [] } },
+    "proposal": { "kind": "fact", "key": "database.primary", "value": "PostgreSQL 18", "scope": { "tags": [] }, "explicitSupersedes": true },
+    "expectedBucket": "clean",
+    "expectedClassification": "C4"
+  },
+  {
+    "name": "normalization does not erase a meaningful value change",
+    "existing": { "kind": "fact", "key": "database.primary", "value": "  PostgreSQL ", "scope": { "tags": [] } },
+    "proposal": { "kind": "fact", "key": "database.primary", "value": "postgresql", "scope": { "tags": [] } },
+    "expectedBucket": "conflict",
+    "expectedClassification": "C3"
+  },
+  {
+    "name": "same key in disjoint environments",
+    "existing": { "kind": "fact", "key": "database.primary", "value": "PostgreSQL", "scope": { "environment": "production", "tags": [] } },
+    "proposal": { "kind": "fact", "key": "database.primary", "value": "SQLite", "scope": { "environment": "test", "tags": [] } },
+    "expectedBucket": "clean",
+    "expectedClassification": "C0"
+  }
+]

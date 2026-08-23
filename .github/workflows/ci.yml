@@ -1,0 +1,255 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CI: "true"
+  NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  quality:
+    name: Static, unit, coverage, and build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.22.0
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.19.0
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit locked dependencies
+        run: pnpm audit --audit-level high
+
+      - name: Enforce dependency license policy
+        shell: bash
+        run: |
+          report="$RUNNER_TEMP/cce-lockfile-licenses.json"
+          pnpm licenses list --json > "$report"
+          node --input-type=module - "$report" <<'NODE'
+          import { readFileSync } from "node:fs";
+
+          const report = JSON.parse(readFileSync(process.argv[2], "utf8"));
+          const rejected = Object.keys(report).filter(
+            (license) =>
+              license.trim() === "" ||
+              /(^|[^A-Z])(?:AGPL|GPL)-/i.test(license) ||
+              /(?:UNKNOWN|UNLICENSED)/i.test(license),
+          );
+          if (rejected.length > 0) {
+            throw new Error(`Rejected dependency licenses: ${rejected.join(", ")}`);
+          }
+          NODE
+
+      - name: Check formatting
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Run unit, contract, and component tests
+        run: pnpm test
+
+      - name: Enforce coverage thresholds
+        run: pnpm test:coverage
+
+      - name: Build production application
+        run: pnpm build
+
+      - name: Upload coverage report
+        if: ${{ always() && hashFiles('coverage/**') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          if-no-files-found: error
+          retention-days: 14
+
+  integration:
+    name: PostgreSQL 18 integration
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:18.6-alpine3.24
+        env:
+          POSTGRES_DB: cce_integration_cli
+          POSTGRES_USER: cce
+          POSTGRES_PASSWORD: cce-integration
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U cce -d cce_integration_cli"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      DATABASE_URL: postgresql://cce:cce-integration@127.0.0.1:5432/cce_integration_cli
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.22.0
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.19.0
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate migration CLI against PostgreSQL service
+        run: pnpm --filter @cce/database migrate
+
+      - name: Run isolated PostgreSQL integration tests
+        run: pnpm test:integration
+
+  e2e:
+    name: Chromium end-to-end
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:18.6-alpine3.24
+        env:
+          POSTGRES_DB: cce_e2e
+          POSTGRES_USER: cce
+          POSTGRES_PASSWORD: cce-e2e
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U cce -d cce_e2e"
+          --health-interval 2s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      DATABASE_URL: postgresql://cce:cce-e2e@127.0.0.1:5432/cce_e2e
+      CCE_SESSION_SECRET: cce-ci-session-secret-with-more-than-32-bytes
+      CCE_SEED_USER_EMAIL: e2e-owner@example.test
+      CCE_SEED_USER_NAME: E2E Owner
+      CCE_SEED_API_TOKEN: cce-e2e-api-token-00000000000000000000
+      CCE_E2E_EDITOR_API_TOKEN: cce-e2e-editor-token-000000000000000000
+      CCE_E2E_VIEWER_API_TOKEN: cce-e2e-viewer-token-000000000000000000
+      MODEL_BASE_URL: http://127.0.0.1:8000/v1
+      MODEL_API_KEY: ""
+      MODEL_CHAT_MODEL: Qwen/Qwen3-8B
+      MODEL_EXTRACTOR_MODEL: Qwen/Qwen3-8B
+      MODEL_CLASSIFIER_MODEL: Qwen/Qwen3-4B
+      MODEL_RESOLVER_MODEL: Qwen/Qwen3-32B
+      MODEL_REQUEST_TIMEOUT_MS: "30000"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.22.0
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.19.0
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Migrate and seed test database
+        run: |
+          pnpm --filter @cce/database migrate
+          pnpm --filter @cce/database seed
+          CCE_SEED_USER_EMAIL=e2e-bob@example.test \
+          CCE_SEED_USER_NAME="E2E Bob" \
+          CCE_SEED_API_TOKEN="$CCE_E2E_EDITOR_API_TOKEN" \
+          pnpm --filter @cce/database seed
+          CCE_SEED_USER_EMAIL=e2e-viewer@example.test \
+          CCE_SEED_USER_NAME="E2E Viewer" \
+          CCE_SEED_API_TOKEN="$CCE_E2E_VIEWER_API_TOKEN" \
+          pnpm --filter @cce/database seed
+
+      - name: Run browser tests
+        shell: bash
+        run: |
+          node scripts/e2e-model-server.mjs > "$RUNNER_TEMP/cce-e2e-model.log" 2>&1 &
+          model_pid=$!
+          trap 'kill "$model_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..50}; do
+            if curl --fail --silent http://127.0.0.1:8000/health > /dev/null; then
+              break
+            fi
+            if [ "$attempt" -eq 50 ]; then
+              cat "$RUNNER_TEMP/cce-e2e-model.log"
+              exit 1
+            fi
+            sleep 0.2
+          done
+          pnpm test:e2e
+
+      - name: Upload Playwright report on failure
+        if: ${{ failure() && hashFiles('playwright-report/**') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          if-no-files-found: error
+          retention-days: 14
+
+  container:
+    name: Production container build
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build standalone image without publishing
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          target: runner
+          push: false
+          tags: cce:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

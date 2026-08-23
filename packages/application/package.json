@@ -1,0 +1,17 @@
+{
+  "name": "@cce/application",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@cce/context-engine": "workspace:*",
+    "@cce/domain": "workspace:*",
+    "@cce/shared": "workspace:*",
+    "zod": "4.4.3"
+  }
+}

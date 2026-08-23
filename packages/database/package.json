@@ -1,0 +1,28 @@
+{
+  "name": "@cce/database",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./runtime": "./src/runtime.ts"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "migrate": "node --import tsx ./src/cli/migrate.ts",
+    "seed": "node --import tsx ./src/cli/seed.ts"
+  },
+  "dependencies": {
+    "@cce/application": "workspace:*",
+    "@cce/domain": "workspace:*",
+    "@cce/shared": "workspace:*",
+    "drizzle-orm": "0.45.2",
+    "pg": "8.23.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/pg": "8.18.0",
+    "tsx": "4.21.0"
+  }
+}

@@ -1,0 +1,20 @@
+.git
+.github
+.next
+**/.next
+node_modules
+**/node_modules
+dist
+**/dist
+coverage
+playwright-report
+test-results
+.turbo
+*.tsbuildinfo
+*.log
+.env
+.env.*
+!.env.example
+tests
+docs
+Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md

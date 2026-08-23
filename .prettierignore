@@ -1,0 +1,10 @@
+.next
+coverage
+dist
+node_modules
+playwright-report
+test-results
+pnpm-lock.yaml
+LICENSE
+Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md
+

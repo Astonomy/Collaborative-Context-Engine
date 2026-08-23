@@ -1,0 +1,32 @@
+{
+  "name": "@cce/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cce/agents": "workspace:*",
+    "@cce/api-contracts": "workspace:*",
+    "@cce/application": "workspace:*",
+    "@cce/database": "workspace:*",
+    "@cce/domain": "workspace:*",
+    "@cce/model-provider": "workspace:*",
+    "@cce/shared": "workspace:*",
+    "next": "16.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
+  }
+}
