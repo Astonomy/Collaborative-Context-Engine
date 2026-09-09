@@ -32,11 +32,20 @@ export async function parseBody<Schema extends z.ZodType>(
     throw new TransportError("Content-Type must be application/json.");
   }
   try {
-    return schema.parse(JSON.parse(await readBoundedRequestText(request)) as unknown);
+    return schema.parse(await readBoundedRequestJson(request));
   } catch (error: unknown) {
     if (error instanceof z.ZodError || error instanceof TransportError) {
       throw error;
     }
+    throw new TransportError("Request body must contain valid JSON.");
+  }
+}
+
+export async function readBoundedRequestJson(request: Request): Promise<unknown> {
+  try {
+    return JSON.parse(await readBoundedRequestText(request)) as unknown;
+  } catch (error: unknown) {
+    if (error instanceof TransportError) throw error;
     throw new TransportError("Request body must contain valid JSON.");
   }
 }

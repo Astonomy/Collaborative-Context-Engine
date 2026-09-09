@@ -1,12 +1,9 @@
-import { z } from "zod";
-
 import { createPostgresPool } from "../connection";
 import { runMigrations } from "../migrations";
-
-const environmentSchema = z.object({ DATABASE_URL: z.string().min(1) });
+import { parseMigrationEnvironment } from "./environment";
 
 async function migrate(): Promise<void> {
-  const environment = environmentSchema.parse(process.env);
+  const environment = parseMigrationEnvironment(process.env);
   const pool = createPostgresPool(environment.DATABASE_URL);
   try {
     const results = await runMigrations(pool);

@@ -11,6 +11,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@cce/conversation-import": "workspace:*",
     "@cce/domain": "workspace:*",
     "zod": "4.4.3"
   }

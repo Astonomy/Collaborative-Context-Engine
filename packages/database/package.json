@@ -10,11 +10,12 @@
   "scripts": {
     "build": "tsc -b",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "migrate": "node --import tsx ./src/cli/migrate.ts",
-    "seed": "node --import tsx ./src/cli/seed.ts"
+    "migrate": "node --import ../../scripts/load-root-environment.mts --import tsx ./src/cli/migrate.ts",
+    "seed": "node --import ../../scripts/load-root-environment.mts --import tsx ./src/cli/seed.ts"
   },
   "dependencies": {
     "@cce/application": "workspace:*",
+    "@cce/conversation-import": "workspace:*",
     "@cce/domain": "workspace:*",
     "@cce/shared": "workspace:*",
     "drizzle-orm": "0.45.2",

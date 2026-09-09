@@ -17,7 +17,13 @@ import type {
   UserId,
 } from "@cce/domain";
 import type { ContextSnapshot } from "@cce/context-engine";
-import type { CceRepositories, ProjectAccess, UnitOfWork } from "@cce/application";
+import type {
+  CceRepositories,
+  ConversationImportPreviewRecord,
+  ConversationImportRecord,
+  ProjectAccess,
+  UnitOfWork,
+} from "@cce/application";
 
 export interface MemoryState {
   users: User[];
@@ -36,6 +42,8 @@ export interface MemoryState {
   modelRuns: ModelRun[];
   agentRuns: AgentRun[];
   auditEvents: AuditEvent[];
+  imports: ConversationImportRecord[];
+  importPreviews: ConversationImportPreviewRecord[];
 }
 
 function initialState(): MemoryState {
@@ -56,6 +64,8 @@ function initialState(): MemoryState {
     modelRuns: [],
     agentRuns: [],
     auditEvents: [],
+    imports: [],
+    importPreviews: [],
   };
 }
 
@@ -197,8 +207,7 @@ export class InMemoryUnitOfWork implements UnitOfWork {
       },
       update: async (conversation, branch) => {
         const conversationIndex = this.state.conversations.findIndex(
-          (entry) =>
-            entry.projectId === conversation.projectId && entry.id === conversation.id,
+          (entry) => entry.projectId === conversation.projectId && entry.id === conversation.id,
         );
         const branchIndex = this.state.branches.findIndex(
           (entry) => entry.projectId === branch.projectId && entry.id === branch.id,
@@ -214,7 +223,8 @@ export class InMemoryUnitOfWork implements UnitOfWork {
           conversation.branchId !== branch.id ||
           currentConversation.branchId !== conversation.branchId ||
           currentConversation.createdAt !== conversation.createdAt ||
-          JSON.stringify(currentConversation.createdBy) !== JSON.stringify(conversation.createdBy) ||
+          JSON.stringify(currentConversation.createdBy) !==
+            JSON.stringify(conversation.createdBy) ||
           currentBranch.conversationId !== branch.conversationId ||
           currentBranch.baseCommitId !== branch.baseCommitId ||
           currentBranch.createdAt !== branch.createdAt
@@ -407,9 +417,7 @@ export class InMemoryUnitOfWork implements UnitOfWork {
         this.state.modelRuns[index] = run;
       },
       findModelRun: async (projectId, runId) =>
-        this.state.modelRuns.find(
-          (run) => run.projectId === projectId && run.id === runId,
-        ) ?? null,
+        this.state.modelRuns.find((run) => run.projectId === projectId && run.id === runId) ?? null,
       listModelRuns: async (projectId) =>
         this.state.modelRuns
           .filter((run) => run.projectId === projectId)
@@ -446,6 +454,46 @@ export class InMemoryUnitOfWork implements UnitOfWork {
           .filter((event) => event.projectId === projectId)
           .sort((left, right) => right.occurredAt.localeCompare(left.occurredAt))
           .slice(0, 500),
+    },
+    imports: {
+      findById: async (projectId, importId) =>
+        this.state.imports.find(
+          (entry) => entry.projectId === projectId && entry.id === importId,
+        ) ?? null,
+      findCompletedByIdentity: async (projectId, sourceFileHash, policy) =>
+        this.state.imports.find(
+          (entry) =>
+            entry.projectId === projectId &&
+            entry.sourceFileHash === sourceFileHash &&
+            entry.policy === policy,
+        ) ?? null,
+      findPreviewById: async (projectId, previewId) =>
+        this.state.importPreviews.find(
+          (entry) => entry.projectId === projectId && entry.id === previewId,
+        ) ?? null,
+      deleteExpiredPreviews: async (projectId, expiredBefore) => {
+        const retained = this.state.importPreviews.filter(
+          (entry) => entry.projectId !== projectId || entry.expiresAt > expiredBefore,
+        );
+        const deleted = this.state.importPreviews.length - retained.length;
+        this.state.importPreviews = retained;
+        return deleted;
+      },
+      insertPreview: async (record) => {
+        this.state.importPreviews.push(record);
+      },
+      insert: async (record) => {
+        if (
+          this.state.imports.some(
+            (entry) =>
+              entry.projectId === record.projectId &&
+              entry.sourceFileHash === record.sourceFileHash &&
+              entry.policy === record.policy,
+          )
+        )
+          throw new Error("Conversation import already exists.");
+        this.state.imports.push(record);
+      },
     },
   };
 

@@ -324,6 +324,117 @@ export const messages = pgTable(
   ],
 );
 
+export const conversationImports = pgTable(
+  "conversation_imports",
+  {
+    projectId: uuid("project_id")
+      .notNull()
+      .references(() => projects.projectId, { onDelete: "restrict" }),
+    id: uuid("id").notNull(),
+    source: text("source").notNull(),
+    sourceFormat: text("source_format").notNull(),
+    sourceFileHash: char("source_file_hash", { length: 64 }).notNull(),
+    policy: text("policy").notNull(),
+    status: text("status").notNull(),
+    createdBy: uuid("created_by")
+      .notNull()
+      .references(() => users.id, { onDelete: "restrict" }),
+    createdAt: auditTimestamp("created_at").notNull(),
+    completedAt: auditTimestamp("completed_at").notNull(),
+    conversationCount: integer("conversation_count").notNull(),
+    messageCount: integer("message_count").notNull(),
+    warnings: jsonb("warnings").$type<unknown>().notNull(),
+    sourceManifest: jsonb("source_manifest").$type<unknown>().notNull(),
+    importedConversations: jsonb("imported_conversations").$type<unknown>().notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.projectId, table.id], name: "conversation_imports_pk" }),
+    unique("conversation_imports_identity_uq").on(
+      table.projectId,
+      table.sourceFileHash,
+      table.policy,
+    ),
+    check("conversation_imports_hash_format", sql`${table.sourceFileHash} ~ '^[0-9a-f]{64}$'`),
+    check(
+      "conversation_imports_counts_nonnegative",
+      sql`${table.conversationCount} >= 0 AND ${table.messageCount} >= 0`,
+    ),
+    check(
+      "conversation_imports_source",
+      sql`${table.source} IN ('chatgpt', 'chatgpt-plugin', 'codex-plugin')`,
+    ),
+    check(
+      "conversation_imports_source_format",
+      sql`${table.sourceFormat} IN ('json', 'zip', 'mcp')`,
+    ),
+    check(
+      "conversation_imports_policy",
+      sql`${table.policy} IN ('current_path', 'provided_messages')`,
+    ),
+    check(
+      "conversation_imports_source_shape",
+      sql`(
+        (${table.source} = 'chatgpt' AND ${table.sourceFormat} IN ('json', 'zip') AND ${table.policy} = 'current_path')
+        OR
+        (${table.source} IN ('chatgpt-plugin', 'codex-plugin') AND ${table.sourceFormat} = 'mcp' AND ${table.policy} = 'provided_messages')
+      )`,
+    ),
+    check("conversation_imports_completed_status", sql`${table.status} = 'completed'`),
+    check(
+      "conversation_imports_json_shape",
+      sql`jsonb_typeof(${table.warnings}) = 'array'
+        AND jsonb_typeof(${table.sourceManifest}) = 'array'
+        AND jsonb_typeof(${table.importedConversations}) = 'array'`,
+    ),
+  ],
+);
+
+export const conversationImportPreviews = pgTable(
+  "conversation_import_previews",
+  {
+    projectId: uuid("project_id")
+      .notNull()
+      .references(() => projects.projectId, { onDelete: "restrict" }),
+    id: uuid("id").notNull(),
+    source: text("source").notNull(),
+    sourceFileHash: char("source_file_hash", { length: 64 }).notNull(),
+    createdBy: uuid("created_by")
+      .notNull()
+      .references(() => users.id, { onDelete: "restrict" }),
+    createdAt: auditTimestamp("created_at").notNull(),
+    expiresAt: auditTimestamp("expires_at").notNull(),
+    messageCount: integer("message_count").notNull(),
+    unsupportedContentCount: integer("unsupported_content_count").notNull(),
+    warnings: jsonb("warnings").$type<unknown>().notNull(),
+    conversation: jsonb("conversation").$type<unknown>().notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.projectId, table.id], name: "conversation_import_previews_pk" }),
+    index("conversation_import_previews_expiry_idx").on(table.expiresAt),
+    check(
+      "conversation_import_previews_source",
+      sql`${table.source} IN ('chatgpt-plugin', 'codex-plugin')`,
+    ),
+    check(
+      "conversation_import_previews_hash_format",
+      sql`${table.sourceFileHash} ~ '^[0-9a-f]{64}$'`,
+    ),
+    check(
+      "conversation_import_previews_counts_nonnegative",
+      sql`${table.messageCount} >= 0 AND ${table.unsupportedContentCount} >= 0`,
+    ),
+    check(
+      "conversation_import_previews_expiry_after_creation",
+      sql`${table.expiresAt} > ${table.createdAt}`,
+    ),
+    check(
+      "conversation_import_previews_json_shape",
+      sql`jsonb_typeof(${table.warnings}) = 'array'
+        AND jsonb_typeof(${table.conversation}) = 'object'`,
+    ),
+  ],
+);
+
 export const modelRuns = pgTable(
   "model_runs",
   {

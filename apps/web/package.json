@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --webpack",
+    "dev": "node --import ../../scripts/load-root-environment.mts ./node_modules/next/dist/bin/next dev --webpack",
     "build": "next build",
-    "start": "next start",
+    "start": "node --import ../../scripts/load-root-environment.mts ./node_modules/next/dist/bin/next start",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -16,8 +16,9 @@
     "@cce/database": "workspace:*",
     "@cce/domain": "workspace:*",
     "@cce/model-provider": "workspace:*",
+    "@cce/mcp-server": "workspace:*",
     "@cce/shared": "workspace:*",
-    "next": "16.3.2",
+    "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "zod": "4.4.3"

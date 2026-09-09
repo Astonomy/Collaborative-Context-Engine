@@ -5,6 +5,7 @@ import { ApplicationError } from "./errors";
 export type ProjectPermission =
   | "project:read"
   | "conversation:write"
+  | "conversation:import"
   | "context:propose"
   | "context:review_low_risk"
   | "context:approve_high_risk"
@@ -17,6 +18,7 @@ const permissionsByRole: Readonly<Record<ProjectRole, ReadonlySet<ProjectPermiss
   editor: new Set([
     "project:read",
     "conversation:write",
+    "conversation:import",
     "context:propose",
     "context:review_low_risk",
     "agent:run",
@@ -24,6 +26,7 @@ const permissionsByRole: Readonly<Record<ProjectRole, ReadonlySet<ProjectPermiss
   owner: new Set([
     "project:read",
     "conversation:write",
+    "conversation:import",
     "context:propose",
     "context:review_low_risk",
     "context:approve_high_risk",

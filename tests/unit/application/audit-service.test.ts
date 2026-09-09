@@ -1,4 +1,4 @@
-import { AuditService, ApplicationError } from "@cce/application";
+import { AuditService } from "@cce/application";
 import { agentRunSchema, auditEventSchema, modelRunSchema, userSchema } from "@cce/domain";
 import { describe, expect, it } from "vitest";
 
@@ -75,6 +75,6 @@ describe("AuditService", () => {
         projectId: fixture.project.id,
         actorUserId: outsider.id,
       }),
-    ).rejects.toMatchObject<ApplicationError>({ code: "NOT_FOUND" });
+    ).rejects.toMatchObject({ code: "NOT_FOUND" });
   });
 });

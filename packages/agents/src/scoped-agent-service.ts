@@ -1,17 +1,19 @@
 import {
   ApplicationError,
-  ContextService,
   authorizeProjectMember,
   requireActiveProject,
+  type ContextService,
   type ModelProvider,
   type ProjectPermission,
   type UnitOfWork,
 } from "@cce/application";
 import {
   auditEventIdSchema,
+  type AgentRun,
   type AgentRunId,
   type ConversationId,
   type ProjectId,
+  type ProjectRole,
   type UserId,
 } from "@cce/domain";
 
@@ -75,9 +77,7 @@ export class ScopedAgentService {
             return repositories.runs.updateAgentRun(run, expectedVersion);
           }),
         findAgentRun: (projectId, runId) =>
-          this.unitOfWork.run((repositories) =>
-            repositories.runs.findAgentRun(projectId, runId),
-          ),
+          this.unitOfWork.run((repositories) => repositories.runs.findAgentRun(projectId, runId)),
       },
       modelProvider,
       runtime,
@@ -146,9 +146,7 @@ export class ScopedAgentService {
         );
       }
       const currentItems = await repositories.context.listCurrentItems(input.projectId);
-      const actualThroughMessageSequence = Math.max(
-        ...evidence.map((item) => item.sequence),
-      );
+      const actualThroughMessageSequence = Math.max(...evidence.map((item) => item.sequence));
       return { access, branch, evidence, currentItems, actualThroughMessageSequence };
     });
     const pack = await this.contexts.buildForConversation({
@@ -156,18 +154,21 @@ export class ScopedAgentService {
       conversationId: input.conversationId,
       actorUserId: input.actorUserId,
     });
-    const result = await this.workflow.start({
-      projectId: input.projectId,
-      conversationId: input.conversationId,
-      branchId: scoped.branch.id,
-      baseCommitId: scoped.branch.baseCommitId,
-      throughMessageSequence: scoped.actualThroughMessageSequence,
-      objective: input.objective,
-      routedContext: JSON.stringify(pack),
-      evidence: scoped.evidence,
-      currentItems: [...scoped.currentItems],
-      principal: { userId: input.actorUserId, role: scoped.access.member.role },
-    }, input.signal);
+    const result = await this.workflow.start(
+      {
+        projectId: input.projectId,
+        conversationId: input.conversationId,
+        branchId: scoped.branch.id,
+        baseCommitId: scoped.branch.baseCommitId,
+        throughMessageSequence: scoped.actualThroughMessageSequence,
+        objective: input.objective,
+        routedContext: JSON.stringify(pack),
+        evidence: scoped.evidence,
+        currentItems: [...scoped.currentItems],
+        principal: { userId: input.actorUserId, role: scoped.access.member.role },
+      },
+      input.signal,
+    );
     await this.recordOutcome("agent_run.started", input.actorUserId, result, [
       "agent:run",
       "context:propose",
@@ -195,11 +196,7 @@ export class ScopedAgentService {
   }): Promise<AgentWorkflowResult> {
     const role = await this.unitOfWork.run(async (repositories) => {
       const access = await repositories.projects.findAccess(input.projectId, input.actorUserId);
-      const member = authorizeProjectMember(
-        access?.member ?? null,
-        input.actorUserId,
-        "agent:run",
-      );
+      const member = authorizeProjectMember(access?.member ?? null, input.actorUserId, "agent:run");
       authorizeProjectMember(access?.member ?? null, input.actorUserId, "context:propose");
       if (access === null) {
         throw new ApplicationError("NOT_FOUND", "Project was not found.");
@@ -231,15 +228,14 @@ export class ScopedAgentService {
   public async list(input: {
     readonly projectId: ProjectId;
     readonly actorUserId: UserId;
-    readonly status?: "queued" | "running" | "awaiting_approval" | "completed" | "failed" | "cancelled";
-  }) {
+    readonly status?:
+      "queued" | "running" | "awaiting_approval" | "completed" | "failed" | "cancelled";
+  }): Promise<readonly AgentRun[]> {
     return this.unitOfWork.run(async (repositories) => {
       const access = await repositories.projects.findAccess(input.projectId, input.actorUserId);
       authorizeProjectMember(access?.member ?? null, input.actorUserId, "project:read");
       const runs = await repositories.runs.listAgentRuns(input.projectId);
-      return input.status === undefined
-        ? runs
-        : runs.filter((run) => run.status === input.status);
+      return input.status === undefined ? runs : runs.filter((run) => run.status === input.status);
     });
   }
 
@@ -318,7 +314,7 @@ export class ScopedAgentService {
     actorUserId: UserId,
     permission: ProjectPermission,
     activeRequired = false,
-  ) {
+  ): Promise<ProjectRole> {
     return this.unitOfWork.run(async (repositories) => {
       const access = await repositories.projects.findAccess(projectId, actorUserId);
       const member = authorizeProjectMember(access?.member ?? null, actorUserId, permission);

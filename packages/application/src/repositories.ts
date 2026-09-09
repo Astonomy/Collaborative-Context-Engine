@@ -27,6 +27,59 @@ import type {
   UserId,
 } from "@cce/domain";
 import type { ContextSnapshot } from "@cce/context-engine";
+import type { ExternalConversation } from "@cce/conversation-import";
+
+export interface ConversationImportRecord {
+  readonly id: string;
+  readonly projectId: ProjectId;
+  readonly source: "chatgpt" | "chatgpt-plugin" | "codex-plugin";
+  readonly sourceFormat: "json" | "zip" | "mcp";
+  readonly sourceFileHash: string;
+  readonly policy: "current_path" | "provided_messages";
+  readonly status: "completed";
+  readonly createdBy: UserId;
+  readonly createdAt: string;
+  readonly completedAt: string;
+  readonly conversationCount: number;
+  readonly messageCount: number;
+  readonly warnings: readonly string[];
+  readonly sourceManifest: readonly ExternalConversation[];
+  readonly importedConversations: readonly {
+    externalConversationId?: string | undefined;
+    conversationId: ConversationId;
+    messageIds: readonly string[];
+  }[];
+}
+
+export interface ConversationImportPreviewRecord {
+  readonly id: string;
+  readonly projectId: ProjectId;
+  readonly source: "chatgpt-plugin" | "codex-plugin";
+  readonly sourceFileHash: string;
+  readonly createdBy: UserId;
+  readonly createdAt: string;
+  readonly expiresAt: string;
+  readonly messageCount: number;
+  readonly unsupportedContentCount: number;
+  readonly warnings: readonly string[];
+  readonly conversation: ExternalConversation;
+}
+
+export interface ConversationImportRepository {
+  findById(projectId: ProjectId, importId: string): Promise<ConversationImportRecord | null>;
+  findCompletedByIdentity(
+    projectId: ProjectId,
+    sourceFileHash: string,
+    policy: "current_path" | "provided_messages",
+  ): Promise<ConversationImportRecord | null>;
+  findPreviewById(
+    projectId: ProjectId,
+    previewId: string,
+  ): Promise<ConversationImportPreviewRecord | null>;
+  deleteExpiredPreviews(projectId: ProjectId, expiredBefore: string): Promise<number>;
+  insertPreview(record: ConversationImportPreviewRecord): Promise<void>;
+  insert(record: ConversationImportRecord): Promise<void>;
+}
 
 export interface ProjectAccess {
   readonly project: Project;
@@ -150,6 +203,7 @@ export interface CceRepositories {
   readonly merges: MergeRepository;
   readonly runs: RunRepository;
   readonly audit: AuditRepository;
+  readonly imports: ConversationImportRepository;
 }
 
 export interface UnitOfWork {

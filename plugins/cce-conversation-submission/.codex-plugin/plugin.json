@@ -1,0 +1,28 @@
+{
+  "name": "cce-conversation-submission",
+  "version": "0.1.0",
+  "description": "Submit an explicitly approved ChatGPT or Codex conversation to a CCE project as evidence.",
+  "author": {
+    "name": "Collaborative Context Engine contributors",
+    "url": "https://github.com/Astonomy/Collaborative-Context-Engine"
+  },
+  "homepage": "https://github.com/Astonomy/Collaborative-Context-Engine/blob/main/docs/plugins/cce-plugin.md",
+  "repository": "https://github.com/Astonomy/Collaborative-Context-Engine",
+  "license": "Apache-2.0",
+  "keywords": ["cce", "conversation", "evidence", "chatgpt", "codex"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Submit Conversations to CCE",
+    "shortDescription": "Send approved conversation evidence to a CCE project",
+    "longDescription": "A confirmation-first workflow for sending the messages available in the current ChatGPT or Codex invocation to one authorized Collaborative Context Engine project as provenance-preserving evidence.",
+    "developerName": "Collaborative Context Engine contributors",
+    "category": "Productivity",
+    "capabilities": ["Write"],
+    "defaultPrompt": [
+      "Submit this conversation to my CCE project",
+      "Preview this Codex conversation for CCE"
+    ],
+    "brandColor": "#2563EB"
+  }
+}

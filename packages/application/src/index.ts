@@ -3,6 +3,7 @@ export * from "./audit-service";
 export * from "./chat-service";
 export * from "./context-service";
 export * from "./conversation-service";
+export * from "./conversation-import-service";
 export * from "./errors";
 export * from "./extraction-service";
 export * from "./merge-service";

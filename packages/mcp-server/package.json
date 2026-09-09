@@ -1,0 +1,24 @@
+{
+  "name": "@cce/mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@cce/application": "workspace:*",
+    "@cce/conversation-import": "workspace:*",
+    "@cce/domain": "workspace:*",
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@cce/test-support": "workspace:*",
+    "vitest": "4.1.11"
+  }
+}

@@ -257,11 +257,7 @@ describe("ChatService", () => {
       },
       { type: "finish", finishReason: "stop" },
     ]);
-    const conversations = new ConversationService(
-      fixture.unitOfWork,
-      idsFrom(100),
-      fixture.clock,
-    );
+    const conversations = new ConversationService(fixture.unitOfWork, idsFrom(100), fixture.clock);
     const service = new ChatService(
       fixture.unitOfWork,
       conversations,
@@ -301,9 +297,7 @@ describe("ChatService", () => {
       cachedTokens: 4,
       outputTokens: 3,
     });
-    expect(provider.requests[0]?.messages[0]?.content).toContain(
-      fixture.project.headCommitId,
-    );
+    expect(provider.requests[0]?.messages[0]?.content).toContain(fixture.project.headCommitId);
   });
 
   it("persists partial text as interrupted when a stream ends without finish", async () => {
@@ -383,8 +377,10 @@ describe("ChatService", () => {
     });
     const iterator = stream[Symbol.asyncIterator]();
 
-    expect((await iterator.next()).value?.type).toBe("user_persisted");
-    expect((await iterator.next()).value?.type).toBe("assistant_started");
+    const firstEvent: unknown = (await iterator.next()).value;
+    const secondEvent: unknown = (await iterator.next()).value;
+    expect(firstEvent).toMatchObject({ type: "user_persisted" });
+    expect(secondEvent).toMatchObject({ type: "assistant_started" });
     await iterator.return?.();
 
     expect(fixture.unitOfWork.view().messages[2]).toMatchObject({
@@ -557,9 +553,9 @@ describe("ChatService", () => {
     };
     await collect(service.chat({ ...base, content: "Original" }));
 
-    await expect(
-      collect(service.chat({ ...base, content: "Different" })),
-    ).rejects.toMatchObject({ code: "CONFLICT" });
+    await expect(collect(service.chat({ ...base, content: "Different" }))).rejects.toMatchObject({
+      code: "CONFLICT",
+    });
     expect(provider.requests).toHaveLength(1);
   });
 });

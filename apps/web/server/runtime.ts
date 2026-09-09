@@ -5,6 +5,7 @@ import {
   AuditService,
   ContextService,
   ConversationService,
+  ConversationImportService,
   ExtractionService,
   MergeService,
   ProjectService,
@@ -45,6 +46,7 @@ export interface WebRuntime {
   readonly secureCookies: boolean;
   readonly projects: ProjectService;
   readonly conversations: ConversationService;
+  readonly conversationImports: ConversationImportService;
   readonly contexts: ContextService;
   readonly extraction: ExtractionService;
   readonly merges: MergeService;
@@ -82,6 +84,7 @@ export function createWebRuntime(
     secureCookies: parsed.NODE_ENV === "production",
     projects: new ProjectService(unitOfWork, systemIds, systemClock),
     conversations,
+    conversationImports: new ConversationImportService(unitOfWork, systemIds, systemClock),
     contexts,
     extraction: new ExtractionService(unitOfWork, provider, systemIds, systemClock, sha256Hasher),
     merges: new MergeService(unitOfWork, systemIds, systemClock, sha256Hasher),

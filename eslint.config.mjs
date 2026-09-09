@@ -27,7 +27,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.{ts,tsx,mts}"],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -41,11 +41,11 @@ export default tseslint.config(
       "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/explicit-function-return-type": [
         "error",
-        { "allowExpressions": true, "allowTypedFunctionExpressions": true },
+        { allowExpressions: true, allowTypedFunctionExpressions: true },
       ],
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-non-null-assertion": "error",
-      "@typescript-eslint/no-unnecessary-type-assertion": "error"
+      "@typescript-eslint/no-unnecessary-type-assertion": "error",
     },
   },
   {
@@ -56,7 +56,7 @@ export default tseslint.config(
       "no-restricted-imports": [
         "error",
         {
-          "patterns": [
+          patterns: [
             "next/*",
             "react",
             "react/*",
@@ -64,11 +64,11 @@ export default tseslint.config(
             "drizzle-orm/*",
             "@cce/database",
             "@cce/model-provider",
-            "@cce/application"
-          ]
-        }
-      ]
-    }
+            "@cce/application",
+          ],
+        },
+      ],
+    },
   },
   ...nextVitals.map((config) => ({
     ...config,
@@ -81,14 +81,14 @@ export default tseslint.config(
   {
     files: ["apps/web/**/*.{ts,tsx}"],
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node }
+      globals: { ...globals.browser, ...globals.node },
     },
     rules: {
-      "@next/next/no-html-link-for-pages": "off"
-    }
+      "@next/next/no-html-link-for-pages": "off",
+    },
   },
   {
-    files: ["*.ts", "tests/**/*.ts"],
+    files: ["*.{ts,mts}", "scripts/**/*.{ts,mts}", "tests/**/*.ts"],
     languageOptions: {
       parserOptions: {
         projectService: false,
@@ -103,16 +103,13 @@ export default tseslint.config(
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-magic-numbers": "off",
       "@typescript-eslint/require-await": "off",
-      "require-yield": "off"
-    }
+      "require-yield": "off",
+    },
   },
   {
-    files: [
-      "packages/model-provider/src/fake-model-provider.ts",
-      "packages/test-support/**/*.ts"
-    ],
+    files: ["packages/model-provider/src/fake-model-provider.ts", "packages/test-support/**/*.ts"],
     rules: {
-      "@typescript-eslint/require-await": "off"
-    }
-  }
+      "@typescript-eslint/require-await": "off",
+    },
+  },
 );

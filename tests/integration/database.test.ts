@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 
 import { PostgreSqlContainer, type StartedPostgreSqlContainer } from "@testcontainers/postgresql";
+import { ConversationImportService, ProjectService } from "@cce/application";
 import {
   agentRunSchema,
   auditEventSchema,
@@ -46,7 +47,11 @@ import {
   seedDevelopmentIdentity,
   type MigrationResult,
 } from "@cce/database";
+import { createCceMcpServer } from "@cce/mcp-server";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { z } from "zod";
 
 let container: StartedPostgreSqlContainer | undefined;
 type DatabasePool = ReturnType<typeof createPostgresPool>;
@@ -338,14 +343,117 @@ afterAll(async () => {
 
 describe("PostgreSQL 18 persistence", () => {
   it("migrates an empty PostgreSQL 18.6 database and records an immutable checksum", async () => {
-    expect(initialMigrations).toEqual([{ name: "0001_initial.sql", status: "applied" }]);
+    expect(initialMigrations).toEqual([
+      { name: "0001_initial.sql", status: "applied" },
+      { name: "0002_conversation_imports.sql", status: "applied" },
+      { name: "0003_provider_conversation_previews.sql", status: "applied" },
+    ]);
     const version = await databasePool().query<{ readonly server_version: string }>(
       "SHOW server_version",
     );
     expect(version.rows[0]?.server_version).toMatch(/^18\.6(?:\s|$)/);
-    await expect(runMigrations(databasePool())).resolves.toEqual([
-      { name: "0001_initial.sql", status: "already_applied" },
-    ]);
+    await expect(runMigrations(databasePool())).resolves.toEqual(
+      [
+        "0001_initial.sql",
+        "0002_conversation_imports.sql",
+        "0003_provider_conversation_previews.sql",
+      ].map((name) => ({ name, status: "already_applied" })),
+    );
+  });
+
+  it("persists approved provider captures atomically and project-scopes preview access", async () => {
+    const first = await createProjectFixture("Provider capture A");
+    const second = await createProjectFixture("Provider capture B");
+    const service = new ConversationImportService(
+      databaseUnitOfWork(),
+      { next: () => randomUUID() },
+      { now: () => new Date() },
+    );
+    const server = createCceMcpServer({
+      actorUserId: first.user.id,
+      projects: new ProjectService(
+        databaseUnitOfWork(),
+        { next: () => randomUUID() },
+        { now: () => new Date() },
+      ),
+      conversationImports: service,
+    });
+    const client = new Client({ name: "cce-postgres-integration", version: "0.1.0" });
+    const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
+    await Promise.all([server.connect(serverTransport), client.connect(clientTransport)]);
+    const previewResult = await client.callTool({
+      name: "preview_conversation_import",
+      arguments: {
+        projectId: first.project.id,
+        source: "codex",
+        captureScope: "partial",
+        externalConversationId: "codex-session-supplied-by-client",
+        title: "PostgreSQL provider import",
+        messages: [
+          {
+            externalMessageId: "provider-message-supplied-by-client",
+            role: "assistant",
+            content: [{ type: "text", text: "Conversation evidence, not canonical state." }],
+            metadata: {},
+          },
+        ],
+        metadata: { surface: "codex" },
+      },
+    });
+    const preview = z
+      .object({ previewId: z.uuid() })
+      .transform(({ previewId }) => ({ id: previewId }))
+      .parse(previewResult.structuredContent);
+
+    expect(
+      await databaseUnitOfWork().run((repositories) =>
+        repositories.imports.findPreviewById(second.project.id, preview.id),
+      ),
+    ).toBeNull();
+    const crossProject = await client.callTool({
+      name: "submit_conversation_import",
+      arguments: { projectId: second.project.id, previewId: preview.id },
+    });
+    expect(crossProject).toMatchObject({ isError: true });
+    const crossProjectError = z
+      .array(z.object({ type: z.literal("text"), text: z.string() }))
+      .min(1)
+      .parse(crossProject.content)[0];
+    if (crossProjectError === undefined) throw new Error("Expected an MCP error response.");
+    expect(crossProjectError.text).toContain("NOT_FOUND");
+
+    const submitResult = await client.callTool({
+      name: "submit_conversation_import",
+      arguments: { projectId: first.project.id, previewId: preview.id },
+    });
+    const imported = z.object({ importId: z.uuid() }).parse(submitResult.structuredContent);
+    await client.close();
+    await server.close();
+    const loaded = await databaseUnitOfWork().run((repositories) =>
+      repositories.imports.findById(first.project.id, imported.importId),
+    );
+    expect(loaded).toMatchObject({
+      source: "codex-plugin",
+      sourceFormat: "mcp",
+      policy: "provided_messages",
+      conversationCount: 1,
+      messageCount: 1,
+      createdBy: first.user.id,
+    });
+    expect(loaded?.sourceManifest[0]?.metadata).toMatchObject({
+      importedBy: first.user.id,
+      previewId: preview.id,
+    });
+    const persistedProject = await databaseUnitOfWork().run((repositories) =>
+      repositories.projects.findById(first.project.id),
+    );
+    expect(persistedProject?.headCommitId).toBe(first.genesis.id);
+    await expect(
+      databasePool().query(
+        "UPDATE conversation_imports SET message_count = message_count + 1 WHERE project_id = $1 AND id = $2",
+        [first.project.id, imported.importId],
+      ),
+    ).rejects.toMatchObject({ code: "55000" });
   });
 
   it("rolls back failed units of work and seeds only a SHA-256 token hash", async () => {
@@ -855,19 +963,20 @@ describe("PostgreSQL 18 persistence", () => {
       ),
     ).rejects.toMatchObject({ code: "55000" });
 
-    if (loaded.agent === null) {
+    const loadedAgent = loaded.agent;
+    if (loadedAgent === null) {
       throw new Error("The persisted AgentRun was not found.");
     }
     await expect(
       databaseUnitOfWork().run((repositories) =>
         repositories.runs.updateAgentRun(
           {
-            ...loaded.agent,
+            ...loadedAgent,
             status: "completed",
-            version: loaded.agent.version + 1,
+            version: loadedAgent.version + 1,
             updatedAt: timestamp(),
           },
-          loaded.agent.version,
+          loadedAgent.version,
         ),
       ),
     ).resolves.toBe(true);

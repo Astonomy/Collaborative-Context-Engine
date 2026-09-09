@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "cce": {
+      "type": "http",
+      "url": "http://localhost:3000/mcp",
+      "bearer_token_env_var": "CCE_MCP_ACCESS_TOKEN"
+    }
+  }
+}

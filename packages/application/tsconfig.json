@@ -5,6 +5,7 @@
   "references": [
     { "path": "../shared" },
     { "path": "../domain" },
-    { "path": "../context-engine" }
+    { "path": "../context-engine" },
+    { "path": "../conversation-import" }
   ]
 }

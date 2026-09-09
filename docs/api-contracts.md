@@ -26,11 +26,18 @@ POST /api/projects/:projectId/agents/runs
 GET /api/projects/:projectId/agents/runs/:runId
 POST /api/projects/:projectId/agents/runs/:runId/resume
 POST /api/projects/:projectId/agents/runs/:runId/cancel
+POST /api/projects/:projectId/imports/provider-previews
+POST /api/projects/:projectId/imports/provider-submissions
+GET|POST|DELETE /mcp
 ```
 
 `POST /deltas` is the resource-oriented extraction endpoint used by the UI; `POST /extract` exposes the
 same validated extraction operation for explicit command-style clients. Both accept an optional
 `throughMessageSequence` and return the persisted immutable `ContextDelta` with status 201.
+
+Conversation import uses generic project-scoped resources: `POST /imports/preview` parses a base64-encoded ChatGPT JSON/ZIP without persistence; `POST /imports` repeats validation and atomically persists selected evidence; `GET /imports/:importId` reads the project-scoped append-only manifest. Preview and confirmation intentionally remain separate.
+
+Provider-facing clients send the normalized capture to `POST /imports/provider-previews`, then send only `{ "previewId": "..." }` to `POST /imports/provider-submissions`. The preview is bound to the authenticated user and project, expires after 15 minutes, and reports duplicate identity without creating evidence. `/mcp` exposes the same application use cases as `list_projects`, `preview_conversation_import`, and `submit_conversation_import`; it is an integration facade, not a second persistence implementation. All three accept the existing CCE cookie/bearer authentication at the deployed endpoint.
 
 ## Authentication and request safety
 

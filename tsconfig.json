@@ -4,12 +4,13 @@
     { "path": "packages/shared" },
     { "path": "packages/domain" },
     { "path": "packages/context-engine" },
+    { "path": "packages/conversation-import" },
     { "path": "packages/application" },
     { "path": "packages/api-contracts" },
+    { "path": "packages/mcp-server" },
     { "path": "packages/database" },
     { "path": "packages/model-provider" },
     { "path": "packages/agents" },
     { "path": "packages/test-support" }
   ]
 }
-

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Submit to CCE"
+  short_description: "Submit approved conversation evidence to a CCE project"

@@ -1,0 +1,20 @@
+{
+  "name": "cce",
+  "interface": {
+    "displayName": "Collaborative Context Engine"
+  },
+  "plugins": [
+    {
+      "name": "cce-conversation-submission",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cce-conversation-submission"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

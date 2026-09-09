@@ -3,12 +3,16 @@ import type {
   CceRepositories,
   ContextRepository,
   ConversationRepository,
+  ConversationImportRepository,
+  ConversationImportPreviewRecord,
+  ConversationImportRecord,
   IdentityRepository,
   MergeRepository,
   ProjectAccess,
   ProjectRepository,
   RunRepository,
 } from "@cce/application";
+import { externalConversationSchema } from "@cce/conversation-import";
 import {
   agentRunSchema,
   auditEventSchema,
@@ -20,6 +24,7 @@ import {
   contextDeltaSchema,
   contextItemVersionSchema,
   conversationSchema,
+  conversationIdSchema,
   dateTimeSchema,
   mergeConflictSchema,
   mergeFinalizationSchema,
@@ -77,6 +82,8 @@ import {
   contextItemProvenanceMessages,
   contextItemVersions,
   conversations,
+  conversationImportPreviews,
+  conversationImports,
   currentContextItems,
   mergeConflicts,
   mergeFinalizations,
@@ -128,169 +135,217 @@ export function parsePersisted<Schema extends z.ZodType>(
 }
 
 function userFromRow(row: UserRow): User {
-  return parsePersisted(userSchema, {
-    id: row.id,
-    email: row.email,
-    displayName: row.displayName,
-    createdAt: databaseTimestamp(row.createdAt),
-  }, "user");
+  return parsePersisted(
+    userSchema,
+    {
+      id: row.id,
+      email: row.email,
+      displayName: row.displayName,
+      createdAt: databaseTimestamp(row.createdAt),
+    },
+    "user",
+  );
 }
 
 function projectFromRow(row: ProjectRow): Project {
-  return parsePersisted(projectSchema, {
-    id: row.projectId,
-    name: row.name,
-    headCommitId: row.headCommitId,
-    version: row.version,
-    createdBy: row.createdBy,
-    createdAt: databaseTimestamp(row.createdAt),
-    archivedAt: nullableDatabaseTimestamp(row.archivedAt),
-  }, "project");
+  return parsePersisted(
+    projectSchema,
+    {
+      id: row.projectId,
+      name: row.name,
+      headCommitId: row.headCommitId,
+      version: row.version,
+      createdBy: row.createdBy,
+      createdAt: databaseTimestamp(row.createdAt),
+      archivedAt: nullableDatabaseTimestamp(row.archivedAt),
+    },
+    "project",
+  );
 }
 
 function memberFromRow(row: MemberRow): ProjectMember {
-  return parsePersisted(projectMemberSchema, {
-    projectId: row.projectId,
-    userId: row.userId,
-    role: row.role,
-    joinedAt: databaseTimestamp(row.joinedAt),
-  }, "project member");
+  return parsePersisted(
+    projectMemberSchema,
+    {
+      projectId: row.projectId,
+      userId: row.userId,
+      role: row.role,
+      joinedAt: databaseTimestamp(row.joinedAt),
+    },
+    "project member",
+  );
 }
 
 function conversationFromRow(row: ConversationRow): Conversation {
-  return parsePersisted(conversationSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    branchId: row.branchId,
-    title: row.title,
-    status: row.status,
-    createdBy: row.createdBy,
-    createdAt: databaseTimestamp(row.createdAt),
-    archivedAt: nullableDatabaseTimestamp(row.archivedAt),
-  }, "conversation");
+  return parsePersisted(
+    conversationSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      branchId: row.branchId,
+      title: row.title,
+      status: row.status,
+      createdBy: row.createdBy,
+      createdAt: databaseTimestamp(row.createdAt),
+      archivedAt: nullableDatabaseTimestamp(row.archivedAt),
+    },
+    "conversation",
+  );
 }
 
 function branchFromRow(row: BranchRow): Branch {
-  return parsePersisted(branchSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    conversationId: row.conversationId,
-    baseCommitId: row.baseCommitId,
-    status: row.status,
-    createdAt: databaseTimestamp(row.createdAt),
-    closedAt: nullableDatabaseTimestamp(row.closedAt),
-  }, "branch");
+  return parsePersisted(
+    branchSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      conversationId: row.conversationId,
+      baseCommitId: row.baseCommitId,
+      status: row.status,
+      createdAt: databaseTimestamp(row.createdAt),
+      closedAt: nullableDatabaseTimestamp(row.closedAt),
+    },
+    "branch",
+  );
 }
 
 function messageFromRow(row: MessageRow): Message {
-  return parsePersisted(messageSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    conversationId: row.conversationId,
-    sequence: row.sequence,
-    clientMessageId: row.clientMessageId,
-    replyToMessageId: row.replyToMessageId,
-    role: row.role,
-    deliveryState: row.deliveryState,
-    content: row.content,
-    author: row.author,
-    providerMessageId: row.providerMessageId,
-    errorCode: row.errorCode,
-    createdAt: databaseTimestamp(row.createdAt),
-    completedAt: nullableDatabaseTimestamp(row.completedAt),
-  }, "message");
+  return parsePersisted(
+    messageSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      conversationId: row.conversationId,
+      sequence: row.sequence,
+      clientMessageId: row.clientMessageId,
+      replyToMessageId: row.replyToMessageId,
+      role: row.role,
+      deliveryState: row.deliveryState,
+      content: row.content,
+      author: row.author,
+      providerMessageId: row.providerMessageId,
+      errorCode: row.errorCode,
+      createdAt: databaseTimestamp(row.createdAt),
+      completedAt: nullableDatabaseTimestamp(row.completedAt),
+    },
+    "message",
+  );
 }
 
 function mergeRequestFromRow(row: MergeRequestRow): MergeRequest {
-  return parsePersisted(mergeRequestSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    branchId: row.branchId,
-    deltaId: row.deltaId,
-    baseCommitId: row.baseCommitId,
-    evaluatedHeadCommitId: row.evaluatedHeadCommitId,
-    resultingCommitId: row.resultingCommitId,
-    status: row.status,
-    createdBy: row.createdBy,
-    createdAt: databaseTimestamp(row.createdAt),
-    updatedAt: databaseTimestamp(row.updatedAt),
-  }, "merge request");
+  return parsePersisted(
+    mergeRequestSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      branchId: row.branchId,
+      deltaId: row.deltaId,
+      baseCommitId: row.baseCommitId,
+      evaluatedHeadCommitId: row.evaluatedHeadCommitId,
+      resultingCommitId: row.resultingCommitId,
+      status: row.status,
+      createdBy: row.createdBy,
+      createdAt: databaseTimestamp(row.createdAt),
+      updatedAt: databaseTimestamp(row.updatedAt),
+    },
+    "merge request",
+  );
 }
 
 function mergeFinalizationFromRow(row: MergeFinalizationRow): MergeFinalization {
-  return parsePersisted(mergeFinalizationSchema, {
-    projectId: row.projectId,
-    mergeRequestId: row.mergeRequestId,
-    operationKey: row.operationKey,
-    outcome: row.outcome,
-    resultingCommitId: row.resultingCommitId,
-    finalizedAt: databaseTimestamp(row.finalizedAt),
-  }, "merge finalization");
+  return parsePersisted(
+    mergeFinalizationSchema,
+    {
+      projectId: row.projectId,
+      mergeRequestId: row.mergeRequestId,
+      operationKey: row.operationKey,
+      outcome: row.outcome,
+      resultingCommitId: row.resultingCommitId,
+      finalizedAt: databaseTimestamp(row.finalizedAt),
+    },
+    "merge finalization",
+  );
 }
 
 function mergeConflictFromRow(row: MergeConflictRow): MergeConflict {
-  return parsePersisted(mergeConflictSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    mergeRequestId: row.mergeRequestId,
-    deltaChangeId: row.deltaChangeId,
-    classification: row.classification,
-    baseVersion: row.baseVersion,
-    currentVersion: row.currentVersion,
-    proposed: row.proposed,
-    reason: row.reason,
-    requiresHumanReview: row.requiresHumanReview,
-    resolution: row.resolution,
-    createdAt: databaseTimestamp(row.createdAt),
-  }, "merge conflict");
+  return parsePersisted(
+    mergeConflictSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      mergeRequestId: row.mergeRequestId,
+      deltaChangeId: row.deltaChangeId,
+      classification: row.classification,
+      baseVersion: row.baseVersion,
+      currentVersion: row.currentVersion,
+      proposed: row.proposed,
+      reason: row.reason,
+      requiresHumanReview: row.requiresHumanReview,
+      resolution: row.resolution,
+      createdAt: databaseTimestamp(row.createdAt),
+    },
+    "merge conflict",
+  );
 }
 
 function agentRunFromRow(row: AgentRunRow): AgentRun {
-  return parsePersisted(agentRunSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    agentName: row.agentName,
-    status: row.status,
-    version: row.version,
-    state: row.state,
-    createdAt: databaseTimestamp(row.createdAt),
-    updatedAt: databaseTimestamp(row.updatedAt),
-  }, "agent run");
+  return parsePersisted(
+    agentRunSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      agentName: row.agentName,
+      status: row.status,
+      version: row.version,
+      state: row.state,
+      createdAt: databaseTimestamp(row.createdAt),
+      updatedAt: databaseTimestamp(row.updatedAt),
+    },
+    "agent run",
+  );
 }
 
 function modelRunFromRow(row: ModelRunRow): ModelRun {
-  return parsePersisted(modelRunSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    conversationId: row.conversationId,
-    provider: row.provider,
-    model: row.model,
-    purpose: row.purpose,
-    promptId: row.promptId,
-    promptVersion: row.promptVersion,
-    inputHash: row.inputHash,
-    status: row.status,
-    inputTokens: row.inputTokens,
-    cachedTokens: row.cachedTokens,
-    outputTokens: row.outputTokens,
-    latencyMs: row.latencyMs,
-    errorCode: row.errorCode,
-    createdAt: databaseTimestamp(row.createdAt),
-    completedAt: nullableDatabaseTimestamp(row.completedAt),
-  }, "model run");
+  return parsePersisted(
+    modelRunSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      conversationId: row.conversationId,
+      provider: row.provider,
+      model: row.model,
+      purpose: row.purpose,
+      promptId: row.promptId,
+      promptVersion: row.promptVersion,
+      inputHash: row.inputHash,
+      status: row.status,
+      inputTokens: row.inputTokens,
+      cachedTokens: row.cachedTokens,
+      outputTokens: row.outputTokens,
+      latencyMs: row.latencyMs,
+      errorCode: row.errorCode,
+      createdAt: databaseTimestamp(row.createdAt),
+      completedAt: nullableDatabaseTimestamp(row.completedAt),
+    },
+    "model run",
+  );
 }
 
 function auditEventFromRow(row: AuditEventRow): AuditEvent {
-  return parsePersisted(auditEventSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    actor: row.actor,
-    action: row.action,
-    targetType: row.targetType,
-    targetId: row.targetId,
-    metadata: row.metadata,
-    occurredAt: databaseTimestamp(row.occurredAt),
-  }, "audit event");
+  return parsePersisted(
+    auditEventSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      actor: row.actor,
+      action: row.action,
+      targetType: row.targetType,
+      targetId: row.targetId,
+      metadata: row.metadata,
+      occurredAt: databaseTimestamp(row.occurredAt),
+    },
+    "audit event",
+  );
 }
 
 export class PostgresIdentityRepository implements IdentityRepository {
@@ -562,10 +617,7 @@ export class PostgresConversationRepository implements ConversationRepository {
     });
   }
 
-  public async update(
-    untrustedConversation: Conversation,
-    untrustedBranch: Branch,
-  ): Promise<void> {
+  public async update(untrustedConversation: Conversation, untrustedBranch: Branch): Promise<void> {
     const conversation = conversationSchema.parse(untrustedConversation);
     const branch = branchSchema.parse(untrustedBranch);
     if (
@@ -834,24 +886,28 @@ async function loadItemVersions(
         recordedAt: databaseTimestamp(source.recordedAt),
       };
     });
-    const item = parsePersisted(contextItemVersionSchema, {
-      id: row.id,
-      logicalItemId: row.logicalItemId,
-      projectId: row.projectId,
-      commitId: row.commitId,
-      previousVersionId: row.previousVersionId,
-      kind: row.kind,
-      key: row.key,
-      value: row.value,
-      scope: row.scope,
-      authority: row.authority,
-      confidence: row.confidence,
-      provenance,
-      lifecycle: row.lifecycle,
-      scopeHash: row.scopeHash,
-      supersedesVersionId: row.supersedesVersionId,
-      createdAt: databaseTimestamp(row.createdAt),
-    }, "context item version");
+    const item = parsePersisted(
+      contextItemVersionSchema,
+      {
+        id: row.id,
+        logicalItemId: row.logicalItemId,
+        projectId: row.projectId,
+        commitId: row.commitId,
+        previousVersionId: row.previousVersionId,
+        kind: row.kind,
+        key: row.key,
+        value: row.value,
+        scope: row.scope,
+        authority: row.authority,
+        confidence: row.confidence,
+        provenance,
+        lifecycle: row.lifecycle,
+        scopeHash: row.scopeHash,
+        supersedesVersionId: row.supersedesVersionId,
+        createdAt: databaseTimestamp(row.createdAt),
+      },
+      "context item version",
+    );
     records.set(item.id, item);
   }
 
@@ -907,39 +963,47 @@ async function loadCommits(
   }
   const changesByCommit = new Map<string, ContextCommitChange[]>();
   for (const row of changeRows) {
-    const change = parsePersisted(contextCommitChangeSchema, {
-      id: row.id,
-      ordinal: row.ordinal,
-      operation: row.operation,
-      logicalItemId: row.logicalItemId,
-      beforeVersion:
-        row.beforeVersionId === null
-          ? null
-          : requireRecord(versions, row.beforeVersionId, "Context item version"),
-      afterVersion: requireRecord(versions, row.afterVersionId, "Context item version"),
-      sourceDeltaId: row.sourceDeltaId,
-      sourceDeltaChangeId: row.sourceDeltaChangeId,
-    }, "context commit change");
+    const change = parsePersisted(
+      contextCommitChangeSchema,
+      {
+        id: row.id,
+        ordinal: row.ordinal,
+        operation: row.operation,
+        logicalItemId: row.logicalItemId,
+        beforeVersion:
+          row.beforeVersionId === null
+            ? null
+            : requireRecord(versions, row.beforeVersionId, "Context item version"),
+        afterVersion: requireRecord(versions, row.afterVersionId, "Context item version"),
+        sourceDeltaId: row.sourceDeltaId,
+        sourceDeltaChangeId: row.sourceDeltaChangeId,
+      },
+      "context commit change",
+    );
     const existing = changesByCommit.get(row.commitId) ?? [];
     existing.push(change);
     changesByCommit.set(row.commitId, existing);
   }
 
   return commitRows.map((row) =>
-    parsePersisted(contextCommitSchema, {
-      id: row.id,
-      projectId: row.projectId,
-      kind: row.kind,
-      parentCommitId: row.parentCommitId,
-      version: row.version,
-      idempotencyKey: row.idempotencyKey,
-      summary: row.summary,
-      sourceDeltaIds: sourcesByCommit.get(row.id) ?? [],
-      proposedBy: row.proposedBy,
-      committedBy: row.committedBy,
-      changes: changesByCommit.get(row.id) ?? [],
-      createdAt: databaseTimestamp(row.createdAt),
-    }, "context commit"),
+    parsePersisted(
+      contextCommitSchema,
+      {
+        id: row.id,
+        projectId: row.projectId,
+        kind: row.kind,
+        parentCommitId: row.parentCommitId,
+        version: row.version,
+        idempotencyKey: row.idempotencyKey,
+        summary: row.summary,
+        sourceDeltaIds: sourcesByCommit.get(row.id) ?? [],
+        proposedBy: row.proposedBy,
+        committedBy: row.committedBy,
+        changes: changesByCommit.get(row.id) ?? [],
+        createdAt: databaseTimestamp(row.createdAt),
+      },
+      "context commit",
+    ),
   );
 }
 
@@ -954,21 +1018,25 @@ async function deltaFromRow(session: DatabaseSession, row: DeltaRow): Promise<Co
       ),
     )
     .orderBy(asc(contextDeltaChanges.ordinal));
-  return parsePersisted(contextDeltaSchema, {
-    id: row.id,
-    projectId: row.projectId,
-    branchId: row.branchId,
-    conversationId: row.conversationId,
-    baseCommitId: row.baseCommitId,
-    throughMessageSequence: row.throughMessageSequence,
-    schemaVersion: row.schemaVersion,
-    extractorRunId: row.extractorRunId,
-    revisionOf: row.revisionOf,
-    contentHash: row.contentHash,
-    proposedBy: row.proposedBy,
-    createdAt: databaseTimestamp(row.createdAt),
-    changes: changes.map((change) => change.payload),
-  }, "context delta");
+  return parsePersisted(
+    contextDeltaSchema,
+    {
+      id: row.id,
+      projectId: row.projectId,
+      branchId: row.branchId,
+      conversationId: row.conversationId,
+      baseCommitId: row.baseCommitId,
+      throughMessageSequence: row.throughMessageSequence,
+      schemaVersion: row.schemaVersion,
+      extractorRunId: row.extractorRunId,
+      revisionOf: row.revisionOf,
+      contentHash: row.contentHash,
+      proposedBy: row.proposedBy,
+      createdAt: databaseTimestamp(row.createdAt),
+      changes: changes.map((change) => change.payload),
+    },
+    "context delta",
+  );
 }
 
 type StoredContextSnapshot = NonNullable<Awaited<ReturnType<ContextRepository["getSnapshot"]>>>;
@@ -1514,10 +1582,7 @@ export class PostgresRunRepository implements RunRepository {
     }
   }
 
-  public async findModelRun(
-    projectId: ProjectId,
-    runId: ModelRun["id"],
-  ): Promise<ModelRun | null> {
+  public async findModelRun(projectId: ProjectId, runId: ModelRun["id"]): Promise<ModelRun | null> {
     const rows = await this.session
       .select()
       .from(modelRuns)
@@ -1619,6 +1684,136 @@ export class PostgresAuditRepository implements AuditRepository {
   }
 }
 
+export class PostgresConversationImportRepository implements ConversationImportRepository {
+  public constructor(private readonly session: DatabaseSession) {}
+  private fromRow(row: typeof conversationImports.$inferSelect): ConversationImportRecord {
+    return {
+      id: z.uuid().parse(row.id),
+      projectId: row.projectId as ProjectId,
+      source: z.enum(["chatgpt", "chatgpt-plugin", "codex-plugin"]).parse(row.source),
+      sourceFormat: z.enum(["json", "zip", "mcp"]).parse(row.sourceFormat),
+      sourceFileHash: z
+        .string()
+        .regex(/^[0-9a-f]{64}$/)
+        .parse(row.sourceFileHash),
+      policy: z.enum(["current_path", "provided_messages"]).parse(row.policy),
+      status: z.literal("completed").parse(row.status),
+      createdBy: userIdSchema.parse(row.createdBy),
+      createdAt: dateTimeSchema.parse(databaseTimestamp(row.createdAt)),
+      completedAt: dateTimeSchema.parse(databaseTimestamp(row.completedAt)),
+      conversationCount: z.int().nonnegative().parse(row.conversationCount),
+      messageCount: z.int().nonnegative().parse(row.messageCount),
+      warnings: z.array(z.string()).parse(row.warnings),
+      sourceManifest: z
+        .array(z.unknown())
+        .parse(row.sourceManifest) as ConversationImportRecord["sourceManifest"],
+      importedConversations: z
+        .array(
+          z.object({
+            externalConversationId: z.string().optional(),
+            conversationId: conversationIdSchema,
+            messageIds: z.array(z.uuid()),
+          }),
+        )
+        .parse(row.importedConversations),
+    };
+  }
+  public async findById(
+    projectId: ProjectId,
+    importId: string,
+  ): Promise<ConversationImportRecord | null> {
+    const rows = await this.session
+      .select()
+      .from(conversationImports)
+      .where(
+        and(
+          eq(conversationImports.projectId, projectId),
+          eq(conversationImports.id, z.uuid().parse(importId)),
+        ),
+      )
+      .limit(1);
+    return rows[0] === undefined ? null : this.fromRow(rows[0]);
+  }
+  public async findCompletedByIdentity(
+    projectId: ProjectId,
+    sourceFileHash: string,
+    policy: "current_path" | "provided_messages",
+  ): Promise<ConversationImportRecord | null> {
+    const rows = await this.session
+      .select()
+      .from(conversationImports)
+      .where(
+        and(
+          eq(conversationImports.projectId, projectId),
+          eq(conversationImports.sourceFileHash, sourceFileHash),
+          eq(conversationImports.policy, policy),
+        ),
+      )
+      .limit(1);
+    return rows[0] === undefined ? null : this.fromRow(rows[0]);
+  }
+  public async findPreviewById(
+    projectId: ProjectId,
+    previewId: string,
+  ): Promise<ConversationImportPreviewRecord | null> {
+    const rows = await this.session
+      .select()
+      .from(conversationImportPreviews)
+      .where(
+        and(
+          eq(conversationImportPreviews.projectId, projectId),
+          eq(conversationImportPreviews.id, z.uuid().parse(previewId)),
+        ),
+      )
+      .limit(1);
+    const row = rows[0];
+    if (row === undefined) return null;
+    return {
+      id: z.uuid().parse(row.id),
+      projectId: row.projectId as ProjectId,
+      source: z.enum(["chatgpt-plugin", "codex-plugin"]).parse(row.source),
+      sourceFileHash: z
+        .string()
+        .regex(/^[0-9a-f]{64}$/)
+        .parse(row.sourceFileHash),
+      createdBy: userIdSchema.parse(row.createdBy),
+      createdAt: dateTimeSchema.parse(databaseTimestamp(row.createdAt)),
+      expiresAt: dateTimeSchema.parse(databaseTimestamp(row.expiresAt)),
+      messageCount: z.int().nonnegative().parse(row.messageCount),
+      unsupportedContentCount: z.int().nonnegative().parse(row.unsupportedContentCount),
+      warnings: z.array(z.string()).parse(row.warnings),
+      conversation: externalConversationSchema.parse(row.conversation),
+    };
+  }
+  public async deleteExpiredPreviews(projectId: ProjectId, expiredBefore: string): Promise<number> {
+    const deleted = await this.session
+      .delete(conversationImportPreviews)
+      .where(
+        and(
+          eq(conversationImportPreviews.projectId, projectId),
+          lte(conversationImportPreviews.expiresAt, dateTimeSchema.parse(expiredBefore)),
+        ),
+      )
+      .returning({ id: conversationImportPreviews.id });
+    return deleted.length;
+  }
+  public async insertPreview(record: ConversationImportPreviewRecord): Promise<void> {
+    await this.session.insert(conversationImportPreviews).values({
+      ...record,
+      warnings: record.warnings,
+      conversation: record.conversation,
+    });
+  }
+  public async insert(record: ConversationImportRecord): Promise<void> {
+    await this.session.insert(conversationImports).values({
+      ...record,
+      warnings: record.warnings,
+      sourceManifest: record.sourceManifest,
+      importedConversations: record.importedConversations,
+    });
+  }
+}
+
 export function createCceRepositories(session: DatabaseSession): CceRepositories {
   return {
     identity: new PostgresIdentityRepository(session),
@@ -1628,5 +1823,6 @@ export function createCceRepositories(session: DatabaseSession): CceRepositories
     merges: new PostgresMergeRepository(session),
     runs: new PostgresRunRepository(session),
     audit: new PostgresAuditRepository(session),
+    imports: new PostgresConversationImportRepository(session),
   };
 }

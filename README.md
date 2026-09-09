@@ -40,17 +40,19 @@ CCE 采用单体部署、模块化边界：Web/API、应用用例、领域规则
 适配器分别测试，但最终只部署一个 Next.js 服务。Qwen/vLLM 独立运行，供应商侧会话丢失不会损坏
 CCE 的证据、版本或权威上下文。
 
-| Workspace                 | Responsibility                                                    |
-| ------------------------- | ----------------------------------------------------------------- |
-| `apps/web`                | Accessible UI, REST/SSE routes, session adapter, composition root |
-| `packages/domain`         | Runtime schemas, entities, invariants, state transitions          |
-| `packages/context-engine` | Pure context building and deterministic three-way merge           |
-| `packages/application`    | Use cases, project-scoped RBAC, ports, transaction orchestration  |
-| `packages/database`       | PostgreSQL schema, migrations, repositories, atomic unit of work  |
-| `packages/model-provider` | Qwen/vLLM OpenAI-compatible complete and streaming calls          |
-| `packages/api-contracts`  | Runtime-validated HTTP request and response schemas               |
-| `packages/agents`         | Persisted, scoped workflows that produce reviewable Deltas        |
-| `packages/test-support`   | Deterministic in-memory adapters and model doubles for tests      |
+| Workspace                      | Responsibility                                                     |
+| ------------------------------ | ------------------------------------------------------------------ |
+| `apps/web`                     | Accessible UI, REST/SSE routes, session adapter, composition root  |
+| `packages/domain`              | Runtime schemas, entities, invariants, state transitions           |
+| `packages/context-engine`      | Pure context building and deterministic three-way merge            |
+| `packages/conversation-import` | Provider-neutral import IR and bounded ChatGPT export adapter      |
+| `packages/application`         | Use cases, project-scoped RBAC, ports, transaction orchestration   |
+| `packages/database`            | PostgreSQL schema, migrations, repositories, atomic unit of work   |
+| `packages/model-provider`      | Qwen/vLLM OpenAI-compatible complete and streaming calls           |
+| `packages/api-contracts`       | Runtime-validated HTTP request and response schemas                |
+| `packages/agents`              | Persisted, scoped workflows that produce reviewable Deltas         |
+| `packages/mcp-server`          | CCE Plugin MCP tools over the conversation-import application flow |
+| `packages/test-support`        | Deterministic in-memory adapters and model doubles for tests       |
 
 ## 快速开始 / Quick start
 
@@ -148,6 +150,7 @@ database. `GET /api/health` is the database-aware readiness endpoint. Stop the d
 | `MODEL_REQUEST_TIMEOUT_MS` | Web                 | Positive integer timeout in milliseconds, maximum 600000                                              |
 | `POSTGRES_PORT`            | Compose only        | Optional host port override; container port remains 5432                                              |
 | `PORT`                     | Container/runtime   | HTTP port, default 3000                                                                               |
+| `CCE_MCP_ACCESS_TOKEN`     | Local Codex client  | CCE-issued bearer token read by the plugin connector; never consumed from conversation content        |
 
 Only the Web composition root reads concrete model names. Application and core code use the
 `ModelProvider` port and logical purposes. Structured model responses are runtime-validated; provider
@@ -156,6 +159,11 @@ credentials or raw prompts. See [Model platform](docs/model-platform.md).
 
 具体模型名只在 Web 组合根读取；核心代码仅依赖 `ModelProvider`。结构化输出必须通过运行时校验，
 超时、限流、畸形输出和流中断会归一化为稳定错误，日志不会泄露密钥或原始提示词。
+
+The root `.env` is a local-development convenience only. Production and container deployments inject
+configuration and secrets explicitly through the runtime platform or secret manager; the repository
+`.env` is optional and is not a production secret source. Existing Docker `--env-file` and `-e` values
+continue to take precedence.
 
 ## UI 与 API / UI and API
 
@@ -177,6 +185,11 @@ GET /api/projects/:projectId
 GET|POST /api/projects/:projectId/members
 PUT /api/projects/:projectId/members/:userId
 GET|POST /api/projects/:projectId/conversations
+POST /api/projects/:projectId/imports/preview
+POST /api/projects/:projectId/imports
+POST /api/projects/:projectId/imports/provider-previews
+POST /api/projects/:projectId/imports/provider-submissions
+GET /api/projects/:projectId/imports/:importId
 GET|POST /api/projects/:projectId/conversations/:conversationId/messages
 POST /api/projects/:projectId/conversations/:conversationId/chat        (SSE)
 POST /api/projects/:projectId/conversations/:conversationId/deltas
@@ -192,7 +205,10 @@ POST /api/projects/:projectId/agents/runs
 GET /api/projects/:projectId/agents/runs/:runId
 POST /api/projects/:projectId/agents/runs/:runId/resume
 POST /api/projects/:projectId/agents/runs/:runId/cancel
+GET|POST|DELETE /mcp                                              (CCE Plugin MCP transport)
 ```
+
+The bundled [CCE conversation-submission plugin](docs/plugins/cce-plugin.md) provides an explicit preview-and-confirm workflow for messages supplied by a supported ChatGPT/Codex invocation. It stores only Conversation/Message evidence and never updates Project Context. ChatGPT official JSON/ZIP export remains the separate bulk/high-fidelity import route. The checked-in connector supports local Codex with a CCE bearer token; hosted ChatGPT requires a real HTTPS deployment and CCE-issued OAuth 2.1 flow before it can be represented as production-ready.
 
 Use either an HttpOnly `cce_session` cookie created by `POST /api/session` or a bearer token. Browser
 cookie mutations require a same-origin `Origin` header. Programmatic example:
