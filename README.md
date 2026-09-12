@@ -208,7 +208,7 @@ POST /api/projects/:projectId/agents/runs/:runId/cancel
 GET|POST|DELETE /mcp                                              (CCE Plugin MCP transport)
 ```
 
-The bundled [CCE conversation-submission plugin](docs/plugins/cce-plugin.md) provides an explicit preview-and-confirm workflow for messages supplied by a supported ChatGPT/Codex invocation. It stores only Conversation/Message evidence and never updates Project Context. ChatGPT official JSON/ZIP export remains the separate bulk/high-fidelity import route. The checked-in connector supports local Codex with a CCE bearer token; hosted ChatGPT requires a real HTTPS deployment and CCE-issued OAuth 2.1 flow before it can be represented as production-ready.
+The bundled [CCE conversation-submission plugin](docs/plugins/cce-plugin.md) provides an explicit preview-and-confirm workflow for messages and supplied materials from a supported ChatGPT/Codex invocation. Its separate preview summary covers accessible attachments, while important original material references remain unchanged in the import manifest. It stores only Conversation/Message evidence and never updates Project Context. ChatGPT official JSON export remains the separate bulk/high-fidelity import route; ZIP uploads are not accepted. The checked-in connector supports local Codex with a CCE bearer token; hosted ChatGPT requires a real HTTPS deployment and CCE-issued OAuth 2.1 flow before it can be represented as production-ready.
 
 Use either an HttpOnly `cce_session` cookie created by `POST /api/session` or a bearer token. Browser
 cookie mutations require a same-origin `Origin` header. Programmatic example:

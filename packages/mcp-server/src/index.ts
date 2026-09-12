@@ -30,6 +30,7 @@ const previewOutput = {
   source: z.enum(["chatgpt-plugin", "codex-plugin"]),
   targetProject: z.object({ id: projectIdSchema, name: z.string() }),
   title: z.string(),
+  summary: z.string().optional(),
   messageCount: z.number().int().positive(),
   unsupportedContentCount: z.number().int().nonnegative(),
   warnings: z.array(z.string()),
@@ -97,7 +98,7 @@ export function createCceMcpServer(dependencies: CceMcpDependencies): McpServer 
     {
       title: "Preview conversation import",
       description:
-        "Validate a user-authorized ChatGPT or Codex conversation capture for one exact CCE project. This creates only an expiring import plan; it does not create Conversation evidence or update Project Context.",
+        "Validate a user-authorized ChatGPT or Codex conversation capture and optional evidence summary for one exact CCE project. Original material references remain unchanged in the import manifest. This creates only an expiring import plan; it does not create Conversation evidence or update Project Context.",
       inputSchema: providerConversationSubmissionSchema.extend({ projectId: projectIdSchema }),
       outputSchema: previewOutput,
       annotations: {
@@ -119,6 +120,7 @@ export function createCceMcpServer(dependencies: CceMcpDependencies): McpServer 
           source: preview.source,
           targetProject: preview.targetProject,
           title: preview.title,
+          ...(preview.summary ? { summary: preview.summary } : {}),
           messageCount: preview.messageCount,
           unsupportedContentCount: preview.unsupportedContentCount,
           warnings: [...preview.warnings],

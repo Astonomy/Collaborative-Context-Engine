@@ -6,6 +6,7 @@ import {
   appendMessageBodySchema,
   cancelAgentRunBodySchema,
   changeProjectMemberRoleBodySchema,
+  conversationImportUploadBodySchema,
   conversationPathParamsSchema,
   createAgentRunBodySchema,
   createChatBodySchema,
@@ -82,6 +83,23 @@ describe("REST request contracts", () => {
         objective: "Extract durable requirements",
       }),
     ).toMatchObject({ conversationId: ids.conversation });
+  });
+
+  it("accepts JSON conversation imports and rejects ZIP filenames", () => {
+    expect(
+      conversationImportUploadBodySchema.safeParse({
+        source: "chatgpt",
+        fileName: "conversations.json",
+        dataBase64: "W10=",
+      }).success,
+    ).toBe(true);
+    expect(
+      conversationImportUploadBodySchema.safeParse({
+        source: "chatgpt",
+        fileName: "export.zip",
+        dataBase64: "UEsDBA==",
+      }).success,
+    ).toBe(false);
   });
 
   it.each([

@@ -49,6 +49,7 @@ export const externalConversationSchema = z
     source: externalSourceSchema,
     externalConversationId: z.string().min(1).max(500).optional(),
     title: z.string().min(1).max(200).optional(),
+    summary: z.string().trim().min(1).max(8_000).optional(),
     createdAt: z.string().datetime().optional(),
     updatedAt: z.string().datetime().optional(),
     currentExternalMessageId: z.string().min(1).max(500).optional(),
@@ -65,7 +66,7 @@ export interface ImportInput {
 }
 export interface DetectionResult {
   readonly detected: boolean;
-  readonly format?: "json" | "zip";
+  readonly format?: "json";
   readonly confidence: "none" | "high";
 }
 export interface ImportValidationResult {
@@ -81,8 +82,6 @@ export interface ConversationImporter {
 
 export interface ImportLimits {
   readonly maximumUploadBytes: number;
-  readonly maximumExpandedBytes: number;
-  readonly maximumFiles: number;
   readonly maximumConversations: number;
   readonly maximumMessagesPerConversation: number;
   readonly maximumMessageBytes: number;
@@ -90,8 +89,6 @@ export interface ImportLimits {
 
 export const defaultImportLimits: ImportLimits = {
   maximumUploadBytes: 8 * 1024 * 1024,
-  maximumExpandedBytes: 32 * 1024 * 1024,
-  maximumFiles: 100,
   maximumConversations: 2_000,
   maximumMessagesPerConversation: 20_000,
   maximumMessageBytes: 1_000_000,

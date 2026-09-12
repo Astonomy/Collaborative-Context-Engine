@@ -347,16 +347,28 @@ describe("PostgreSQL 18 persistence", () => {
       { name: "0001_initial.sql", status: "applied" },
       { name: "0002_conversation_imports.sql", status: "applied" },
       { name: "0003_provider_conversation_previews.sql", status: "applied" },
+      { name: "0004_remove_zip_conversation_import.sql", status: "applied" },
     ]);
     const version = await databasePool().query<{ readonly server_version: string }>(
       "SHOW server_version",
     );
     expect(version.rows[0]?.server_version).toMatch(/^18\.6(?:\s|$)/);
+    const importConstraints = await databasePool().query<{ readonly definition: string }>(
+      `SELECT pg_get_constraintdef(oid) AS definition
+       FROM pg_constraint
+       WHERE conname IN ('conversation_imports_source_format', 'conversation_imports_source_shape')
+       ORDER BY conname`,
+    );
+    expect(importConstraints.rows).toHaveLength(2);
+    expect(importConstraints.rows.every(({ definition }) => !definition.includes("'zip'"))).toBe(
+      true,
+    );
     await expect(runMigrations(databasePool())).resolves.toEqual(
       [
         "0001_initial.sql",
         "0002_conversation_imports.sql",
         "0003_provider_conversation_previews.sql",
+        "0004_remove_zip_conversation_import.sql",
       ].map((name) => ({ name, status: "already_applied" })),
     );
   });

@@ -10,7 +10,12 @@ export const providerConversationImportPreviewPathSchema = z
 export const conversationImportUploadBodySchema = z
   .object({
     source: z.literal("chatgpt"),
-    fileName: z.string().trim().min(1).max(255),
+    fileName: z
+      .string()
+      .trim()
+      .min(1)
+      .max(255)
+      .regex(/\.json$/i, "Only JSON files are supported."),
     dataBase64: z.string().min(1).max(12_000_000),
   })
   .strict();
@@ -30,7 +35,7 @@ const previewItem = z
 export const conversationImportPreviewResponseSchema = z
   .object({
     source: z.literal("chatgpt"),
-    sourceFormat: z.enum(["json", "zip"]),
+    sourceFormat: z.literal("json"),
     sourceFileHash: z.string(),
     duplicateImportId: z.uuid().optional(),
     conversations: z.array(previewItem),
@@ -48,6 +53,7 @@ export const providerConversationImportPreviewResponseSchema = z
       .object({ id: projectIdSchema, name: z.string().trim().min(1).max(160) })
       .strict(),
     title: z.string().trim().min(1).max(200),
+    summary: z.string().trim().min(1).max(8_000).optional(),
     messageCount: z.int().positive(),
     unsupportedContentCount: z.int().nonnegative(),
     warnings: z.array(z.string().max(500)),

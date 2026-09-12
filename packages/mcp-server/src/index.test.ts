@@ -106,6 +106,7 @@ describe("CCE MCP server", () => {
       source: "codex",
       captureScope: "partial",
       title: "MCP capture",
+      summary: "A bounded Codex capture with its supplied materials.",
       messages: [
         {
           role: "assistant",
@@ -123,6 +124,7 @@ describe("CCE MCP server", () => {
     expect(preview.structuredContent).toMatchObject({
       source: "codex-plugin",
       targetProject: { id: project.id, name: project.name },
+      summary: captureArguments.summary,
       messageCount: 1,
       duplicateStatus: "none",
     });

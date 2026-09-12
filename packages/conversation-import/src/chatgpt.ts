@@ -11,7 +11,6 @@ import {
   type ImportValidationResult,
   type ExternalMessageNode,
 } from "./types";
-import { readBoundedZip } from "./zip";
 
 type JsonObject = Record<string, unknown>;
 const isObject = (v: unknown): v is JsonObject =>
@@ -30,15 +29,12 @@ export class ChatGptExportImporter implements ConversationImporter {
   public constructor(private readonly limits: ImportLimits = defaultImportLimits) {}
   public async detect(input: ImportInput): Promise<DetectionResult> {
     await Promise.resolve();
-    const zip = input.bytes[0] === 0x50 && input.bytes[1] === 0x4b;
     const json =
-      input.fileName.toLowerCase().endsWith(".json") ||
-      [0x5b, 0x7b].includes(input.bytes.find((b) => b > 0x20) ?? -1);
-    return zip
-      ? { detected: true, format: "zip" as const, confidence: "high" as const }
-      : json
-        ? { detected: true, format: "json" as const, confidence: "high" as const }
-        : { detected: false, confidence: "none" as const };
+      input.fileName.toLowerCase().endsWith(".json") &&
+      [0x5b, 0x7b].includes(input.bytes.find((byte) => byte > 0x20) ?? -1);
+    return json
+      ? { detected: true, format: "json" as const, confidence: "high" as const }
+      : { detected: false, confidence: "none" as const };
   }
   public async parse(input: ImportInput): Promise<ExternalConversation[]> {
     if (input.bytes.byteLength > this.limits.maximumUploadBytes)
@@ -47,48 +43,37 @@ export class ChatGptExportImporter implements ConversationImporter {
     if (!detected.detected)
       throw new ConversationImportError(
         "UNSUPPORTED",
-        "Input is not a supported ChatGPT JSON or ZIP export.",
-      );
-    const documents =
-      detected.format === "zip"
-        ? [...readBoundedZip(input.bytes, this.limits)].filter(([name]) =>
-            /(^|\/)conversations(?:-\d+)?\.json$/i.test(name),
-          )
-        : [[input.fileName, input.bytes] as const];
-    if (documents.length === 0)
-      throw new ConversationImportError(
-        "UNSUPPORTED",
-        "Archive contains no conversations JSON file.",
+        "Input is not a supported ChatGPT JSON export.",
       );
     const result: ExternalConversation[] = [];
-    for (const [, bytes] of documents) {
-      let value: unknown;
-      try {
-        value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
-      } catch {
+    let value: unknown;
+    try {
+      value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(input.bytes));
+    } catch {
+      throw new ConversationImportError(
+        "MALFORMED",
+        "Conversation JSON is malformed or not UTF-8.",
+      );
+    }
+    const rows = Array.isArray(value)
+      ? value
+      : isObject(value) && Array.isArray(value["conversations"])
+        ? value["conversations"]
+        : null;
+    if (rows === null) {
+      throw new ConversationImportError(
+        "UNSUPPORTED",
+        "Conversation JSON has an unsupported top-level shape.",
+      );
+    }
+    for (const row of rows) {
+      if (result.length >= this.limits.maximumConversations) {
         throw new ConversationImportError(
-          "MALFORMED",
-          "Conversation JSON is malformed or not UTF-8.",
+          "LIMIT_EXCEEDED",
+          "Export contains too many conversations.",
         );
       }
-      const rows = Array.isArray(value)
-        ? value
-        : isObject(value) && Array.isArray(value["conversations"])
-          ? value["conversations"]
-          : null;
-      if (rows === null)
-        throw new ConversationImportError(
-          "UNSUPPORTED",
-          "Conversation JSON has an unsupported top-level shape.",
-        );
-      for (const row of rows) {
-        if (result.length >= this.limits.maximumConversations)
-          throw new ConversationImportError(
-            "LIMIT_EXCEEDED",
-            "Export contains too many conversations.",
-          );
-        result.push(this.parseConversation(row));
-      }
+      result.push(this.parseConversation(row));
     }
     return result;
   }

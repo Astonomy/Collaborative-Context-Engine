@@ -19,6 +19,6 @@ The checked-in connector uses a separate CCE bearer token from an environment va
 
 ## Consequences
 
-Official ChatGPT JSON/ZIP export remains the preferred bulk and higher-fidelity path. Plugin captures may be partial, and non-text blocks are provenance metadata rather than Message text. Codex support is limited to content a supported surface actually supplies; no local transcript or export format is assumed. Future provider surfaces can reuse the IR and application transaction without adding persistence paths.
+Official ChatGPT JSON export remains the preferred bulk and higher-fidelity path; ZIP upload support was subsequently removed. Plugin captures remain unchanged, may be partial, and retain non-text blocks as provenance metadata rather than Message text. Codex support is limited to content a supported surface actually supplies; no local transcript or export format is assumed. Future provider surfaces can reuse the IR and application transaction without adding persistence paths.
 
 The MCP transport uses the official TypeScript SDK pinned at 1.30.0. It is MIT-licensed, supplies the runtime schemas, Streamable HTTP transport, and linked in-memory test transport needed here, and is confined to the provider-facing package; core Domain and Context Engine packages do not import it. The locked production graph has no known audit findings as of this decision.

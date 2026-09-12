@@ -1,4 +1,3 @@
-import { deflateRawSync } from "node:zlib";
 import { describe, expect, it } from "vitest";
 import { ChatGptExportImporter, ConversationImportError, selectCurrentPath } from "./index";
 
@@ -38,21 +37,6 @@ const input = (value: unknown) => ({
   bytes: encoder.encode(JSON.stringify(value)),
 });
 
-function zip(name: string, data: Uint8Array): Uint8Array {
-  const body = deflateRawSync(data),
-    n = encoder.encode(name),
-    b = new Uint8Array(30 + n.length + body.length);
-  const v = new DataView(b.buffer);
-  v.setUint32(0, 0x04034b50, true);
-  v.setUint16(8, 8, true);
-  v.setUint32(18, body.length, true);
-  v.setUint32(22, data.length, true);
-  v.setUint16(26, n.length, true);
-  b.set(n, 30);
-  b.set(body, 30 + n.length);
-  return b;
-}
-
 describe("ChatGptExportImporter", () => {
   it("parses a provider-neutral current path", async () => {
     const parsed = await new ChatGptExportImporter().parse(input([conversation]));
@@ -65,13 +49,12 @@ describe("ChatGptExportImporter", () => {
     expect(
       await new ChatGptExportImporter().parse(input({ conversations: [conversation] })),
     ).toHaveLength(1));
-  it("parses bounded ZIP exports", async () =>
-    expect(
-      await new ChatGptExportImporter().parse({
-        fileName: "export.zip",
-        bytes: zip("conversations.json", input([conversation]).bytes),
-      }),
-    ).toHaveLength(1));
+  it("rejects ZIP uploads", async () => {
+    const bytes = new Uint8Array([0x50, 0x4b, 0x03, 0x04]);
+    await expect(
+      new ChatGptExportImporter().parse({ fileName: "export.zip", bytes }),
+    ).rejects.toMatchObject({ code: "UNSUPPORTED" });
+  });
   it("reports branches, unknown roles, unsupported content and missing parents", async () => {
     const changed: Record<string, unknown> = structuredClone(conversation);
     const mapping = changed["mapping"] as Record<string, typeof conversation.mapping.a1>;
@@ -126,20 +109,11 @@ describe("ChatGptExportImporter", () => {
       expect(parsed?.warnings).not.toHaveLength(0);
     },
   );
-  it("rejects unsafe ZIP paths", async () =>
-    expect(
-      new ChatGptExportImporter().parse({
-        fileName: "x.zip",
-        bytes: zip("../conversations.json", input([]).bytes),
-      }),
-    ).rejects.toMatchObject({ code: "MALFORMED" }));
   it("enforces upload and message limits", async () => {
     await expect(
       new ChatGptExportImporter({
         ...{
           maximumUploadBytes: 1,
-          maximumExpandedBytes: 10,
-          maximumFiles: 1,
           maximumConversations: 1,
           maximumMessagesPerConversation: 1,
           maximumMessageBytes: 1,

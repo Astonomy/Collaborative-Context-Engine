@@ -24,6 +24,7 @@ export const providerConversationSubmissionSchema = z
     captureScope: z.enum(["full", "partial"]),
     externalConversationId: z.string().trim().min(1).max(500).optional(),
     title: z.string().trim().min(1).max(200).optional(),
+    summary: z.string().trim().min(1).max(8_000).optional(),
     createdAt: z.string().datetime().optional(),
     messages: z
       .array(
@@ -85,11 +86,20 @@ export function normalizeProviderSubmission(input: unknown): NormalizedProviderS
         `A submitted message exceeds the ${providerSubmissionLimits.maximumMessageBytes} byte limit.`,
       );
     }
+    const references = message.content.filter(
+      (block) => block.type === "file_reference" || block.type === "image_reference",
+    ).length;
     const unsupported = message.content.filter((block) => block.type !== "text").length;
     unsupportedContentCount += unsupported;
-    if (unsupported > 0) {
+    if (references > 0) {
       warnings.push(
-        `A ${message.role} message contains ${unsupported} unsupported content block(s); only text becomes CCE Message evidence.`,
+        `A ${message.role} message contains ${references} original material reference(s); CCE retains them unchanged in the import manifest, while only text becomes CCE Message evidence.`,
+      );
+    }
+    const otherUnsupported = unsupported - references;
+    if (otherUnsupported > 0) {
+      warnings.push(
+        `A ${message.role} message contains ${otherUnsupported} unsupported non-reference content block(s); only text becomes CCE Message evidence.`,
       );
     }
     if (message.role === "unknown") {
@@ -124,6 +134,7 @@ export function normalizeProviderSubmission(input: unknown): NormalizedProviderS
       ? { externalConversationId: parsed.externalConversationId }
       : {}),
     ...(parsed.title ? { title: parsed.title } : {}),
+    ...(parsed.summary ? { summary: parsed.summary } : {}),
     ...(parsed.createdAt ? { createdAt: parsed.createdAt } : {}),
     nodes,
     metadata: {

@@ -365,7 +365,7 @@ export const conversationImports = pgTable(
     ),
     check(
       "conversation_imports_source_format",
-      sql`${table.sourceFormat} IN ('json', 'zip', 'mcp')`,
+      sql`${table.sourceFormat} IN ('json', 'mcp')`,
     ),
     check(
       "conversation_imports_policy",
@@ -374,7 +374,7 @@ export const conversationImports = pgTable(
     check(
       "conversation_imports_source_shape",
       sql`(
-        (${table.source} = 'chatgpt' AND ${table.sourceFormat} IN ('json', 'zip') AND ${table.policy} = 'current_path')
+        (${table.source} = 'chatgpt' AND ${table.sourceFormat} = 'json' AND ${table.policy} = 'current_path')
         OR
         (${table.source} IN ('chatgpt-plugin', 'codex-plugin') AND ${table.sourceFormat} = 'mcp' AND ${table.policy} = 'provided_messages')
       )`,

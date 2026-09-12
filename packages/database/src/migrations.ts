@@ -25,6 +25,18 @@ const migrations: readonly MigrationDefinition[] = [
     name: "0001_initial.sql",
     resource: new URL("../migrations/0001_initial.sql", import.meta.url),
   },
+  {
+    name: "0002_conversation_imports.sql",
+    resource: new URL("../migrations/0002_conversation_imports.sql", import.meta.url),
+  },
+  {
+    name: "0003_provider_conversation_previews.sql",
+    resource: new URL("../migrations/0003_provider_conversation_previews.sql", import.meta.url),
+  },
+  {
+    name: "0004_remove_zip_conversation_import.sql",
+    resource: new URL("../migrations/0004_remove_zip_conversation_import.sql", import.meta.url),
+  },
 ];
 
 function migrationChecksum(contents: string): string {

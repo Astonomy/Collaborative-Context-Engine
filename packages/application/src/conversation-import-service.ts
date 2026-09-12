@@ -34,7 +34,7 @@ const providerPreviewLifetimeMs = 15 * 60 * 1_000;
 
 export interface ImportPreview {
   readonly source: "chatgpt";
-  readonly sourceFormat: "json" | "zip";
+  readonly sourceFormat: "json";
   readonly sourceFileHash: string;
   readonly duplicateImportId?: string;
   readonly conversations: readonly {
@@ -52,6 +52,7 @@ export interface ProviderImportPreview {
   readonly source: "chatgpt-plugin" | "codex-plugin";
   readonly targetProject: { readonly id: ProjectId; readonly name: string };
   readonly title: string;
+  readonly summary?: string;
   readonly messageCount: number;
   readonly unsupportedContentCount: number;
   readonly warnings: readonly string[];
@@ -221,7 +222,7 @@ export class ConversationImportService {
     projectId: ProjectId;
     actorUserId: UserId;
     source: ConversationImportRecord["source"];
-    sourceFormat: ConversationImportRecord["sourceFormat"];
+    sourceFormat: "json" | "mcp";
     sourceFileHash: string;
     policy: ConversationImportRecord["policy"];
     conversations: readonly ExternalConversation[];
@@ -397,6 +398,7 @@ export class ConversationImportService {
       source: preview.source,
       targetProject: { id: preview.projectId, name: projectName },
       title: preview.conversation.title ?? "Untitled submitted conversation",
+      ...(preview.conversation.summary ? { summary: preview.conversation.summary } : {}),
       messageCount: preview.messageCount,
       unsupportedContentCount: preview.unsupportedContentCount,
       warnings: preview.warnings,
@@ -461,7 +463,7 @@ export class ConversationImportService {
       .trim();
   }
 
-  private format(value: "json" | "zip" | undefined): "json" | "zip" {
+  private format(value: "json" | undefined): "json" {
     if (value === undefined) {
       throw new ApplicationError("VALIDATION", "Import format was not detected.");
     }

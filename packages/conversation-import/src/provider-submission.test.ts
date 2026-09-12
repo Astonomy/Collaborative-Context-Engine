@@ -58,6 +58,30 @@ describe("normalizeProviderSubmission", () => {
     );
   });
 
+  it("keeps an evidence summary separate from unchanged original material references", () => {
+    const originalReference = {
+      type: "file_reference" as const,
+      reference: "provider://attachments/requirements.pdf",
+      metadata: { mediaType: "application/pdf", fileName: "requirements.pdf" },
+    };
+    const result = normalizeProviderSubmission({
+      ...submission(),
+      summary:
+        "The attached requirements and the conversation agree that PostgreSQL remains authoritative.",
+      messages: [
+        {
+          role: "user",
+          content: [{ type: "text", text: "Use the attached requirements." }, originalReference],
+          metadata: {},
+        },
+      ],
+    });
+
+    expect(result.conversation.summary).toContain("attached requirements");
+    expect(result.conversation.nodes[0]?.content[1]).toEqual(originalReference);
+    expect(result.warnings.join(" ")).toContain("retains them unchanged in the import manifest");
+  });
+
   it("rejects non-JSON metadata and captures without supported message text", () => {
     expect(() =>
       normalizeProviderSubmission({ ...submission(), metadata: { invalid: undefined } }),
@@ -74,6 +98,9 @@ describe("normalizeProviderSubmission", () => {
         ],
       }),
     ).toThrowError("Conversation submission contains no supported non-empty message text.");
+    expect(() =>
+      normalizeProviderSubmission({ ...submission(), summary: "x".repeat(8_001) }),
+    ).toThrowError("Conversation submission is malformed.");
   });
 
   it("retains unknown roles in provenance while excluding them from Message counts", () => {

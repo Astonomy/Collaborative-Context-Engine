@@ -98,6 +98,7 @@ describe("ConversationImportService", () => {
         captureScope: "partial",
         externalConversationId: "chatgpt-conversation-1",
         title: "Imported through the plugin",
+        summary: "The conversation and attached image establish PostgreSQL as authoritative.",
         messages: [
           {
             externalMessageId: "user-1",
@@ -122,6 +123,7 @@ describe("ConversationImportService", () => {
     expect(preview).toMatchObject({
       source: "chatgpt-plugin",
       targetProject: { id: fixture.project.id, name: fixture.project.name },
+      summary: "The conversation and attached image establish PostgreSQL as authoritative.",
       messageCount: 2,
       unsupportedContentCount: 1,
       duplicateStatus: "none",
@@ -150,6 +152,12 @@ describe("ConversationImportService", () => {
       importedBy: fixture.user.id,
       previewId: preview.id,
       provider: "chatgpt",
+    });
+    expect(imported.sourceManifest[0]?.summary).toBe(preview.summary);
+    expect(imported.sourceManifest[0]?.nodes[1]?.content[1]).toEqual({
+      type: "image_reference",
+      reference: "provider-image",
+      metadata: {},
     });
     expect(state.messages.map((message) => message.providerMessageId)).toEqual([
       "user-1",
