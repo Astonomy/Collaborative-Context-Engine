@@ -52,6 +52,8 @@ export const providerConversationImportPreviewResponseSchema = z
     targetProject: z
       .object({ id: projectIdSchema, name: z.string().trim().min(1).max(160) })
       .strict(),
+    operation: z.enum(["create", "append"]),
+    targetConversationId: z.uuid().optional(),
     title: z.string().trim().min(1).max(200),
     summary: z.string().trim().min(1).max(8_000).optional(),
     messageCount: z.int().positive(),

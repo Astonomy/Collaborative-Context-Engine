@@ -67,6 +67,10 @@ export interface ConversationImportPreviewRecord {
 
 export interface ConversationImportRepository {
   findById(projectId: ProjectId, importId: string): Promise<ConversationImportRecord | null>;
+  findContinuation(
+    projectId: ProjectId,
+    previousImportId: string,
+  ): Promise<ConversationImportRecord | null>;
   findCompletedByIdentity(
     projectId: ProjectId,
     sourceFileHash: string,

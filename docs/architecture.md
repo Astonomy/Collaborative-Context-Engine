@@ -12,6 +12,8 @@ Browser
 
 External export and provider-submission adapters live in `packages/conversation-import`. They normalize untrusted provider data into an IR before application orchestration; persisted imports create Conversation/Message evidence and an append-only provenance manifest, never direct canonical context mutations. `packages/mcp-server` is a thin provider-facing facade over those application use cases and contains no persistence logic. See [Conversation import](conversation-import.md), [ADR 0007](adr/0007-external-conversations-import-as-evidence.md), and [ADR 0008](adr/0008-provider-plugin-submissions.md).
 
+Repeated plugin submissions carry the previous successful import ID and only new messages. The application resolves the existing Conversation from project-scoped import provenance and appends evidence under project/conversation locks. Each delta keeps its own immutable manifest and audit record; the Conversation and its Branch are reused. The Skill keeps the submission boundary; the server enforces ownership, source consistency, predecessor freshness, and retry idempotency.
+
 ## Package responsibilities
 
 | Package          | Responsibility                                                  | May depend on                   |

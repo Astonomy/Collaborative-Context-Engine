@@ -1,4 +1,5 @@
 import {
+  ApplicationError,
   ChatService,
   ContextService,
   ConversationService,
@@ -50,6 +51,101 @@ async function collect(source: AsyncIterable<ChatEvent>): Promise<ChatEvent[]> {
 }
 
 describe("ExtractionService", () => {
+  it("preserves an existing ApplicationError by identity", async () => {
+    const fixture = createFixture();
+    const { conversation } = seedConversation(fixture);
+    const provider = new ScriptedModelProvider();
+    const error = new ApplicationError("VALIDATION", "Existing validation failure.");
+    provider.enqueueResponse(error);
+    const service = new ExtractionService(
+      fixture.unitOfWork,
+      provider,
+      idsFrom(100),
+      fixture.clock,
+      fixture.hasher,
+    );
+    await expect(
+      service.extract({
+        projectId: fixture.project.id,
+        conversationId: conversation.id,
+        actorUserId: fixture.user.id,
+      }),
+    ).rejects.toBe(error);
+    expect(fixture.unitOfWork.view().modelRuns[0]?.status).toBe("failed");
+    expect(provider.requests).toHaveLength(1);
+  });
+
+  it.each(["CONNECTION", "TIMEOUT", "INCOMPATIBLE_CAPABILITY"] as const)(
+    "maps provider %s to dependency unavailable and records the actual failure code",
+    async (code) => {
+      const fixture = createFixture();
+      const { conversation } = seedConversation(fixture);
+      const provider = new ScriptedModelProvider();
+      provider.enqueueResponse(
+        new ModelProviderError(code, "Provider request failed.", {
+          retryable: false,
+          statusCode: code === "INCOMPATIBLE_CAPABILITY" ? 400 : null,
+        }),
+      );
+      const service = new ExtractionService(
+        fixture.unitOfWork,
+        provider,
+        idsFrom(100),
+        fixture.clock,
+        fixture.hasher,
+      );
+      await expect(
+        service.extract({
+          projectId: fixture.project.id,
+          conversationId: conversation.id,
+          actorUserId: fixture.user.id,
+        }),
+      ).rejects.toMatchObject({ code: "DEPENDENCY_UNAVAILABLE" });
+      expect(fixture.unitOfWork.view().modelRuns[0]).toMatchObject({
+        status: "failed",
+        errorCode: code,
+      });
+      expect(fixture.unitOfWork.view().deltas).toEqual([]);
+      expect(provider.requests).toHaveLength(1);
+    },
+  );
+
+  it.each([
+    ["", "Model returned empty message.content."],
+    ["   ", "Model returned empty message.content."],
+    ["not json", "Model returned invalid JSON."],
+    ['{"changes":"wrong"}', "Model returned an invalid Context proposal."],
+  ])(
+    "rejects invalid extraction content %j with a specific validation failure",
+    async (content, message) => {
+      const fixture = createFixture();
+      const { conversation } = seedConversation(fixture);
+      const provider = new ScriptedModelProvider();
+      provider.enqueueResponse(response(content));
+      provider.enqueueResponse(response(content));
+      const service = new ExtractionService(
+        fixture.unitOfWork,
+        provider,
+        idsFrom(100),
+        fixture.clock,
+        fixture.hasher,
+      );
+      await expect(
+        service.extract({
+          projectId: fixture.project.id,
+          conversationId: conversation.id,
+          actorUserId: fixture.user.id,
+        }),
+      ).rejects.toMatchObject({ code: "VALIDATION", message });
+      expect(provider.requests).toHaveLength(2);
+      expect(fixture.unitOfWork.view().modelRuns[0]).toMatchObject({
+        status: "failed",
+        errorCode: "MALFORMED_STRUCTURED_OUTPUT",
+      });
+      expect(fixture.unitOfWork.view().deltas).toEqual([]);
+    },
+  );
+
   it("turns strict structured output into an evidence-linked proposal, never a commit", async () => {
     const fixture = createFixture();
     const { conversation, message } = seedConversation(fixture);
@@ -197,7 +293,8 @@ describe("ExtractionService", () => {
         conversationId: conversation.id,
         actorUserId: fixture.user.id,
       }),
-    ).rejects.toMatchObject({ code: "DEPENDENCY_UNAVAILABLE" });
+    ).rejects.toMatchObject({ code: "VALIDATION" });
+    expect(provider.requests).toHaveLength(1);
     expect(fixture.unitOfWork.view().modelRuns[0]).toMatchObject({
       status: "failed",
       errorCode: "MALFORMED_RESPONSE",
@@ -205,7 +302,7 @@ describe("ExtractionService", () => {
     expect(fixture.unitOfWork.view().deltas).toEqual([]);
   });
 
-  it("terminalizes validation failures raised while assembling the Delta", async () => {
+  it("terminalizes duplicate top-level proposals after the repair attempt", async () => {
     const fixture = createFixture();
     const { conversation, message } = seedConversation(fixture);
     const candidate = JSON.parse(extractionJson(message.id)) as {
@@ -213,6 +310,7 @@ describe("ExtractionService", () => {
     };
     candidate.changes.push(structuredClone(candidate.changes[0]));
     const provider = new ScriptedModelProvider();
+    provider.enqueueResponse(response(JSON.stringify(candidate)));
     provider.enqueueResponse(response(JSON.stringify(candidate)));
     const service = new ExtractionService(
       fixture.unitOfWork,

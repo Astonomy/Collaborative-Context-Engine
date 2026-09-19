@@ -163,6 +163,41 @@ describe("CCE MCP server", () => {
     );
     expect(unitOfWork.view().conversations).toHaveLength(1);
 
+    const originalImport = z
+      .object({ importId: z.uuid(), conversationId: z.uuid() })
+      .parse(submitted.structuredContent);
+    const delta = await client.callTool({
+      name: "preview_conversation_import",
+      arguments: {
+        ...captureArguments,
+        previousImportId: originalImport.importId,
+        messages: [
+          { role: "user", content: [{ type: "text", text: "New conversation evidence." }] },
+        ],
+      },
+    });
+    expect(delta.isError).not.toBe(true);
+    expect(delta.structuredContent).toMatchObject({
+      operation: "append",
+      targetConversationId: originalImport.conversationId,
+      messageCount: 1,
+    });
+    expect(unitOfWork.view().messages).toHaveLength(1);
+    const appended = await client.callTool({
+      name: "submit_conversation_import",
+      arguments: {
+        projectId: project.id,
+        previewId: z.object({ previewId: z.uuid() }).parse(delta.structuredContent).previewId,
+      },
+    });
+    expect(appended.structuredContent).toMatchObject({
+      conversationId: originalImport.conversationId,
+      messageCount: 1,
+    });
+    expect(unitOfWork.view().messages).toHaveLength(2);
+    expect(unitOfWork.view().conversations).toHaveLength(1);
+    expect(unitOfWork.view().branches).toHaveLength(1);
+
     const unknownProject = await client.callTool({
       name: "preview_conversation_import",
       arguments: { ...captureArguments, projectId: uuid(999) },

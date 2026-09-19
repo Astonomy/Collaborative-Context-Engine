@@ -29,6 +29,8 @@ const previewOutput = {
   previewId: z.uuid(),
   source: z.enum(["chatgpt-plugin", "codex-plugin"]),
   targetProject: z.object({ id: projectIdSchema, name: z.string() }),
+  operation: z.enum(["create", "append"]),
+  targetConversationId: z.uuid().optional(),
   title: z.string(),
   summary: z.string().optional(),
   messageCount: z.number().int().positive(),
@@ -98,7 +100,7 @@ export function createCceMcpServer(dependencies: CceMcpDependencies): McpServer 
     {
       title: "Preview conversation import",
       description:
-        "Validate a user-authorized ChatGPT or Codex conversation capture and optional evidence summary for one exact CCE project. Original material references remain unchanged in the import manifest. This creates only an expiring import plan; it does not create Conversation evidence or update Project Context.",
+        "Validate a user-authorized conversation capture for one exact CCE project. For another submission from the same provider conversation, pass the latest successful previousImportId and only new messages: the preview targets the existing CCE Conversation. Original references remain unchanged. This creates only an expiring plan, not evidence or Project Context changes.",
       inputSchema: providerConversationSubmissionSchema.extend({ projectId: projectIdSchema }),
       outputSchema: previewOutput,
       annotations: {
@@ -119,6 +121,10 @@ export function createCceMcpServer(dependencies: CceMcpDependencies): McpServer 
           previewId: preview.id,
           source: preview.source,
           targetProject: preview.targetProject,
+          operation: preview.operation,
+          ...(preview.targetConversationId
+            ? { targetConversationId: preview.targetConversationId }
+            : {}),
           title: preview.title,
           ...(preview.summary ? { summary: preview.summary } : {}),
           messageCount: preview.messageCount,
@@ -148,7 +154,7 @@ export function createCceMcpServer(dependencies: CceMcpDependencies): McpServer 
     {
       title: "Submit conversation to CCE",
       description:
-        "Persist the validated expiring preview as append-only CCE Conversation and Message evidence. Call only after the user has approved the shown destination, message count, and warnings. This does not update Project Context.",
+        "Persist the approved preview as evidence. An append preview adds only the supplied delta messages to its existing Conversation; a create preview creates a Conversation. Keep the returned importId for the next delta in this provider conversation. Call only after approval of the destination, message count, and warnings. Project Context is not updated.",
       inputSchema: { projectId: projectIdSchema, previewId: z.uuid() },
       outputSchema: submitOutput,
       annotations: {

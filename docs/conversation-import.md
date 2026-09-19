@@ -14,6 +14,8 @@ Attachments are references only because CCE has no artifact store. Provider subm
 
 The CCE conversation-submission plugin is a separate quick-capture path. It normalizes explicitly authorized, invocation-supplied ChatGPT or Codex messages, a generated evidence summary, and selected original material references into the same IR, persists a project- and actor-scoped 15-minute preview, and submits through the same application transaction. The summary covers accessible attached content but never replaces or rewrites the captured messages. Exact normalized content, source, policy, and project provide deterministic idempotency. Partial capture and non-text blocks are disclosed before confirmation.
 
+For subsequent submissions in the same provider conversation, the Skill sends only the delta since its last successful preview boundary and the returned `importId` as `previousImportId`. The server appends those messages to the existing Conversation, retains its Branch, and records a new immutable import manifest linking the predecessor. Previews distinguish `create` from `append` and show the existing Conversation ID for an append. Exact retries are idempotent; a different delta using an already-continued predecessor conflicts. Missing or unauthorized predecessors never fall back to creating a conversation. The offline ChatGPT export path keeps its existing behavior.
+
 | Path                    | Intended use                                                                      |
 | ----------------------- | --------------------------------------------------------------------------------- |
 | ChatGPT official export | Bulk/high-fidelity history import from supported JSON data                        |

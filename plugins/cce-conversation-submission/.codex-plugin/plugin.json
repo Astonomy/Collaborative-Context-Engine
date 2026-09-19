@@ -1,6 +1,6 @@
 {
   "name": "cce-conversation-submission",
-  "version": "0.1.0+codex.20260910073040",
+  "version": "0.1.0+codex.20260917054823",
   "description": "Summarize and submit an explicitly approved ChatGPT or Codex conversation and its supplied materials to a CCE project as evidence.",
   "author": {
     "name": "Collaborative Context Engine contributors",

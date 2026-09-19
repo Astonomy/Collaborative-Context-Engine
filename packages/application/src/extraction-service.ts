@@ -44,7 +44,7 @@ const extractionProposalSchema = z
     value: contextItemProposalSchema.shape.value,
     scope: contextScopeSchema,
     confidence: z.number().min(0).max(1),
-    evidenceMessageIds: z.array(z.uuid()).min(1),
+    evidenceMessageIds: z.array(z.uuid()).min(1).max(500),
   })
   .strict();
 
@@ -66,32 +66,17 @@ const extractedChangeSchema = z.discriminatedUnion("operation", [
       proposal: extractionProposalSchema,
     })
     .strict(),
-  z
-    .object({
-      operation: z.literal("deprecate"),
-      targetLogicalItemId: z.uuid(),
-      expectedBaseVersionId: z.uuid(),
-      evidenceMessageIds: z.array(z.uuid()).min(1),
-    })
-    .strict(),
 ]);
 
 const extractedDeltaSchema = z
   .object({
-    changes: z.array(extractedChangeSchema).max(200),
+    // Keep the Delta envelope; all topics belong inside one proposal's JSON value.
+    changes: z.array(extractedChangeSchema).length(1),
   })
   .strict();
 
-type ExtractedChange = z.infer<typeof extractedChangeSchema>;
-
 function parseJson(text: string): unknown {
   return JSON.parse(text) as unknown;
-}
-
-function evidenceIds(change: ExtractedChange): readonly string[] {
-  return change.operation === "deprecate"
-    ? change.evidenceMessageIds
-    : change.proposal.evidenceMessageIds;
 }
 
 export class ExtractionService {
@@ -140,7 +125,7 @@ export class ExtractionService {
       if (snapshot === null) {
         throw new ApplicationError("CONFLICT", "Project Context HEAD is unavailable.");
       }
-      return { access, branch, messages, snapshot };
+      return { access, conversation, branch, messages, snapshot };
     });
 
     buildContextPack({
@@ -186,16 +171,33 @@ export class ExtractionService {
         role: "system" as const,
         content:
           "Extract only semantic changes supported by the supplied message IDs. Return strict JSON. " +
-          "Do not approve changes and do not invent provenance.",
+          "Do not approve changes and do not invent provenance. " +
+          "The input represents one complete conversation-level work unit. " +
+          "Treat the entire conversation as one coherent module or project context. " +
+          "Read all messages together before extracting information. " +
+          "Messages are evidence belonging to the same conversation; they are not independent extraction units. " +
+          "Produce exactly one merged conversation-level extraction proposal in the changes array. " +
+          "Consolidate duplicate, repeated, updated, or related information across messages. " +
+          "Later messages may refine, replace, or supersede earlier statements when the conversation clearly indicates this. " +
+          "Preserve requirements, constraints, decisions, implementation details, unresolved issues, files, paths, " +
+          "commands, errors, and next steps as structured information inside the single proposal's value. " +
+          "Do not split the conversation into multiple top-level extraction records because it contains multiple topics or stages. " +
+          "Use a conversation-level key, and cite the supplied message IDs supporting the merged information. " +
+          "Use add for a new work unit, or update/supersede for an existing record of this conversation; " +
+          "represent retired details inside the merged value instead of a standalone deprecation. " +
+          "Current project items are background context; do not merge separate conversations into one extraction record. " +
+          "The output represents what this conversation, considered as a whole, contributes to the project.",
       },
       {
         role: "user" as const,
         content: JSON.stringify({
           baseCommitId: readable.branch.baseCommitId,
           currentItems: readable.snapshot.items,
+          conversation: readable.conversation,
           messages: completedMessages.map((message) => ({
             id: message.id,
             role: message.role,
+            author: message.author,
             content: message.content,
             sequence: message.sequence,
           })),
@@ -211,7 +213,7 @@ export class ExtractionService {
       model: "medium",
       purpose: "extraction",
       promptId: "context-extractor",
-      promptVersion: 1,
+      promptVersion: 2,
       inputHash,
       status: "running",
       inputTokens: null,
@@ -233,7 +235,7 @@ export class ExtractionService {
       const messageIds = new Set(completedMessages.map((message) => message.id));
       for (const change of extracted.changes) {
         if (
-          evidenceIds(change).some(
+          change.proposal.evidenceMessageIds.some(
             (messageId) => !messageIds.has(messageIdSchema.parse(messageId)),
           )
         ) {
@@ -251,25 +253,25 @@ export class ExtractionService {
         model: response.model,
         runId,
       };
-      const provenanceFor = (rawMessageIds: readonly string[]): Provenance => ({
-        projectId: input.projectId,
-        conversationId: input.conversationId,
-        messageIds: rawMessageIds.map((messageId) => messageIdSchema.parse(messageId)),
-        actor: modelActor,
-        modelRunId: runId,
-        recordedAt: completedAt.toISOString(),
-      });
-      const changes = extracted.changes.map((candidate) => {
-        const id = deltaChangeIdSchema.parse(this.ids.next());
-        if (candidate.operation === "deprecate") {
-          return contextDeltaChangeSchema.parse({
-            id,
-            operation: "deprecate",
-            targetLogicalItemId: logicalContextItemIdSchema.parse(candidate.targetLogicalItemId),
-            expectedBaseVersionId: contextItemVersionIdSchema.parse(candidate.expectedBaseVersionId),
-            provenance: [provenanceFor(candidate.evidenceMessageIds)],
+      const provenanceFor = (rawMessageIds: readonly string[]): Provenance[] => {
+        const messageIds = [...new Set(rawMessageIds)].map((id) => messageIdSchema.parse(id));
+        const provenance: Provenance[] = [];
+        // One merged proposal can cite the full bounded conversation. Each existing
+        // provenance entry supports 100 messages; no evidence schema change is needed.
+        for (let offset = 0; offset < messageIds.length; offset += 100) {
+          provenance.push({
+            projectId: input.projectId,
+            conversationId: input.conversationId,
+            messageIds: messageIds.slice(offset, offset + 100),
+            actor: modelActor,
+            modelRunId: runId,
+            recordedAt: completedAt.toISOString(),
           });
         }
+        return provenance;
+      };
+      const changes = extracted.changes.map((candidate) => {
+        const id = deltaChangeIdSchema.parse(this.ids.next());
         const proposal = contextItemProposalSchema.parse({
           kind: candidate.proposal.kind,
           key: candidate.proposal.key,
@@ -277,7 +279,7 @@ export class ExtractionService {
           scope: candidate.proposal.scope,
           authority: "authoritative",
           confidence: candidate.proposal.confidence,
-          provenance: [provenanceFor(candidate.proposal.evidenceMessageIds)],
+          provenance: provenanceFor(candidate.proposal.evidenceMessageIds),
           explicitSupersedesVersionId:
             candidate.operation === "supersede"
               ? contextItemVersionIdSchema.parse(candidate.expectedBaseVersionId)
@@ -360,7 +362,10 @@ export class ExtractionService {
       if (error instanceof ApplicationError) {
         throw error;
       }
-      if (error instanceof z.ZodError) {
+      if (
+        error instanceof z.ZodError ||
+        (error instanceof ModelProviderError && error.code === "MALFORMED_RESPONSE")
+      ) {
         throw new ApplicationError("VALIDATION", "Model returned an invalid Context proposal.");
       }
       throw new ApplicationError("DEPENDENCY_UNAVAILABLE", "Context extraction failed.");
@@ -397,7 +402,7 @@ export class ExtractionService {
           purpose: "extraction",
           messages: requestMessages,
           promptId: "context-extractor",
-          promptVersion: 1,
+          promptVersion: 2,
           temperature: 0,
           responseFormat,
           ...(signal === undefined ? {} : { signal }),
@@ -418,14 +423,55 @@ export class ExtractionService {
           { retryable: lastResponse.finishReason === "length" },
         );
       }
+      let parsed: unknown;
       try {
+        if (lastResponse.content.trim() === "") {
+          throw new ApplicationError("VALIDATION", "Model returned empty message.content.");
+        }
+        parsed = parseJson(lastResponse.content);
+        const extracted = extractedDeltaSchema.safeParse(parsed);
+        if (!extracted.success) {
+          throw extracted.error;
+        }
         return {
           response: lastResponse,
-          extracted: extractedDeltaSchema.parse(parseJson(lastResponse.content)),
+          extracted: extracted.data,
         };
-      } catch {
+      } catch (error: unknown) {
+        if (
+          !(error instanceof SyntaxError) &&
+          !(error instanceof z.ZodError) &&
+          !(error instanceof ApplicationError)
+        ) {
+          throw error;
+        }
+        if (process.env["NODE_ENV"] === "development" || process.env["NODE_ENV"] === "test") {
+          console.error("Model extraction output rejected", {
+            reason:
+              error instanceof z.ZodError
+                ? "INVALID_SCHEMA"
+                : error instanceof ApplicationError
+                  ? "EMPTY_CONTENT"
+                  : "INVALID_JSON",
+            responseCharacterLength: lastResponse.content.length,
+            topLevelKeys:
+              parsed !== null && typeof parsed === "object" ? Object.keys(parsed).slice(0, 20) : [],
+            issues:
+              error instanceof z.ZodError
+                ? error.issues.slice(0, 20).map(({ code, path }) => ({ code, path }))
+                : [],
+          });
+        }
         if (attempt === 1) {
-          throw new ApplicationError("VALIDATION", "Model returned malformed structured output.");
+          if (error instanceof ApplicationError) {
+            throw error;
+          }
+          throw new ApplicationError(
+            "VALIDATION",
+            error instanceof SyntaxError
+              ? "Model returned invalid JSON."
+              : "Model returned an invalid Context proposal.",
+          );
         }
       }
     }

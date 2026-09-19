@@ -99,7 +99,7 @@ async function createProjectFixture(label: string): Promise<ProjectFixture> {
   const now = timestamp();
   const user = userSchema.parse({
     id: userIdSchema.parse(randomUUID()),
-    email: `${label}-${randomUUID()}@example.test`,
+    email: `${label.replace(/\s+/gu, "-")}-${randomUUID()}@example.test`,
     displayName: label,
     createdAt: now,
   });
@@ -466,6 +466,86 @@ describe("PostgreSQL 18 persistence", () => {
         [first.project.id, imported.importId],
       ),
     ).rejects.toMatchObject({ code: "55000" });
+  });
+
+  it("serializes delta submissions into one conversation with immutable provenance", async () => {
+    const fixture = await createProjectFixture("Provider deltas");
+    const other = await createProjectFixture("Other provider deltas");
+    const service = new ConversationImportService(
+      databaseUnitOfWork(),
+      { next: randomUUID },
+      { now: () => new Date() },
+    );
+    const scope = { projectId: fixture.project.id, actorUserId: fixture.user.id };
+    const capture = (text: string, previousImportId?: string) => ({
+      source: "codex" as const,
+      captureScope: "partial" as const,
+      ...(previousImportId ? { previousImportId } : {}),
+      messages: [
+        { role: "user" as const, content: [{ type: "text" as const, text }], metadata: {} },
+      ],
+      metadata: {},
+    });
+    const firstPreview = await service.previewProviderSubmission({
+      ...scope,
+      submission: capture("First"),
+    });
+    const first = await service.submitProviderPreview({ ...scope, previewId: firstPreview.id });
+    const conversationId = first.importedConversations[0]?.conversationId;
+    if (!conversationId) throw new Error("Expected initial conversation ID.");
+    const before = await databaseUnitOfWork().run(async (repositories) => ({
+      conversations: await repositories.conversations.list(scope.projectId),
+      messages: await repositories.conversations.listMessages(scope.projectId, conversationId),
+    }));
+    const deltaInput = { ...scope, submission: capture("Second", first.id) };
+    const delta = await service.previewProviderSubmission(deltaInput);
+    const competing = await service.previewProviderSubmission({
+      ...scope,
+      submission: capture("Competing delta", first.id),
+    });
+    const results = await Promise.all([
+      service.submitProviderPreview({ ...scope, previewId: delta.id }),
+      service.submitProviderPreview({ ...scope, previewId: delta.id }),
+    ]);
+    const second = results[0];
+    if (!second) throw new Error("Expected appended import.");
+    expect(results[1]?.id).toBe(second.id);
+    expect(second.importedConversations[0]?.conversationId).toBe(conversationId);
+    expect(second.sourceManifest[0]?.previousImportId).toBe(first.id);
+    await expect(
+      service.submitProviderPreview({ ...scope, previewId: competing.id }),
+    ).rejects.toMatchObject({ code: "CONFLICT" });
+    const retry = await service.previewProviderSubmission(deltaInput);
+    expect(retry).toMatchObject({
+      operation: "append",
+      targetConversationId: conversationId,
+      duplicateImportId: second.id,
+    });
+    await expect(
+      service.previewProviderSubmission({
+        projectId: other.project.id,
+        actorUserId: other.user.id,
+        submission: capture("Wrong project", first.id),
+      }),
+    ).rejects.toMatchObject({ code: "NOT_FOUND" });
+    await databaseUnitOfWork().run(async (repositories) => {
+      expect(await repositories.imports.findContinuation(scope.projectId, first.id)).toEqual(
+        second,
+      );
+      expect(await repositories.imports.findContinuation(other.project.id, first.id)).toBeNull();
+      expect(await repositories.imports.findById(scope.projectId, first.id)).toEqual(first);
+      expect(await repositories.conversations.list(scope.projectId)).toEqual(before.conversations);
+      const messages = await repositories.conversations.listMessages(
+        scope.projectId,
+        conversationId,
+      );
+      expect(messages).toHaveLength(2);
+      expect(messages[0]).toEqual(before.messages[0]);
+      expect(messages[1]).toMatchObject({ sequence: 2, content: "Second" });
+      expect((await repositories.projects.findById(scope.projectId))?.headCommitId).toBe(
+        fixture.genesis.id,
+      );
+    });
   });
 
   it("rolls back failed units of work and seeds only a SHA-256 token hash", async () => {

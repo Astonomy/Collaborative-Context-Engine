@@ -73,7 +73,7 @@ const completionSchema = z
           .object({
             message: z
               .object({
-                content: z.string().max(maximumContentLength).nullable(),
+                content: z.string().max(maximumContentLength).nullish(),
               })
               .passthrough(),
             finish_reason: finishReasonSchema,
@@ -112,8 +112,8 @@ const providerErrorSchema = z
   .object({
     error: z
       .object({
-        code: z.union([z.string(), z.number()]).optional(),
-        type: z.string().optional(),
+        code: z.union([z.string(), z.number()]).nullish(),
+        type: z.string().nullish(),
         param: z.string().nullable().optional(),
         message: z.string().optional(),
       })
@@ -138,10 +138,9 @@ interface OpenAiRequestBody {
   readonly temperature: number;
   readonly stream: boolean;
   readonly stream_options?: { readonly include_usage: true };
-  readonly response_format?: {
-    readonly type: "json_schema";
-    readonly json_schema: StructuredResponseFormat;
-  };
+  readonly response_format?:
+    | { readonly type: "json_schema"; readonly json_schema: StructuredResponseFormat }
+    | { readonly type: "json_object" };
 }
 
 interface ErrorDetails {
@@ -149,6 +148,12 @@ interface ErrorDetails {
   readonly type: string;
   readonly param: string;
   readonly message: string;
+}
+
+interface StructuredOutputDiagnostics {
+  readonly responseCharacterLength: number;
+  readonly topLevelKeys: readonly string[];
+  readonly issues: readonly { readonly code: string; readonly path: readonly PropertyKey[] }[];
 }
 
 class RequestDeadline {
@@ -208,10 +213,14 @@ export class QwenVllmModelProvider implements ModelProvider {
   public async generate(request: ModelRequest): Promise<ModelResponse> {
     const structuredResponseSchema = validateRequest(request);
     const deadline = new RequestDeadline(this.#configuration.requestTimeoutMs, request.signal);
+    let response: Response | null = null;
+    let errorDetails: ErrorDetails | null = null;
+    const diagnostics: { output: StructuredOutputDiagnostics | null } = { output: null };
     try {
-      const response = await this.sendRequest(this.buildRequestBody(request, false), deadline);
+      response = await this.sendRequest(this.buildRequestBody(request, false), deadline);
       if (!response.ok) {
-        throw await normalizeHttpError(response);
+        errorDetails = await readErrorDetails(response);
+        throw normalizeHttpError(response.status, errorDetails);
       }
       const payload = await readJson(response);
       const completion = completionSchema.safeParse(payload);
@@ -220,7 +229,11 @@ export class QwenVllmModelProvider implements ModelProvider {
       }
 
       const choice = completion.data.choices[0];
-      if (choice === undefined || choice.message.content === null) {
+      if (
+        choice?.message.content === undefined ||
+        choice.message.content === null ||
+        (structuredResponseSchema !== null && choice.message.content.trim() === "")
+      ) {
         throw malformedResponse("Model provider returned a completion without text content.");
       }
       const identity = validateProviderIdentity(
@@ -229,7 +242,15 @@ export class QwenVllmModelProvider implements ModelProvider {
         completion.data.provider,
       );
       if (structuredResponseSchema !== null) {
-        assertStructuredJson(choice.message.content, structuredResponseSchema);
+        const content = choice.message.content;
+        assertStructuredJson(content, structuredResponseSchema, (value, issues) => {
+          diagnostics.output = {
+            responseCharacterLength: content.length,
+            topLevelKeys:
+              value !== null && typeof value === "object" ? Object.keys(value).slice(0, 20) : [],
+            issues: issues.slice(0, 20).map(({ code, path }) => ({ code, path })),
+          };
+        });
       }
 
       return {
@@ -239,7 +260,50 @@ export class QwenVllmModelProvider implements ModelProvider {
         usage: normalizeUsage(completion.data.usage),
       };
     } catch (error) {
-      throw normalizeRequestFailure(error, deadline, "generate");
+      const normalized = normalizeRequestFailure(error, deadline, "generate");
+      if (
+        request.purpose === "extraction" &&
+        (process.env["NODE_ENV"] === "development" || process.env["NODE_ENV"] === "test")
+      ) {
+        const safe = (text: string): string =>
+          safeDiagnosticText(text, this.#configuration, request);
+        console.error("Model extraction provider failed", {
+          name: safe(normalized.name),
+          message: safe(normalized.message),
+          code: normalized instanceof ModelProviderError ? normalized.code : null,
+          status: response?.status ?? null,
+          requestId: safe(response?.headers.get("x-request-id") ?? "") || null,
+          model: safe(this.modelForPurpose(request)),
+          baseUrl: safe(this.#configuration.baseUrl),
+          requestError:
+            error instanceof Error
+              ? { name: safe(error.name), message: safe(error.message) }
+              : null,
+          providerError:
+            errorDetails === null
+              ? null
+              : {
+                  code: safe(errorDetails.code),
+                  type: safe(errorDetails.type),
+                  param: safe(errorDetails.param),
+                  message: safe(errorDetails.message),
+                },
+          output:
+            diagnostics.output === null
+              ? null
+              : {
+                  responseCharacterLength: diagnostics.output.responseCharacterLength,
+                  topLevelKeys: diagnostics.output.topLevelKeys.map(safe),
+                  issues: diagnostics.output.issues.map(({ code, path }) => ({
+                    code,
+                    path: path.map((part) =>
+                      typeof part === "number" ? part : safe(String(part)),
+                    ),
+                  })),
+                },
+        });
+      }
+      throw normalized;
     } finally {
       deadline.dispose();
     }
@@ -251,7 +315,7 @@ export class QwenVllmModelProvider implements ModelProvider {
     try {
       const response = await this.sendRequest(this.buildRequestBody(request, true), deadline);
       if (!response.ok) {
-        throw await normalizeHttpError(response);
+        throw normalizeHttpError(response.status, await readErrorDetails(response));
       }
       const contentType = response.headers.get("content-type")?.toLowerCase() ?? "";
       if (!contentType.includes("text/event-stream")) {
@@ -321,19 +385,35 @@ export class QwenVllmModelProvider implements ModelProvider {
   }
 
   private buildRequestBody(request: ModelRequest, stream: boolean): OpenAiRequestBody {
+    // DeepSeek chat completions supports JSON objects, not OpenAI JSON Schema output.
+    const jsonObjectExtraction =
+      request.purpose === "extraction" &&
+      request.responseFormat !== null &&
+      new URL(this.#configuration.baseUrl).hostname === "api.deepseek.com";
     const responseFormat =
       request.responseFormat === null
         ? {}
-        : {
-            response_format: {
-              type: "json_schema" as const,
-              json_schema: request.responseFormat,
-            },
-          };
+        : jsonObjectExtraction
+          ? { response_format: { type: "json_object" as const } }
+          : {
+              response_format: {
+                type: "json_schema" as const,
+                json_schema: request.responseFormat,
+              },
+            };
     const streamOptions = stream ? { stream_options: { include_usage: true as const } } : {};
     return {
       model: this.modelForPurpose(request),
-      messages: request.messages,
+      messages:
+        jsonObjectExtraction && request.responseFormat !== null
+          ? [
+              {
+                role: "system",
+                content: `Return JSON only matching this JSON Schema: ${JSON.stringify(request.responseFormat.schema)}`,
+              },
+              ...request.messages,
+            ]
+          : request.messages,
       temperature: request.temperature,
       stream,
       ...streamOptions,
@@ -625,9 +705,7 @@ function dataFromEventBlock(block: string): string | null {
   return dataLines.length === 0 ? null : dataLines.join("\n");
 }
 
-async function normalizeHttpError(response: Response): Promise<ModelProviderError> {
-  const details = await readErrorDetails(response);
-  const statusCode = response.status;
+function normalizeHttpError(statusCode: number, details: ErrorDetails): ModelProviderError {
   if (statusCode === 401 || statusCode === 403) {
     return new ModelProviderError("AUTHENTICATION", "Model provider authentication failed.", {
       retryable: false,
@@ -686,15 +764,15 @@ async function readErrorDetails(response: Response): Promise<ErrorDetails> {
     return { code: "", type: "", param: "", message: "" };
   }
   return {
-    code: String(result.data.error.code ?? "").toLowerCase(),
-    type: result.data.error.type?.toLowerCase() ?? "",
-    param: result.data.error.param?.toLowerCase() ?? "",
-    message: result.data.error.message?.toLowerCase() ?? "",
+    code: String(result.data.error.code ?? ""),
+    type: result.data.error.type ?? "",
+    param: result.data.error.param ?? "",
+    message: result.data.error.message ?? "",
   };
 }
 
 function isUnavailableModel(details: ErrorDetails): boolean {
-  const fingerprint = `${details.code} ${details.type} ${details.message}`;
+  const fingerprint = `${details.code} ${details.type} ${details.message}`.toLowerCase();
   return (
     /model[_ -]?(not[_ -]?found|unavailable)/.test(fingerprint) ||
     /model .* (does not exist|is not available|is unavailable|was not found)/.test(fingerprint)
@@ -702,7 +780,8 @@ function isUnavailableModel(details: ErrorDetails): boolean {
 }
 
 function isIncompatibleCapability(details: ErrorDetails): boolean {
-  const fingerprint = `${details.code} ${details.type} ${details.param} ${details.message}`;
+  const fingerprint =
+    `${details.code} ${details.type} ${details.param} ${details.message}`.toLowerCase();
   return (
     /(unsupported|not supported|not implemented|unknown parameter)/.test(fingerprint) &&
     /(response.format|json.schema|stream|tool|capability)/.test(fingerprint)
@@ -763,16 +842,49 @@ function normalizeFinishReason(
   }
 }
 
-function assertStructuredJson(content: string, schema: z.ZodType): void {
+function assertStructuredJson(
+  content: string,
+  schema: z.ZodType,
+  onInvalid?: (value: unknown, issues: readonly z.core.$ZodIssue[]) => void,
+): void {
   let value: unknown;
   try {
     value = JSON.parse(content) as unknown;
   } catch {
+    onInvalid?.(undefined, []);
     throw malformedResponse("Model provider returned malformed structured output.");
   }
-  if (!schema.safeParse(value).success) {
+  const result = schema.safeParse(value);
+  if (!result.success) {
+    onInvalid?.(value, result.error.issues);
     throw malformedResponse("Model provider returned structured output that violated its schema.");
   }
+}
+
+function safeDiagnosticText(
+  text: string,
+  configuration: QwenVllmProviderConfiguration,
+  request: ModelRequest,
+): string {
+  let safe =
+    configuration.apiKey === null || configuration.apiKey === ""
+      ? text
+      : text.replaceAll(configuration.apiKey, "[REDACTED]");
+  for (const message of request.messages) {
+    if (message.content !== "") {
+      safe = safe
+        .replaceAll(message.content, "[REDACTED MESSAGE]")
+        .replaceAll(JSON.stringify(message.content).slice(1, -1), "[REDACTED MESSAGE]");
+    }
+  }
+  if (
+    /\b(?:authorization|cookie|set-cookie|api[_-]?key|session[_-]?secret|password)\b["']?\s*[:=]|\bBearer\s+|:\/\/[^\s/]+@/i.test(
+      safe,
+    )
+  ) {
+    return "[REDACTED SENSITIVE DIAGNOSTIC]";
+  }
+  return safe.replace(/[\r\n\t]/g, " ").slice(0, 1_000);
 }
 
 function malformedResponse(message: string, statusCode: number | null = null): ModelProviderError {

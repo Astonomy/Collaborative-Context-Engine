@@ -44,6 +44,10 @@ Conversation import parser tests use deterministic synthetic ChatGPT JSON fixtur
 
 Provider-plugin tests use the official MCP SDK's linked in-memory transport. They verify the three tool contracts, evidence-summary previewing, unchanged material-reference retention, truthful read/write annotations, malformed and oversized payload rejection, unknown projects, duplicate submission, preview expiry, rollback, provenance, and unchanged Context HEAD without an OpenAI account. The PostgreSQL integration suite drives an MCP call through the real application service and repositories after migrating an empty database, then verifies project isolation, persisted manifest/message evidence, and append-only enforcement. A separate manual smoke procedure is documented in [CCE plugin](plugins/cce-plugin.md) and is never reported as executed unless a real client/account was used.
 
+The plugin's header helper has a dependency-free Node test at `plugins/cce-conversation-submission/scripts/cce-auth-headers.test.mjs`. It verifies that the emitted Authorization header comes from `.mcp.json`, that a token environment variable cannot override it, and that environment-only or malformed credential documents fail without printing credentials.
+
+Provider delta regression tests verify successive submissions reuse the Conversation/Branch, retain original messages and material references, allocate continuous sequences, and persist separate immutable manifests. They cover retries, stale predecessors, project/actor/provider isolation, archived targets, and rollback. The MCP contract exercises an append preview and submit; the PostgreSQL integration suite verifies concurrent identical submissions, predecessor JSONB lookup, unchanged prior evidence, and unchanged Context HEAD.
+
 Real Qwen/vLLM smoke tests and AI evals are opt-in; ordinary tests never call a paid or remote model. Eval fixtures record dataset, prompt, provider, model, and version and report extraction precision/recall/type/source accuracy plus merge conflict precision/recall and false-auto-merge rate.
 
 `pnpm validate` stops after the Docker-free gate. `pnpm verify:full` is the complete local command. On a

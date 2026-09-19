@@ -38,15 +38,23 @@ In the summary, record an invoked plugin Skill with its namespaced Codex form `$
 
 ## Preview, disclose, and confirm
 
-1. Call `preview_conversation_import` with the resolved `projectId`, generated `summary`, authorized messages, and retained original material references. Use `chatgpt` as `source` on ChatGPT and `codex` on Codex. If the surface is genuinely unknown, ask the user instead of guessing.
+For repeated submissions in the same provider conversation and CCE project, continue the existing evidence conversation:
+
+- Retain the last successful result's `projectId`, `importId`, `conversationId`, and the last original message included in that submitted preview. Advance this checkpoint only after a successful submit, never after a preview or failed write.
+- On the next submission, pass that `importId` as `previousImportId` and include only the new authorized messages and material references after the checkpoint. Summarize this delta. Messages exchanged while confirming the earlier preview were not in that preview and are eligible for the next delta.
+- A previous success already visible in this conversation can serve as the checkpoint, including imports made before delta support. Use the exact returned IDs; do not fabricate provider IDs or infer a target from its title, similar content, or another conversation. If the earlier submitted boundary is unavailable, ask only for the missing boundary rather than silently resending old messages or creating a new Conversation.
+- If no new authorized messages or materials are available, report that there is nothing new to submit and return the existing conversation ID. Do not create an empty preview.
+- The server must return `operation: append` and the expected `targetConversationId` for a continuation. A stale predecessor is a conflict; do not drop `previousImportId` and retry as a new conversation.
+
+1. Call `preview_conversation_import` with the resolved `projectId`, generated `summary`, authorized messages, retained original material references, and `previousImportId` for a continuation. Use `chatgpt` as `source` on ChatGPT and `codex` on Codex. If the surface is genuinely unknown, ask the user instead of guessing.
 2. Explain that previewing stores a confidential, expiring validation record but creates no CCE Conversation, Message, or Context change.
-3. Show the user the exact project name and ID, conversation title, summary, message count, unsupported-content count, every warning, expiration time, and duplicate status. If it is a duplicate, also show the existing import and conversation IDs.
+3. Show the user the exact project name and ID, conversation title, summary, message count, unsupported-content count, every warning, expiration time, and duplicate status. State whether this creates a conversation or appends a delta; for an append, show `targetConversationId` and label the count as new messages. If it is a duplicate, also show the existing import and conversation IDs.
 4. Ask once for explicit confirmation to submit that preview. The invocation or initial submission request authorizes creating the preview but is not the write confirmation because the preview details were not yet known.
 5. When the user confirms the displayed preview, immediately call `submit_conversation_import` with that preview. Do not ask for another conversational confirmation, regenerate an unchanged preview, or repeat the preview disclosure before submitting. Do not bypass any confirmation enforced directly by the host platform.
 
 ## Submit and report
 
-If a valid preview is already displayed in the conversation and the user replies affirmatively, treat that reply as the single required confirmation and submit it immediately. Call `submit_conversation_import` with the exact `projectId` and `previewId`. On success, report the import ID, conversation ID, persisted message count, warnings, and whether CCE returned an existing duplicate. State plainly:
+If a valid preview is already displayed in the conversation and the user replies affirmatively, treat that reply as the single required confirmation and submit it immediately. Call `submit_conversation_import` with the exact `projectId` and `previewId`. On success, report the import ID, conversation ID, persisted message count, warnings, and whether CCE returned an existing duplicate. For a delta, report the appended message count and retain the new import ID as the checkpoint for the next submission. A duplicate returns the existing result without appending its messages again. State plainly:
 
 > The conversation is stored as evidence. Project Context was not updated.
 

@@ -23,6 +23,19 @@ function submission() {
 }
 
 describe("normalizeProviderSubmission", () => {
+  it("validates and preserves a previous import reference for delta captures", () => {
+    const previousImportId = "00000000-0000-4000-8000-000000000123";
+    expect(
+      normalizeProviderSubmission({ ...submission(), previousImportId }).conversation
+        .previousImportId,
+    ).toBe(previousImportId);
+    expect(() =>
+      normalizeProviderSubmission({ ...submission(), previousImportId: "not-an-import-id" }),
+    ).toThrow("Conversation submission is malformed.");
+    expect(() =>
+      normalizeProviderSubmission({ ...submission(), previousImportId, messages: [] }),
+    ).toThrow("Conversation submission is malformed.");
+  });
   it("normalizes authorized text while retaining unsupported blocks in provenance", () => {
     const result = normalizeProviderSubmission(submission());
 

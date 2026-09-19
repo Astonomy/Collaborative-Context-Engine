@@ -16,6 +16,7 @@ import {
   conversationSchema,
   messageIdSchema,
   messageSchema,
+  type Conversation,
   type ContextCommitId,
   type ProjectId,
   type UserId,
@@ -51,6 +52,8 @@ export interface ProviderImportPreview {
   readonly id: string;
   readonly source: "chatgpt-plugin" | "codex-plugin";
   readonly targetProject: { readonly id: ProjectId; readonly name: string };
+  readonly operation: "create" | "append";
+  readonly targetConversationId?: string;
   readonly title: string;
   readonly summary?: string;
   readonly messageCount: number;
@@ -171,11 +174,23 @@ export class ConversationImportService {
         preview.sourceFileHash,
         "provided_messages",
       );
+      const target = await this.resolveContinuation(
+        repositories,
+        input.projectId,
+        input.actorUserId,
+        preview.conversation,
+        duplicate?.id,
+      );
       await repositories.imports.deleteExpiredPreviews(input.projectId, now.toISOString());
       await repositories.imports.insertPreview(preview);
-      return { access, duplicate };
+      return { access, duplicate, target };
     });
-    return this.providerPreview(preview, result.access.project.name, result.duplicate);
+    return this.providerPreview(
+      preview,
+      result.access.project.name,
+      result.duplicate,
+      result.target?.conversation,
+    );
   }
 
   public async submitProviderPreview(input: {
@@ -265,6 +280,15 @@ export class ConversationImportService {
       const importedConversations = [];
       let messageCount = 0;
       for (const [index, external] of sourceManifest.entries()) {
+        const target =
+          input.policy === "provided_messages"
+            ? await this.resolveContinuation(
+                repositories,
+                input.projectId,
+                input.actorUserId,
+                external,
+              )
+            : null;
         const imported = await this.persistConversation(
           repositories,
           input.projectId,
@@ -273,6 +297,7 @@ export class ConversationImportService {
           external,
           index,
           now,
+          target,
         );
         importedConversations.push(imported);
         messageCount += imported.messageIds.length;
@@ -308,11 +333,67 @@ export class ConversationImportService {
           sourceFileHash: input.sourceFileHash,
           conversationCount: importedConversations.length,
           messageCount,
+          ...(input.conversations[0]?.previousImportId
+            ? { previousImportId: input.conversations[0].previousImportId }
+            : {}),
         },
         occurredAt: now,
       });
       return record;
     });
+  }
+
+  private async resolveContinuation(
+    repositories: CceRepositories,
+    projectId: ProjectId,
+    actorUserId: UserId,
+    external: ExternalConversation,
+    duplicateImportId?: string,
+  ): Promise<{ conversation: Conversation; externalConversationId?: string } | null> {
+    if (external.previousImportId === undefined) return null;
+    const previous = await repositories.imports.findById(projectId, external.previousImportId);
+    if (previous === null || previous.createdBy !== actorUserId) {
+      throw new ApplicationError("NOT_FOUND", "Previous conversation import was not found.");
+    }
+    const imported = previous.importedConversations[0];
+    if (
+      previous.source !== external.source ||
+      previous.policy !== "provided_messages" ||
+      previous.importedConversations.length !== 1 ||
+      imported === undefined
+    ) {
+      throw new ApplicationError(
+        "CONFLICT",
+        "Previous import is not a matching provider submission.",
+      );
+    }
+    if (
+      imported.externalConversationId !== undefined &&
+      external.externalConversationId !== undefined &&
+      imported.externalConversationId !== external.externalConversationId
+    ) {
+      throw new ApplicationError(
+        "CONFLICT",
+        "The provider conversation does not match the previous import.",
+      );
+    }
+    const conversation = await repositories.conversations.find(projectId, imported.conversationId);
+    if (conversation === null || conversation.status !== "active") {
+      throw new ApplicationError("CONFLICT", "The target conversation is no longer active.");
+    }
+    const successor = await repositories.imports.findContinuation(projectId, previous.id);
+    if (successor !== null && successor.id !== duplicateImportId) {
+      throw new ApplicationError(
+        "CONFLICT",
+        "This import already has a delta. Use the latest successful importId.",
+      );
+    }
+    return {
+      conversation,
+      ...(imported.externalConversationId
+        ? { externalConversationId: imported.externalConversationId }
+        : {}),
+    };
   }
 
   private async persistConversation(
@@ -323,29 +404,41 @@ export class ConversationImportService {
     external: ExternalConversation,
     index: number,
     now: string,
+    target: { conversation: Conversation; externalConversationId?: string } | null,
   ): Promise<ConversationImportRecord["importedConversations"][number]> {
-    const conversationId = conversationIdSchema.parse(this.ids.next());
-    const branchId = branchIdSchema.parse(this.ids.next());
-    await repositories.conversations.insert(
-      conversationSchema.parse({
-        id: conversationId,
-        projectId,
-        branchId,
-        title: external.title ?? `Imported conversation ${index + 1}`,
-        status: "active",
-        createdBy: { type: "human", userId: actorUserId },
-        createdAt: external.createdAt ?? now,
-        archivedAt: null,
-      }),
-      branchSchema.parse({
-        id: branchId,
-        projectId,
-        conversationId,
-        baseCommitId,
-        status: "open",
-        createdAt: now,
-        closedAt: null,
-      }),
+    const conversationId = target?.conversation.id ?? conversationIdSchema.parse(this.ids.next());
+    if (target === null) {
+      const branchId = branchIdSchema.parse(this.ids.next());
+      await repositories.conversations.insert(
+        conversationSchema.parse({
+          id: conversationId,
+          projectId,
+          branchId,
+          title: external.title ?? `Imported conversation ${index + 1}`,
+          status: "active",
+          createdBy: { type: "human", userId: actorUserId },
+          createdAt: external.createdAt ?? now,
+          archivedAt: null,
+        }),
+        branchSchema.parse({
+          id: branchId,
+          projectId,
+          conversationId,
+          baseCommitId,
+          status: "open",
+          createdAt: now,
+          closedAt: null,
+        }),
+      );
+    } else {
+      const locked = await repositories.conversations.lock(projectId, conversationId);
+      if (locked === null || locked.status !== "active") {
+        throw new ApplicationError("CONFLICT", "The target conversation is no longer active.");
+      }
+    }
+    const firstSequence = await repositories.conversations.nextMessageSequence(
+      projectId,
+      conversationId,
     );
     const messageIds: string[] = [];
     const evidenceNodes =
@@ -359,7 +452,7 @@ export class ConversationImportService {
           id,
           projectId,
           conversationId,
-          sequence: messageIds.length + 1,
+          sequence: firstSequence + messageIds.length,
           clientMessageId: node.role === "user" ? this.ids.next() : null,
           replyToMessageId: null,
           role: node.role,
@@ -378,10 +471,10 @@ export class ConversationImportService {
       );
       messageIds.push(id);
     }
+    const externalConversationId =
+      external.externalConversationId ?? target?.externalConversationId;
     return {
-      ...(external.externalConversationId
-        ? { externalConversationId: external.externalConversationId }
-        : {}),
+      ...(externalConversationId ? { externalConversationId } : {}),
       conversationId,
       messageIds,
     };
@@ -391,13 +484,16 @@ export class ConversationImportService {
     preview: ConversationImportPreviewRecord,
     projectName: string,
     duplicate: ConversationImportRecord | null,
+    target?: Conversation,
   ): ProviderImportPreview {
     const duplicateConversationId = duplicate?.importedConversations[0]?.conversationId;
     return {
       id: preview.id,
       source: preview.source,
       targetProject: { id: preview.projectId, name: projectName },
-      title: preview.conversation.title ?? "Untitled submitted conversation",
+      operation: preview.conversation.previousImportId ? "append" : "create",
+      ...(target ? { targetConversationId: target.id } : {}),
+      title: target?.title ?? preview.conversation.title ?? "Untitled submitted conversation",
       ...(preview.conversation.summary ? { summary: preview.conversation.summary } : {}),
       messageCount: preview.messageCount,
       unsupportedContentCount: preview.unsupportedContentCount,

@@ -1686,6 +1686,22 @@ export class PostgresAuditRepository implements AuditRepository {
 
 export class PostgresConversationImportRepository implements ConversationImportRepository {
   public constructor(private readonly session: DatabaseSession) {}
+  public async findContinuation(
+    projectId: ProjectId,
+    previousImportId: string,
+  ): Promise<ConversationImportRecord | null> {
+    const rows = await this.session
+      .select()
+      .from(conversationImports)
+      .where(
+        and(
+          eq(conversationImports.projectId, projectId),
+          sql`${conversationImports.sourceManifest} @> ${JSON.stringify([{ previousImportId: z.uuid().parse(previousImportId) }])}::jsonb`,
+        ),
+      )
+      .limit(1);
+    return rows[0] === undefined ? null : this.fromRow(rows[0]);
+  }
   private fromRow(row: typeof conversationImports.$inferSelect): ConversationImportRecord {
     return {
       id: z.uuid().parse(row.id),
@@ -1704,9 +1720,7 @@ export class PostgresConversationImportRepository implements ConversationImportR
       conversationCount: z.int().nonnegative().parse(row.conversationCount),
       messageCount: z.int().nonnegative().parse(row.messageCount),
       warnings: z.array(z.string()).parse(row.warnings),
-      sourceManifest: z
-        .array(z.unknown())
-        .parse(row.sourceManifest) as ConversationImportRecord["sourceManifest"],
+      sourceManifest: z.array(externalConversationSchema).parse(row.sourceManifest),
       importedConversations: z
         .array(
           z.object({

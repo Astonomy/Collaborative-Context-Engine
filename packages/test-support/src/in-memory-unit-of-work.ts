@@ -456,6 +456,14 @@ export class InMemoryUnitOfWork implements UnitOfWork {
           .slice(0, 500),
     },
     imports: {
+      findContinuation: async (projectId, previousImportId) =>
+        this.state.imports.find(
+          (entry) =>
+            entry.projectId === projectId &&
+            entry.sourceManifest.some(
+              (conversation) => conversation.previousImportId === previousImportId,
+            ),
+        ) ?? null,
       findById: async (projectId, importId) =>
         this.state.imports.find(
           (entry) => entry.projectId === projectId && entry.id === importId,

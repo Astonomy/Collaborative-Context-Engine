@@ -22,6 +22,7 @@ export const providerConversationSubmissionSchema = z
   .object({
     source: z.enum(["chatgpt", "codex"]),
     captureScope: z.enum(["full", "partial"]),
+    previousImportId: z.uuid().optional(),
     externalConversationId: z.string().trim().min(1).max(500).optional(),
     title: z.string().trim().min(1).max(200).optional(),
     summary: z.string().trim().min(1).max(8_000).optional(),
@@ -130,6 +131,7 @@ export function normalizeProviderSubmission(input: unknown): NormalizedProviderS
 
   const conversation = externalConversationSchema.parse({
     source: parsed.source === "chatgpt" ? "chatgpt-plugin" : "codex-plugin",
+    ...(parsed.previousImportId ? { previousImportId: parsed.previousImportId } : {}),
     ...(parsed.externalConversationId
       ? { externalConversationId: parsed.externalConversationId }
       : {}),

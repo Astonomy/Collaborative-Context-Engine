@@ -47,6 +47,7 @@ export type ExternalMessageNode = z.infer<typeof externalMessageNodeSchema>;
 export const externalConversationSchema = z
   .object({
     source: externalSourceSchema,
+    previousImportId: z.uuid().optional(),
     externalConversationId: z.string().min(1).max(500).optional(),
     title: z.string().min(1).max(200).optional(),
     summary: z.string().trim().min(1).max(8_000).optional(),

@@ -2,7 +2,7 @@ import { createServer } from "node:http";
 import type { IncomingMessage, Server, ServerResponse } from "node:http";
 
 import type { ModelRequest, ModelStreamEvent } from "@cce/application";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import type { QwenVllmProviderConfiguration } from "./configuration";
 import { QwenVllmModelProvider } from "./openai-compatible-provider";
@@ -50,6 +50,254 @@ const maximumSseEventBytes = 8_000_000;
 const maximumSseStreamBytes = 16_000_000;
 
 describe("Qwen/vLLM OpenAI-compatible provider contract", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllEnvs();
+  });
+
+  it.each(["https://api.deepseek.com", "https://api.deepseek.com/v1/"])(
+    "uses JSON object mode with the schema in the extraction prompt at %s",
+    async (baseUrl) => {
+      const responseFormat = {
+        name: "context_delta",
+        schema: {
+          type: "object",
+          properties: { summary: { type: "string" } },
+          required: ["summary"],
+          additionalProperties: false,
+        },
+        strict: true as const,
+      };
+      const fetchMock = vi
+        .spyOn(globalThis, "fetch")
+        .mockResolvedValue(Response.json(completionResponse('{"summary":"accepted"}')));
+      const modelProvider = new QwenVllmModelProvider({ ...baseConfiguration, baseUrl });
+      await expect(
+        modelProvider.generate({
+          ...baseRequest,
+          purpose: "extraction",
+          responseFormat,
+        }),
+      ).resolves.toMatchObject({ content: '{"summary":"accepted"}' });
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      const [endpoint, init] = fetchMock.mock.calls[0] ?? [];
+      expect(endpoint).toBe(`${baseUrl.replace(/\/$/, "")}/chat/completions`);
+      if (typeof init?.body !== "string") {
+        throw new Error("Expected a JSON request body.");
+      }
+      const body: unknown = JSON.parse(init.body);
+      expect(body).toEqual({
+        model: "qwen-extractor",
+        messages: [
+          {
+            role: "system",
+            content: `Return JSON only matching this JSON Schema: ${JSON.stringify(responseFormat.schema)}`,
+          },
+          ...baseRequest.messages,
+        ],
+        temperature: 0.2,
+        stream: false,
+        response_format: { type: "json_object" },
+      });
+    },
+  );
+
+  it("logs safe HTTP diagnostics before normalizing an extraction failure", async () => {
+    vi.stubEnv("NODE_ENV", "development");
+    const log = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      Response.json(
+        {
+          error: {
+            code: "invalid_request_error",
+            type: "invalid_request_error",
+            param: null,
+            message: "This response_format type is unavailable now",
+            debug: "contract-test-secret private conversation",
+          },
+        },
+        { status: 400, headers: { "x-request-id": "deepseek-request-1" } },
+      ),
+    );
+    await expect(
+      provider("https://api.deepseek.com").generate({
+        ...baseRequest,
+        purpose: "extraction",
+      }),
+    ).rejects.toMatchObject({ code: "INCOMPATIBLE_CAPABILITY", statusCode: 400 });
+    expect(log).toHaveBeenCalledWith(
+      "Model extraction provider failed",
+      expect.objectContaining({
+        name: "ModelProviderError",
+        code: "INCOMPATIBLE_CAPABILITY",
+        status: 400,
+        requestId: "deepseek-request-1",
+        model: "qwen-extractor",
+        baseUrl: "https://api.deepseek.com/v1",
+        providerError: {
+          code: "invalid_request_error",
+          type: "invalid_request_error",
+          param: "",
+          message: "This response_format type is unavailable now",
+        },
+      }),
+    );
+    expect(JSON.stringify(log.mock.calls)).not.toContain("contract-test-secret");
+    expect(JSON.stringify(log.mock.calls)).not.toContain("private conversation");
+  });
+
+  it.each([
+    "Rejected contract-test-secret private conversation",
+    'Rejected \\"private conversation\\"',
+    "Authorization: Bearer header-secret",
+    "Cookie: session=cookie-secret",
+    "session_secret=session-secret",
+    "postgresql://database-user:database-secret@localhost/cce",
+  ])("redacts sensitive extraction diagnostics: %s", async (message) => {
+    vi.stubEnv("NODE_ENV", "development");
+    const log = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      Response.json(
+        {
+          error: { code: null, type: "invalid_request_error", message },
+        },
+        { status: 400 },
+      ),
+    );
+    await expect(
+      provider("https://api.deepseek.com").generate({
+        ...baseRequest,
+        purpose: "extraction",
+        messages: [{ role: "user", content: "private conversation" }],
+      }),
+    ).rejects.toMatchObject({ code: "INCOMPATIBLE_CAPABILITY", statusCode: 400 });
+    expect(log).toHaveBeenCalledTimes(1);
+    const diagnostic = JSON.stringify(log.mock.calls);
+    for (const secret of [
+      "contract-test-secret",
+      "private conversation",
+      "header-secret",
+      "cookie-secret",
+      "session-secret",
+      "database-secret",
+    ]) {
+      expect(diagnostic).not.toContain(secret);
+    }
+  });
+
+  it("logs a connection failure with safe original error diagnostics", async () => {
+    vi.stubEnv("NODE_ENV", "test");
+    const log = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(
+      new TypeError("fetch failed contract-test-secret"),
+    );
+    await expect(
+      provider("https://api.deepseek.com").generate({
+        ...baseRequest,
+        purpose: "extraction",
+      }),
+    ).rejects.toMatchObject({ code: "CONNECTION", statusCode: null });
+    expect(log).toHaveBeenCalledWith(
+      "Model extraction provider failed",
+      expect.objectContaining({
+        code: "CONNECTION",
+        status: null,
+        requestError: { name: "TypeError", message: "fetch failed [REDACTED]" },
+      }),
+    );
+  });
+
+  it("does not log remote extraction diagnostics in production", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    const log = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      Response.json(
+        {
+          error: { message: "private remote error" },
+        },
+        { status: 500 },
+      ),
+    );
+    await expect(
+      provider("https://api.deepseek.com").generate({
+        ...baseRequest,
+        purpose: "extraction",
+      }),
+    ).rejects.toMatchObject({ code: "SERVER", statusCode: 500 });
+    expect(log).not.toHaveBeenCalled();
+  });
+
+  it("keeps ordinary DeepSeek chat requests unchanged", async () => {
+    const fetchMock = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValue(Response.json(completionResponse("Hello")));
+    await provider("https://api.deepseek.com").generate(baseRequest);
+    const bodyText = fetchMock.mock.calls[0]?.[1]?.body;
+    if (typeof bodyText !== "string") {
+      throw new Error("Expected a JSON request body.");
+    }
+    const body: unknown = JSON.parse(bodyText);
+    expect(body).toEqual({
+      model: "qwen-chat",
+      messages: baseRequest.messages,
+      temperature: 0.2,
+      stream: false,
+    });
+  });
+
+  it.each([
+    [undefined, "without text content"],
+    [null, "without text content"],
+    ["", "without text content"],
+    ["   ", "without text content"],
+    ["not json", "malformed structured output"],
+    ['{"summary":42}', "violated its schema"],
+  ])("rejects invalid DeepSeek extraction content %j", async (content, message) => {
+    vi.stubEnv("NODE_ENV", "test");
+    const log = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      Response.json({
+        id: "deepseek-response",
+        model: "deepseek-flash",
+        choices: [
+          {
+            message: { content, reasoning_content: '{"summary":"do not parse reasoning"}' },
+            finish_reason: "stop",
+          },
+        ],
+        usage: { prompt_tokens: 8, completion_tokens: 2 },
+      }),
+    );
+    const generation = provider("https://api.deepseek.com").generate({
+      ...baseRequest,
+      purpose: "extraction",
+      responseFormat: {
+        name: "context_delta",
+        schema: {
+          type: "object",
+          properties: { summary: { type: "string" } },
+          required: ["summary"],
+          additionalProperties: false,
+        },
+        strict: true,
+      },
+    });
+    await expect(generation).rejects.toMatchObject({ code: "MALFORMED_RESPONSE" });
+    await expect(generation).rejects.toThrow(String(message));
+    if (content === '{"summary":42}') {
+      expect(log).toHaveBeenCalledWith(
+        "Model extraction provider failed",
+        expect.objectContaining({
+          output: {
+            responseCharacterLength: content.length,
+            topLevelKeys: ["summary"],
+            issues: [{ code: "invalid_type", path: ["summary"] }],
+          },
+        }),
+      );
+    }
+  });
+
   it("generates a normalized response and sends credentials only in the header", async () => {
     await withFakeServer(
       async (incoming, outgoing) => {
