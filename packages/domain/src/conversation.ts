@@ -128,13 +128,14 @@ export const messageSchema = z
 export type Message = z.infer<typeof messageSchema>;
 export type MessageDeliveryState = z.infer<typeof messageDeliveryStateSchema>;
 
-const messageTransitions: Readonly<Record<MessageDeliveryState, readonly MessageDeliveryState[]>> = {
-  pending: ["streaming", "completed", "failed"],
-  streaming: ["completed", "interrupted", "failed"],
-  completed: [],
-  interrupted: [],
-  failed: [],
-};
+const messageTransitions: Readonly<Record<MessageDeliveryState, readonly MessageDeliveryState[]>> =
+  {
+    pending: ["streaming", "completed", "failed"],
+    streaming: ["completed", "interrupted", "failed"],
+    completed: [],
+    interrupted: [],
+    failed: [],
+  };
 
 export function assertMessageTransition(
   current: MessageDeliveryState,
@@ -148,10 +149,7 @@ export function assertMessageTransition(
   }
 }
 
-export function assertBranchTransition(
-  current: Branch["status"],
-  next: Branch["status"],
-): void {
+export function assertBranchTransition(current: Branch["status"], next: Branch["status"]): void {
   if (current !== "open" || next === "open") {
     throw new DomainError(
       "INVALID_STATE_TRANSITION",

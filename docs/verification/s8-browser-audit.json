@@ -1,0 +1,30 @@
+{
+  "next": [],
+  "vue": [
+    "apps/vue/dist/assets/AttachmentRenderer-DS9H_X-S.js",
+    "apps/vue/dist/assets/AttachmentView-Dgnsr1jV.js",
+    "apps/vue/dist/assets/ContextView-Z7ab0a-n.js",
+    "apps/vue/dist/assets/ConversationView-YCIkZGuY.js",
+    "apps/vue/dist/assets/ConversationsView-dzkNBxFc.js",
+    "apps/vue/dist/assets/HistoryView-DWFjzqmT.js",
+    "apps/vue/dist/assets/LoginView-ukaMF8sk.js",
+    "apps/vue/dist/assets/MergeView-D3snVBdZ.js",
+    "apps/vue/dist/assets/ModelPreview-C0WnVM3A.js",
+    "apps/vue/dist/assets/NotFoundView-CmCZmLzw.js",
+    "apps/vue/dist/assets/ProjectOverview-DUrI_IOH.js",
+    "apps/vue/dist/assets/ProjectView-BTIs1_X-.js",
+    "apps/vue/dist/assets/ProjectsView-C3kJbh9w.js",
+    "apps/vue/dist/assets/ResourceState-C5Gx8t9F.js",
+    "apps/vue/dist/assets/chat-stream-COOfStaU.js",
+    "apps/vue/dist/assets/context-DLHZYja6.js",
+    "apps/vue/dist/assets/conversations-CbyJ2Hp4.js",
+    "apps/vue/dist/assets/index-Bm7WWPB8.js",
+    "apps/vue/dist/assets/model-worker-BDASv5kH.js",
+    "apps/vue/dist/assets/project-context-DIW4PIFN.js",
+    "apps/vue/dist/assets/upload-CIHFMI-r.js",
+    "apps/vue/dist/assets/use-action-IpwFQ1TX.js"
+  ],
+  "forbiddenMatches": 0,
+  "knownCredentialMatches": 0,
+  "limitation": "Artifact string scan supplements Vue build module-graph enforcement; not a proof against arbitrary obfuscation."
+}

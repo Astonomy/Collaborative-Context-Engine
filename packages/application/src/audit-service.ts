@@ -17,10 +17,7 @@ export class AuditService {
     readonly actorUserId: UserId;
   }): Promise<ProjectAuditHistory> {
     return this.unitOfWork.run(async (repositories) => {
-      const access = await repositories.projects.findAccess(
-        input.projectId,
-        input.actorUserId,
-      );
+      const access = await repositories.projects.findAccess(input.projectId, input.actorUserId);
       authorizeProjectMember(access?.member ?? null, input.actorUserId, "project:read");
       const [modelRuns, agentRuns, events] = await Promise.all([
         repositories.runs.listModelRuns(input.projectId),

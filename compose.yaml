@@ -1,10 +1,53 @@
 services:
+  frontend:
+    build:
+      context: .
+      target: frontend
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-8080}:80"
+    # No startup dependency: static assets remain usable when API is stopped.
+  api:
+    build:
+      context: .
+      target: api
+    environment:
+      NODE_ENV: production
+      CCE_API_HOST: 0.0.0.0
+      CCE_API_PORT: 3001
+      CCE_API_PUBLIC_ORIGIN: ${CCE_API_PUBLIC_ORIGIN:-}
+      DATABASE_URL: postgresql://cce:${POSTGRES_PASSWORD:-cce}@postgres:5432/cce
+      CCE_SESSION_SECRET: ${CCE_SESSION_SECRET:-}
+      CCE_ATTACHMENT_STORAGE_DIRECTORY: /var/lib/cce/attachments
+      MODEL_BASE_URL: ${MODEL_BASE_URL:-http://host.docker.internal:8000/v1}
+      MODEL_API_KEY: ${MODEL_API_KEY:-}
+      MODEL_CHAT_MODEL: ${MODEL_CHAT_MODEL:-Qwen/Qwen3-8B}
+      MODEL_EXTRACTOR_MODEL: ${MODEL_EXTRACTOR_MODEL:-Qwen/Qwen3-8B}
+      MODEL_CLASSIFIER_MODEL: ${MODEL_CLASSIFIER_MODEL:-Qwen/Qwen3-4B}
+      MODEL_RESOLVER_MODEL: ${MODEL_RESOLVER_MODEL:-Qwen/Qwen3-32B}
+      MODEL_REQUEST_TIMEOUT_MS: ${MODEL_REQUEST_TIMEOUT_MS:-30000}
+    ports:
+      - "127.0.0.1:${CCE_API_PORT:-3001}:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - cce-attachments:/var/lib/cce/attachments
+  migrator:
+    profiles: [tools]
+    build:
+      context: .
+      target: migrator
+    environment:
+      DATABASE_URL: postgresql://cce:${POSTGRES_PASSWORD:-cce}@postgres:5432/cce
+    depends_on:
+      postgres:
+        condition: service_healthy
   postgres:
     image: postgres:18.6-alpine3.24
     environment:
       POSTGRES_DB: cce
       POSTGRES_USER: cce
-      POSTGRES_PASSWORD: cce
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cce}
     ports:
       - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     healthcheck:
@@ -15,6 +58,6 @@ services:
       start_period: 5s
     volumes:
       - cce-postgres:/var/lib/postgresql
-
 volumes:
   cce-postgres:
+  cce-attachments:

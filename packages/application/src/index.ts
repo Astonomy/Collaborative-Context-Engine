@@ -11,3 +11,12 @@ export * from "./model-provider";
 export * from "./project-service";
 export * from "./repositories";
 export * from "./session-service";
+export * from "./attachment-repository";
+export * from "./import-attachment";
+export * from "./attachment-storage";
+export * from "./attachment-policy";
+export * from "./attachment-service";
+export * from "./media-inspection";
+export * from "./media-processing-service";
+
+export * from "./project-queries";

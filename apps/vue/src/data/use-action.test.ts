@@ -1,0 +1,34 @@
+import { effectScope } from "vue";
+import { expect, it, vi } from "vitest";
+import { useAction } from "./use-action";
+import { ApiError } from "./api-client";
+it("serializes actions, reports failures and cancels on disposal", async () => {
+  const scope = effectScope();
+  const action = scope.run(useAction);
+  if (!action) throw new Error("Missing action");
+  const pending = Promise.withResolvers<void>();
+  let signal: AbortSignal | undefined;
+  const first = action.perform(async (value) => {
+    signal = value;
+    await pending.promise;
+  });
+  const duplicate = vi.fn();
+  await action.perform(duplicate);
+  expect(duplicate).not.toHaveBeenCalled();
+  pending.resolve();
+  await first;
+  expect(action.busy.value).toBe(false);
+  await action.perform(() => Promise.reject(new ApiError(409, "HEAD changed")));
+  expect(action.error.value).toContain("Conflict:");
+  await action.perform(() => Promise.reject(new Error("private")));
+  expect(action.error.value).not.toContain("private");
+  const late = Promise.withResolvers<void>();
+  const work = action.perform(() => late.promise);
+  scope.stop();
+  expect(signal?.aborted).toBe(true);
+  late.reject(new Error("late"));
+  await work;
+  expect(action.error.value).toBe("");
+  await action.perform(duplicate);
+  expect(duplicate).not.toHaveBeenCalled();
+});

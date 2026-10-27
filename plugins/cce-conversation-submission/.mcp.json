@@ -2,7 +2,7 @@
   "mcpServers": {
     "cce": {
       "type": "http",
-      "url": "http://localhost:3000/mcp",
+      "url": "http://localhost:3001/mcp",
       "http_headers_helper": "node scripts/cce-auth-headers.mjs"
     }
   }

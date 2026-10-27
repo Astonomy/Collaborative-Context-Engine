@@ -26,6 +26,14 @@ const projectOutput = {
 };
 
 const previewOutput = {
+  attachments: z.array(
+    z.object({
+      attachmentId: z.uuid(),
+      filename: z.string(),
+      byteSize: z.int().positive(),
+      checksum: z.string(),
+    }),
+  ),
   previewId: z.uuid(),
   source: z.enum(["chatgpt-plugin", "codex-plugin"]),
   targetProject: z.object({ id: projectIdSchema, name: z.string() }),
@@ -118,6 +126,7 @@ export function createCceMcpServer(dependencies: CceMcpDependencies): McpServer 
           submission,
         });
         const structuredContent = {
+          attachments: [...preview.attachments],
           previewId: preview.id,
           source: preview.source,
           targetProject: preview.targetProject,

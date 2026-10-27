@@ -64,4 +64,3 @@ export function assertCanChangeMemberRole(
     throw new DomainError("LAST_OWNER", "A project must retain at least one owner.");
   }
 }
-

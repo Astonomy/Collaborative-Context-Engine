@@ -19,4 +19,3 @@ export const auditEventSchema = z
   .strict();
 
 export type AuditEvent = z.infer<typeof auditEventSchema>;
-

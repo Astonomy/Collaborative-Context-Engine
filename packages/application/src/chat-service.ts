@@ -15,12 +15,7 @@ import { authorizeProjectMember } from "./authorization";
 import type { ContextService } from "./context-service";
 import type { ConversationService } from "./conversation-service";
 import { ApplicationError } from "./errors";
-import type {
-  ModelProvider,
-  ModelResponse,
-  ModelStreamEvent,
-  ModelUsage,
-} from "./model-provider";
+import type { ModelProvider, ModelResponse, ModelStreamEvent, ModelUsage } from "./model-provider";
 import { ModelProviderError } from "./model-provider";
 import type { UnitOfWork } from "./repositories";
 
@@ -163,10 +158,15 @@ export class ChatService {
     try {
       yield { type: "assistant_started", messageId: pendingMessage.id };
       for await (const event of this.provider.stream(request)) {
-        ({ providerResponseId, providerName, providerModel, usage, started, finishReason } = this.consumeModelEvent(
-          event,
-          { providerResponseId, providerName, providerModel, usage, started, finishReason },
-        ));
+        ({ providerResponseId, providerName, providerModel, usage, started, finishReason } =
+          this.consumeModelEvent(event, {
+            providerResponseId,
+            providerName,
+            providerModel,
+            usage,
+            started,
+            finishReason,
+          }));
         if (event.type === "text_delta") {
           if (content.length + event.text.length > 1_000_000) {
             throw new ModelProviderError(

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --import ../../scripts/load-root-environment.mts ./node_modules/next/dist/bin/next dev --webpack",
     "build": "next build",
-    "start": "node --import ../../scripts/load-root-environment.mts ./node_modules/next/dist/bin/next start",
+    "start": "node --import ../../scripts/load-root-environment.mts ./.next/standalone/apps/web/server.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -21,7 +21,9 @@
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "zod": "4.4.3"
+    "zod": "4.4.3",
+    "@cce/storage": "workspace:*",
+    "@cce/server-runtime": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "6.9.1",

@@ -1,0 +1,23 @@
+{
+  "name": "@cce/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "node --import tsx dist/apps/api/main.js"
+  },
+  "dependencies": {
+    "@cce/agents": "workspace:*",
+    "@cce/api-contracts": "workspace:*",
+    "@cce/application": "workspace:*",
+    "@cce/database": "workspace:*",
+    "@cce/domain": "workspace:*",
+    "@cce/mcp-server": "workspace:*",
+    "@cce/server-runtime": "workspace:*",
+    "tsx": "4.21.0",
+    "zod": "4.4.3"
+  }
+}

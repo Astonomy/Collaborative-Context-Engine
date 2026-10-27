@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-08",
+  "command": "pnpm --filter @cce/api deploy --legacy --prod <isolated-temp-directory>",
+  "isolatedProductionDeploy": true,
+  "installedVirtualStoreEntries": 131,
+  "forbiddenPackages": [],
+  "checkedPackages": ["next", "react", "react-dom", "eslint-config-next"],
+  "compiledApiImport": "passed",
+  "actualHttpUnknownRouteStatus": 404,
+  "nextProcessRunning": false,
+  "databaseAcceptance": "blocked: localhost:5432 ECONNREFUSED",
+  "dockerImageBuild": "not run: Docker unavailable"
+}

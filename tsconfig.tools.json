@@ -14,5 +14,5 @@
     "apps/**/*.test.ts",
     "apps/**/*.test.tsx"
   ],
-  "exclude": ["node_modules", "**/.next/**", "**/dist/**"]
+  "exclude": ["node_modules", "**/.next/**", "**/dist/**", "apps/vue/**"]
 }

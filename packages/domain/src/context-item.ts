@@ -64,8 +64,7 @@ export function contextScopeIdentity(scope: ContextScope): string {
     component: scope.component ?? null,
     effectiveFrom:
       scope.effectiveFrom === undefined ? null : new Date(scope.effectiveFrom).toISOString(),
-    effectiveTo:
-      scope.effectiveTo === undefined ? null : new Date(scope.effectiveTo).toISOString(),
+    effectiveTo: scope.effectiveTo === undefined ? null : new Date(scope.effectiveTo).toISOString(),
     environment: scope.environment ?? null,
     tags: [...scope.tags].sort(),
   });
@@ -94,10 +93,7 @@ const normalizedContextKeySchema = z
   .trim()
   .min(1)
   .max(240)
-  .regex(
-    /^[a-z0-9]+(?:[._-][a-z0-9]+)*$/,
-    "Context keys must be normalized lowercase segments.",
-  );
+  .regex(/^[a-z0-9]+(?:[._-][a-z0-9]+)*$/, "Context keys must be normalized lowercase segments.");
 
 export const contextItemProposalSchema = z
   .object({

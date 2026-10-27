@@ -11,5 +11,10 @@ test-results/
 !.env.example
 .DS_Store
 Thumbs.db
+.cce-attachments/
 *.log
+upload_test/
+apps/web/public/vue/
 
+# Agent files
+agent/

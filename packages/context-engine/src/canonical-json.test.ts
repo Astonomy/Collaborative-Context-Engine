@@ -20,9 +20,7 @@ describe("canonical JSON comparison", () => {
   it("keeps case, whitespace, and array ordering as semantic data", () => {
     expect(normalizedJsonEquals(" PostgreSQL ", "postgresql")).toBe(false);
     expect(normalizedJsonEquals("PostgreSQL", "PostgreSQL")).toBe(true);
-    expect(normalizedJsonEquals(["Docker", "Postgres"], ["Postgres", "Docker"])).toBe(
-      false,
-    );
+    expect(normalizedJsonEquals(["Docker", "Postgres"], ["Postgres", "Docker"])).toBe(false);
   });
 
   it("keeps ordered arrays exact and merges non-overlapping objects deterministically", () => {
@@ -33,9 +31,7 @@ describe("canonical JSON comparison", () => {
       compatible: true,
       value: ["PostgreSQL"],
     });
-    expect(
-      mergeCompatibleJson({ database: "PostgreSQL" }, { extension: "pgvector" }),
-    ).toEqual({
+    expect(mergeCompatibleJson({ database: "PostgreSQL" }, { extension: "pgvector" })).toEqual({
       compatible: true,
       value: { database: "PostgreSQL", extension: "pgvector" },
     });

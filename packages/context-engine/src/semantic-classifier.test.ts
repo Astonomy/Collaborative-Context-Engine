@@ -125,4 +125,3 @@ describe("semantic conflict classifier boundary", () => {
     expect(malformed[0]?.error).toContain("invalid semantic classification");
   });
 });
-

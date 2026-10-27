@@ -131,9 +131,9 @@ describe("ContextBuilder and ContextRouter", () => {
       recentMessageCharacterBudget: 1,
     };
     expect(() => buildContextPack({ ...base, maxRecentMessages: -1 })).toThrow(RangeError);
-    expect(() =>
-      buildContextPack({ ...base, recentMessageCharacterBudget: Number.NaN }),
-    ).toThrow(RangeError);
+    expect(() => buildContextPack({ ...base, recentMessageCharacterBudget: Number.NaN })).toThrow(
+      RangeError,
+    );
   });
 
   it("refuses an unbounded active Context projection", () => {

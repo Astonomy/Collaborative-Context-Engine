@@ -165,7 +165,9 @@ export class ExtractionService {
     if (completedMessages.length === 0) {
       throw new ApplicationError("VALIDATION", "No completed messages are available to extract.");
     }
-    const throughMessageSequence = Math.max(...completedMessages.map((message) => message.sequence));
+    const throughMessageSequence = Math.max(
+      ...completedMessages.map((message) => message.sequence),
+    );
     const providerMessages = [
       {
         role: "system" as const,
@@ -227,10 +229,7 @@ export class ExtractionService {
     await this.unitOfWork.run((repositories) => repositories.runs.insertModelRun(running));
 
     try {
-      const { response, extracted } = await this.generateStructured(
-        providerMessages,
-        input.signal,
-      );
+      const { response, extracted } = await this.generateStructured(providerMessages, input.signal);
       assertPersistableResponse(response);
       const messageIds = new Set(completedMessages.map((message) => message.id));
       for (const change of extracted.changes) {
@@ -494,9 +493,7 @@ function assertPersistableResponse(response: ModelResponse): void {
     response.usage.inputTokens,
     response.usage.cachedTokens,
     response.usage.outputTokens,
-  ].every(
-    (value) => Number.isInteger(value) && value >= 0 && value <= 2_147_483_647,
-  );
+  ].every((value) => Number.isInteger(value) && value >= 0 && value <= 2_147_483_647);
   if (!identityIsValid || !usageIsValid || response.content.length > 1_000_000) {
     throw new ModelProviderError(
       "MALFORMED_RESPONSE",

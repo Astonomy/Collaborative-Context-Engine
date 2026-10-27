@@ -8,7 +8,12 @@ import {
   userSchema,
   type ProjectRole,
 } from "@cce/domain";
-import { FixedClock, InMemoryUnitOfWork, SequenceIdGenerator, Sha256ContentHasher } from "@cce/test-support";
+import {
+  FixedClock,
+  InMemoryUnitOfWork,
+  SequenceIdGenerator,
+  Sha256ContentHasher,
+} from "@cce/test-support";
 
 export function uuid(value: number): string {
   return `00000000-0000-4000-8000-${value.toString().padStart(12, "0")}`;
@@ -104,8 +109,5 @@ export function seedConversation(fixture: ReturnType<typeof createFixture>) {
 }
 
 export function idsFrom(start: number, count = 100): SequenceIdGenerator {
-  return new SequenceIdGenerator(
-    Array.from({ length: count }, (_, index) => uuid(start + index)),
-  );
+  return new SequenceIdGenerator(Array.from({ length: count }, (_, index) => uuid(start + index)));
 }
-

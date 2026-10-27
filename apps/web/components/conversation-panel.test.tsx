@@ -56,12 +56,14 @@ function renderPanel(
 describe("ConversationPanel lifecycle controls", () => {
   it("lets an Editor rename and archive an active Conversation", async () => {
     const user = userEvent.setup();
-    const onUpdate = vi.fn<
-      (
-        conversationId: Conversation["id"],
-        update: { readonly title?: string; readonly archive?: true },
-      ) => Promise<void>
-    >().mockResolvedValue();
+    const onUpdate = vi
+      .fn<
+        (
+          conversationId: Conversation["id"],
+          update: { readonly title?: string; readonly archive?: true },
+        ) => Promise<void>
+      >()
+      .mockResolvedValue();
     renderPanel("editor", false, onUpdate);
 
     const title = screen.getByLabelText("Conversation title");

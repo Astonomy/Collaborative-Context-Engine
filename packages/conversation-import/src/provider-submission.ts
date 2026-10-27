@@ -32,6 +32,7 @@ export const providerConversationSubmissionSchema = z
         z
           .object({
             externalMessageId: z.string().trim().min(1).max(500).optional(),
+            attachmentIds: z.array(z.uuid()).max(100).optional(),
             role: z.enum(["user", "assistant", "system", "tool", "unknown"]),
             content: z
               .array(providerContentBlockSchema)
@@ -111,6 +112,7 @@ export function normalizeProviderSubmission(input: unknown): NormalizedProviderS
     return {
       ...(message.externalMessageId ? { externalMessageId: message.externalMessageId } : {}),
       role: message.role,
+      ...(message.attachmentIds ? { attachmentIds: message.attachmentIds } : {}),
       content: message.content,
       ...(message.createdAt ? { createdAt: message.createdAt } : {}),
       metadata: message.metadata,

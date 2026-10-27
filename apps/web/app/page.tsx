@@ -1,6 +1,5 @@
-import { CceWorkbench } from "../components/cce-workbench";
-import type { ReactElement } from "react";
+import { redirect } from "next/navigation";
 
-export default function HomePage(): ReactElement {
-  return <CceWorkbench />;
+export default function HomePage(): never {
+  redirect("/vue/");
 }

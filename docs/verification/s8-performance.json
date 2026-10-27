@@ -1,0 +1,2732 @@
+{
+  "measuredAt": "2026-10-03T10:39:31.895Z",
+  "node": "v24.15.0",
+  "browser": "151.0.7922.34",
+  "apiDelayMs": 100,
+  "samples": [
+    {
+      "frontend": "next",
+      "count": 0,
+      "run": 0,
+      "readyMs": 486.3999999985099,
+      "heap": {
+        "usedSize": 5174276,
+        "totalSize": 5881856,
+        "embedderHeapUsedSize": 549744,
+        "backingStorageSize": 801534
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 71,
+        "jsEventListeners": 321
+      },
+      "afterHeap": {
+        "usedSize": 799192,
+        "totalSize": 1835008,
+        "embedderHeapUsedSize": 885912,
+        "backingStorageSize": 158
+      },
+      "firstApplicationRenderMs": 432.6000000014901,
+      "fcp": 172,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 62.899999998509884,
+          "duration": 23.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 63.5,
+          "duration": 74.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 63.600000001490116,
+          "duration": 92.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 63.600000001490116,
+          "duration": 116.09999999403954
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 63.79999999701977,
+          "duration": 74.39999999850988
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 63.79999999701977,
+          "duration": 74.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 63.79999999701977,
+          "duration": 113.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 296.79999999701977,
+          "duration": 108.10000000149012
+        }
+      ],
+      "elements": 40,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 0,
+      "run": 1,
+      "readyMs": 316.79999999701977,
+      "heap": {
+        "usedSize": 5173132,
+        "totalSize": 6144000,
+        "embedderHeapUsedSize": 549568,
+        "backingStorageSize": 801497
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 71,
+        "jsEventListeners": 321
+      },
+      "afterHeap": {
+        "usedSize": 799192,
+        "totalSize": 1835008,
+        "embedderHeapUsedSize": 886240,
+        "backingStorageSize": 158
+      },
+      "firstApplicationRenderMs": 246.60000000149012,
+      "fcp": 68,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 40.100000001490116,
+          "duration": 5.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 40.29999999701977,
+          "duration": 6.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 40.29999999701977,
+          "duration": 13
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 40.399999998509884,
+          "duration": 15
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 40.5,
+          "duration": 10.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 40.5,
+          "duration": 10.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 40.5,
+          "duration": 15.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 125.29999999701977,
+          "duration": 102.20000000298023
+        }
+      ],
+      "elements": 40,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 0,
+      "run": 2,
+      "readyMs": 315.29999999701977,
+      "heap": {
+        "usedSize": 5206532,
+        "totalSize": 5881856,
+        "embedderHeapUsedSize": 549568,
+        "backingStorageSize": 801495
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 71,
+        "jsEventListeners": 321
+      },
+      "afterHeap": {
+        "usedSize": 800296,
+        "totalSize": 1835008,
+        "embedderHeapUsedSize": 880304,
+        "backingStorageSize": 158
+      },
+      "firstApplicationRenderMs": 245.39999999850988,
+      "fcp": 68,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 39.79999999701977,
+          "duration": 4.9000000059604645
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 39.899999998509884,
+          "duration": 7.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 39.899999998509884,
+          "duration": 11.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 40,
+          "duration": 10
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 40,
+          "duration": 15.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 40.100000001490116,
+          "duration": 10.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 40.100000001490116,
+          "duration": 16.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 125.20000000298023,
+          "duration": 102
+        }
+      ],
+      "elements": 40,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 0,
+      "run": 3,
+      "readyMs": 316.3999999985099,
+      "heap": {
+        "usedSize": 5206136,
+        "totalSize": 6406144,
+        "embedderHeapUsedSize": 549568,
+        "backingStorageSize": 801497
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 71,
+        "jsEventListeners": 321
+      },
+      "afterHeap": {
+        "usedSize": 800296,
+        "totalSize": 1835008,
+        "embedderHeapUsedSize": 880408,
+        "backingStorageSize": 158
+      },
+      "firstApplicationRenderMs": 248.79999999701977,
+      "fcp": 68,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 38.79999999701977,
+          "duration": 4.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 38.899999998509884,
+          "duration": 5.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 39,
+          "duration": 11.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 39,
+          "duration": 14.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 39.099999994039536,
+          "duration": 10.800000004470348
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 39.099999994039536,
+          "duration": 11.900000005960464
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 39.099999994039536,
+          "duration": 16.900000005960464
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 127.59999999403954,
+          "duration": 102.90000000596046
+        }
+      ],
+      "elements": 40,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 0,
+      "run": 4,
+      "readyMs": 318.5,
+      "heap": {
+        "usedSize": 5205840,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 549840,
+        "backingStorageSize": 801497
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 71,
+        "jsEventListeners": 321
+      },
+      "afterHeap": {
+        "usedSize": 800296,
+        "totalSize": 1835008,
+        "embedderHeapUsedSize": 879448,
+        "backingStorageSize": 158
+      },
+      "firstApplicationRenderMs": 249.10000000149012,
+      "fcp": 76,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 38.899999998509884,
+          "duration": 5.700000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 39.100000001490116,
+          "duration": 7.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 39.20000000298023,
+          "duration": 12.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 39.20000000298023,
+          "duration": 14.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 39.29999999701977,
+          "duration": 9.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 39.29999999701977,
+          "duration": 10.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 39.29999999701977,
+          "duration": 15.900000005960464
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 126.79999999701977,
+          "duration": 104.5
+        }
+      ],
+      "elements": 40,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 20,
+      "run": 0,
+      "readyMs": 932,
+      "heap": {
+        "usedSize": 5477460,
+        "totalSize": 6668288,
+        "embedderHeapUsedSize": 1159752,
+        "backingStorageSize": 802597
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 387,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 5702140,
+        "totalSize": 6144000,
+        "embedderHeapUsedSize": 1233480,
+        "backingStorageSize": 803314
+      },
+      "firstApplicationRenderMs": 631.5,
+      "fcp": 68,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 40,
+          "duration": 6.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 40.100000001490116,
+          "duration": 7.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 40.20000000298023,
+          "duration": 12.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 40.20000000298023,
+          "duration": 11.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 40.20000000298023,
+          "duration": 11.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 40.20000000298023,
+          "duration": 14.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 40.30000000447035,
+          "duration": 17.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 134.70000000298023,
+          "duration": 104.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 240.70000000298023,
+          "duration": 102.29999999701977
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 376.30000000447035,
+          "duration": 103.89999999850988
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 376.6000000014901,
+          "duration": 103.89999999850988
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 376.80000000447035,
+          "duration": 103.69999999552965
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 377.20000000298023,
+          "duration": 103.39999999850988
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 520.2000000029802,
+          "duration": 101.89999999850988
+        }
+      ],
+      "elements": 216,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 20,
+      "run": 1,
+      "readyMs": 911.2000000029802,
+      "heap": {
+        "usedSize": 5465904,
+        "totalSize": 6144000,
+        "embedderHeapUsedSize": 1160024,
+        "backingStorageSize": 802560
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 387,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 5698008,
+        "totalSize": 6406144,
+        "embedderHeapUsedSize": 1304024,
+        "backingStorageSize": 803277
+      },
+      "firstApplicationRenderMs": 581.2000000029802,
+      "fcp": 60,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 37.400000005960464,
+          "duration": 4.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 37.5,
+          "duration": 6.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 37.600000001490116,
+          "duration": 9.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 37.70000000298023,
+          "duration": 8.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 37.70000000298023,
+          "duration": 14.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 37.900000005960464,
+          "duration": 9
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 37.900000005960464,
+          "duration": 14.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 117.70000000298023,
+          "duration": 103.29999999701977
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 223,
+          "duration": 102.70000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 353.30000000447035,
+          "duration": 103.79999999701977
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 353.6000000014901,
+          "duration": 103.80000000447035
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 353.80000000447035,
+          "duration": 104
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 354.1000000014901,
+          "duration": 104.20000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 473.30000000447035,
+          "duration": 101.69999999552965
+        }
+      ],
+      "elements": 216,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 20,
+      "run": 2,
+      "readyMs": 931.7999999970198,
+      "heap": {
+        "usedSize": 5515588,
+        "totalSize": 6668288,
+        "embedderHeapUsedSize": 1159752,
+        "backingStorageSize": 802562
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 387,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 5737040,
+        "totalSize": 6406144,
+        "embedderHeapUsedSize": 1299864,
+        "backingStorageSize": 803279
+      },
+      "firstApplicationRenderMs": 602.6999999955297,
+      "fcp": 64,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 40.099999994039536,
+          "duration": 4.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 40.29999999701977,
+          "duration": 6.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 40.29999999701977,
+          "duration": 10.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 40.29999999701977,
+          "duration": 14.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 40.399999998509884,
+          "duration": 10.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 40.399999998509884,
+          "duration": 9.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 40.399999998509884,
+          "duration": 15.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 134.19999999552965,
+          "duration": 103.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 239.29999999701977,
+          "duration": 102
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 371.09999999403954,
+          "duration": 102.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 371.29999999701977,
+          "duration": 102.60000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 371.59999999403954,
+          "duration": 102.40000000596046
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 371.79999999701977,
+          "duration": 102.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 489.79999999701977,
+          "duration": 102.70000000298023
+        }
+      ],
+      "elements": 216,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 20,
+      "run": 3,
+      "readyMs": 929.3999999985099,
+      "heap": {
+        "usedSize": 5515500,
+        "totalSize": 6144000,
+        "embedderHeapUsedSize": 1159752,
+        "backingStorageSize": 802560
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 387,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 5736788,
+        "totalSize": 6406144,
+        "embedderHeapUsedSize": 1299864,
+        "backingStorageSize": 803277
+      },
+      "firstApplicationRenderMs": 646.3999999985099,
+      "fcp": 76,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 43.29999999701977,
+          "duration": 6.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 43.5,
+          "duration": 7.199999995529652
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 43.600000001490116,
+          "duration": 14.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 43.69999999552965,
+          "duration": 13.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 43.69999999552965,
+          "duration": 13.700000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 43.69999999552965,
+          "duration": 18.400000005960464
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 43.79999999701977,
+          "duration": 20.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 133.89999999850988,
+          "duration": 103.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 239.5,
+          "duration": 102.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 371.3999999985099,
+          "duration": 109.79999999701977
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 371.69999999552965,
+          "duration": 109.70000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 372,
+          "duration": 109.60000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 372.29999999701977,
+          "duration": 109.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 497.3999999985099,
+          "duration": 142.10000000149012
+        }
+      ],
+      "elements": 216,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 20,
+      "run": 4,
+      "readyMs": 935.7999999970198,
+      "heap": {
+        "usedSize": 5514672,
+        "totalSize": 6930432,
+        "embedderHeapUsedSize": 1160024,
+        "backingStorageSize": 802558
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 387,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 5736120,
+        "totalSize": 6406144,
+        "embedderHeapUsedSize": 1300456,
+        "backingStorageSize": 803275
+      },
+      "firstApplicationRenderMs": 603.6000000014901,
+      "fcp": 68,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 41.29999999701977,
+          "duration": 6
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 41.399999998509884,
+          "duration": 7.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 41.5,
+          "duration": 11.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 41.5,
+          "duration": 14
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 41.5,
+          "duration": 16.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 41.600000001490116,
+          "duration": 11.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 41.600000001490116,
+          "duration": 17
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 138.79999999701977,
+          "duration": 104.20000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 244.5,
+          "duration": 100.79999999701977
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 375.69999999552965,
+          "duration": 103.20000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 375.8999999985099,
+          "duration": 103.20000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 376.19999999552965,
+          "duration": 103
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 376.3999999985099,
+          "duration": 103
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 494.8999999985099,
+          "duration": 102.79999999701977
+        }
+      ],
+      "elements": 216,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 1000,
+      "run": 0,
+      "readyMs": 938.5,
+      "heap": {
+        "usedSize": 7418744,
+        "totalSize": 7979008,
+        "embedderHeapUsedSize": 13196720,
+        "backingStorageSize": 1012466
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 9207,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 6242360,
+        "totalSize": 7192576,
+        "embedderHeapUsedSize": 1753472,
+        "backingStorageSize": 1013167
+      },
+      "firstApplicationRenderMs": 691.7999999970198,
+      "fcp": 72,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 40.29999999701977,
+          "duration": 5.9000000059604645
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 40.600000001490116,
+          "duration": 6.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 40.70000000298023,
+          "duration": 11.199999995529652
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 40.70000000298023,
+          "duration": 12.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 40.70000000298023,
+          "duration": 16.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 40.79999999701977,
+          "duration": 11.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 40.79999999701977,
+          "duration": 17.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 150,
+          "duration": 103.60000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 255.20000000298023,
+          "duration": 103
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 386.70000000298023,
+          "duration": 101.59999999403954
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 386.8999999985099,
+          "duration": 102.60000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 387.20000000298023,
+          "duration": 102.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 387.5,
+          "duration": 102.29999999701977
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 504.5,
+          "duration": 112
+        }
+      ],
+      "elements": 5116,
+      "messages": 1000,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 1000,
+      "run": 1,
+      "readyMs": 914.2999999970198,
+      "heap": {
+        "usedSize": 7456908,
+        "totalSize": 8241152,
+        "embedderHeapUsedSize": 13195560,
+        "backingStorageSize": 1012477
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 9207,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 6276160,
+        "totalSize": 7454720,
+        "embedderHeapUsedSize": 1753120,
+        "backingStorageSize": 1013169
+      },
+      "firstApplicationRenderMs": 654.7999999970198,
+      "fcp": 68,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 39.20000000298023,
+          "duration": 5.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 39.399999998509884,
+          "duration": 6.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 39.399999998509884,
+          "duration": 12.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 39.5,
+          "duration": 9.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 39.5,
+          "duration": 10.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 39.5,
+          "duration": 15.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 39.600000001490116,
+          "duration": 16.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 122.20000000298023,
+          "duration": 102.89999999850988
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 226.70000000298023,
+          "duration": 102.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 356.8999999985099,
+          "duration": 103.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 357,
+          "duration": 103.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 357.20000000298023,
+          "duration": 103.39999999850988
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 357.3999999985099,
+          "duration": 103.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 474.5,
+          "duration": 111.29999999701977
+        }
+      ],
+      "elements": 5116,
+      "messages": 1000,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 1000,
+      "run": 2,
+      "readyMs": 990.7000000029802,
+      "heap": {
+        "usedSize": 7423840,
+        "totalSize": 7979008,
+        "embedderHeapUsedSize": 13196048,
+        "backingStorageSize": 1012466
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 9207,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 6247240,
+        "totalSize": 7454720,
+        "embedderHeapUsedSize": 1753328,
+        "backingStorageSize": 1013167
+      },
+      "firstApplicationRenderMs": 682.8999999985099,
+      "fcp": 72,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 42.79999999701977,
+          "duration": 7
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 43,
+          "duration": 6.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 43.100000001490116,
+          "duration": 10.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 43.100000001490116,
+          "duration": 11.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 43.100000001490116,
+          "duration": 12.699999995529652
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 43.100000001490116,
+          "duration": 15.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 43.100000001490116,
+          "duration": 17.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 136.39999999850988,
+          "duration": 103.80000000447035
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 241.89999999850988,
+          "duration": 101.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 377.3999999985099,
+          "duration": 104.70000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 377.79999999701977,
+          "duration": 104.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 378.1000000014901,
+          "duration": 104.29999999701977
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 378.3999999985099,
+          "duration": 104.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 496.8999999985099,
+          "duration": 112.60000000149012
+        }
+      ],
+      "elements": 5116,
+      "messages": 1000,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 1000,
+      "run": 3,
+      "readyMs": 916.1000000014901,
+      "heap": {
+        "usedSize": 7409324,
+        "totalSize": 8241152,
+        "embedderHeapUsedSize": 13195560,
+        "backingStorageSize": 1012466
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 9207,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 6239580,
+        "totalSize": 6930432,
+        "embedderHeapUsedSize": 1228248,
+        "backingStorageSize": 1013167
+      },
+      "firstApplicationRenderMs": 652.6000000014901,
+      "fcp": 68,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 41.5,
+          "duration": 4.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 41.600000001490116,
+          "duration": 4.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 41.600000001490116,
+          "duration": 10.199999995529652
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 41.69999999552965,
+          "duration": 8.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 41.69999999552965,
+          "duration": 12.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 41.79999999701977,
+          "duration": 9.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 41.79999999701977,
+          "duration": 14.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 121.5,
+          "duration": 103.60000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 226.79999999701977,
+          "duration": 101.20000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 354.19999999552965,
+          "duration": 103.40000000596046
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 354.3999999985099,
+          "duration": 103.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 354.5,
+          "duration": 103.60000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 354.79999999701977,
+          "duration": 103.5
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 476.19999999552965,
+          "duration": 110.5
+        }
+      ],
+      "elements": 5116,
+      "messages": 1000,
+      "errors": []
+    },
+    {
+      "frontend": "next",
+      "count": 1000,
+      "run": 4,
+      "readyMs": 924.7000000029802,
+      "heap": {
+        "usedSize": 7457808,
+        "totalSize": 7979008,
+        "embedderHeapUsedSize": 13194840,
+        "backingStorageSize": 1012475
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 9207,
+        "jsEventListeners": 336
+      },
+      "afterHeap": {
+        "usedSize": 6277056,
+        "totalSize": 7454720,
+        "embedderHeapUsedSize": 1752328,
+        "backingStorageSize": 1013167
+      },
+      "firstApplicationRenderMs": 655.6000000014901,
+      "fcp": 72,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2c-voqrzfokfd.css",
+          "start": 40.899999998509884,
+          "duration": 6.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1sgcetnq4uvby.js",
+          "start": 41.100000001490116,
+          "duration": 7.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/262akway5md93.js",
+          "start": 41.100000001490116,
+          "duration": 13.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+          "start": 41.20000000298023,
+          "duration": 9.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/263ynslmiwojj.js",
+          "start": 41.20000000298023,
+          "duration": 11
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/2w8cr9y56iucw.js",
+          "start": 41.20000000298023,
+          "duration": 16.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/_next/static/chunks/1-dcvrn57mi7c.js",
+          "start": 41.30000000447035,
+          "duration": 17.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/session",
+          "start": 128,
+          "duration": 103.70000000298023
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects",
+          "start": 233.60000000149012,
+          "duration": 101.89999999850988
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations",
+          "start": 364.30000000447035,
+          "duration": 104
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context",
+          "start": 364.5,
+          "duration": 104
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/context/commits",
+          "start": 364.6000000014901,
+          "duration": 104.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/merge-requests",
+          "start": 364.8999999985099,
+          "duration": 103.90000000596046
+        },
+        {
+          "url": "http://127.0.0.1:3107/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 483.8999999985099,
+          "duration": 110.20000000298023
+        }
+      ],
+      "elements": 5116,
+      "messages": 1000,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 0,
+      "run": 0,
+      "readyMs": 299,
+      "heap": {
+        "usedSize": 4248556,
+        "totalSize": 4833280,
+        "embedderHeapUsedSize": 395520,
+        "backingStorageSize": 198100
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 53,
+        "jsEventListeners": 38
+      },
+      "afterHeap": {
+        "usedSize": 810920,
+        "totalSize": 1572864,
+        "embedderHeapUsedSize": 303936,
+        "backingStorageSize": 92
+      },
+      "firstApplicationRenderMs": 252.19999999552965,
+      "fcp": 36,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 17,
+          "duration": 58.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 17.100000001490116,
+          "duration": 9.599999994039536
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 108.19999999552965,
+          "duration": 102
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/LoginView-Dni9mTgT.js",
+          "start": 216.89999999850988,
+          "duration": 17.600000001490116
+        }
+      ],
+      "elements": 23,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 0,
+      "run": 1,
+      "readyMs": 228.19999999552965,
+      "heap": {
+        "usedSize": 4247120,
+        "totalSize": 5095424,
+        "embedderHeapUsedSize": 395384,
+        "backingStorageSize": 198100
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 53,
+        "jsEventListeners": 38
+      },
+      "afterHeap": {
+        "usedSize": 810920,
+        "totalSize": 1572864,
+        "embedderHeapUsedSize": 303936,
+        "backingStorageSize": 92
+      },
+      "firstApplicationRenderMs": 167.89999999850988,
+      "fcp": 20,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5,
+          "duration": 7.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.100000001490116,
+          "duration": 3.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 36.899999998509884,
+          "duration": 103.39999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/LoginView-Dni9mTgT.js",
+          "start": 142.89999999850988,
+          "duration": 3.100000001490116
+        }
+      ],
+      "elements": 23,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 0,
+      "run": 2,
+      "readyMs": 231.10000000149012,
+      "heap": {
+        "usedSize": 4248196,
+        "totalSize": 4833280,
+        "embedderHeapUsedSize": 395384,
+        "backingStorageSize": 198100
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 53,
+        "jsEventListeners": 38
+      },
+      "afterHeap": {
+        "usedSize": 810920,
+        "totalSize": 1572864,
+        "embedderHeapUsedSize": 303968,
+        "backingStorageSize": 92
+      },
+      "firstApplicationRenderMs": 171.89999999850988,
+      "fcp": 24,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 4.899999998509884,
+          "duration": 7.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5,
+          "duration": 3.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 37.30000000447035,
+          "duration": 103
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/LoginView-Dni9mTgT.js",
+          "start": 143.30000000447035,
+          "duration": 2.5
+        }
+      ],
+      "elements": 23,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 0,
+      "run": 3,
+      "readyMs": 228.20000000298023,
+      "heap": {
+        "usedSize": 4247164,
+        "totalSize": 5095424,
+        "embedderHeapUsedSize": 395384,
+        "backingStorageSize": 198100
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 53,
+        "jsEventListeners": 38
+      },
+      "afterHeap": {
+        "usedSize": 810920,
+        "totalSize": 1572864,
+        "embedderHeapUsedSize": 303968,
+        "backingStorageSize": 92
+      },
+      "firstApplicationRenderMs": 173.79999999701977,
+      "fcp": 28,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.5,
+          "duration": 3.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5.5,
+          "duration": 7.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 37.399999998509884,
+          "duration": 104
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/LoginView-Dni9mTgT.js",
+          "start": 144.5,
+          "duration": 2.600000001490116
+        }
+      ],
+      "elements": 23,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 0,
+      "run": 4,
+      "readyMs": 227.70000000298023,
+      "heap": {
+        "usedSize": 4248400,
+        "totalSize": 4833280,
+        "embedderHeapUsedSize": 395384,
+        "backingStorageSize": 198100
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 53,
+        "jsEventListeners": 38
+      },
+      "afterHeap": {
+        "usedSize": 810920,
+        "totalSize": 1835008,
+        "embedderHeapUsedSize": 303968,
+        "backingStorageSize": 92
+      },
+      "firstApplicationRenderMs": 163.89999999850988,
+      "fcp": 32,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5,
+          "duration": 4.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5,
+          "duration": 7.5
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 37.79999999701977,
+          "duration": 102.90000000596046
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/LoginView-Dni9mTgT.js",
+          "start": 143.20000000298023,
+          "duration": 2.5999999940395355
+        }
+      ],
+      "elements": 23,
+      "messages": 0,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 20,
+      "run": 0,
+      "readyMs": 834.7999999970198,
+      "heap": {
+        "usedSize": 4927604,
+        "totalSize": 5881856,
+        "embedderHeapUsedSize": 750496,
+        "backingStorageSize": 224557
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 342,
+        "jsEventListeners": 67
+      },
+      "afterHeap": {
+        "usedSize": 5174776,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 507536,
+        "backingStorageSize": 226571
+      },
+      "firstApplicationRenderMs": 420,
+      "fcp": 20,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5.399999998509884,
+          "duration": 7.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.600000001490116,
+          "duration": 3.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 37.79999999701977,
+          "duration": 102.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 143.89999999850988,
+          "duration": 20.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 144.10000000149012,
+          "duration": 17.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 144.10000000149012,
+          "duration": 17.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 144.10000000149012,
+          "duration": 17.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 144.20000000298023,
+          "duration": 38.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 144.29999999701977,
+          "duration": 34.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 187.29999999701977,
+          "duration": 102.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 293.79999999701977,
+          "duration": 103.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 294,
+          "duration": 103.5
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 294.20000000298023,
+          "duration": 103.39999999850988
+        }
+      ],
+      "elements": 142,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 20,
+      "run": 1,
+      "readyMs": 831.6999999955297,
+      "heap": {
+        "usedSize": 4927244,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 750856,
+        "backingStorageSize": 224557
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 342,
+        "jsEventListeners": 67
+      },
+      "afterHeap": {
+        "usedSize": 5174432,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 507848,
+        "backingStorageSize": 226571
+      },
+      "firstApplicationRenderMs": 388.8999999985099,
+      "fcp": 24,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5.299999997019768,
+          "duration": 8
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.5,
+          "duration": 4.199999995529652
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 38.5,
+          "duration": 102.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 143.59999999403954,
+          "duration": 4.9000000059604645
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 143.59999999403954,
+          "duration": 5.700000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 143.59999999403954,
+          "duration": 6
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 143.79999999701977,
+          "duration": 5.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 143.89999999850988,
+          "duration": 6.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 143.89999999850988,
+          "duration": 6.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 154,
+          "duration": 103.39999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 262.29999999701977,
+          "duration": 104.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 262.5,
+          "duration": 104.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 262.59999999403954,
+          "duration": 104.30000000447035
+        }
+      ],
+      "elements": 142,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 20,
+      "run": 2,
+      "readyMs": 841.5,
+      "heap": {
+        "usedSize": 4927320,
+        "totalSize": 5357568,
+        "embedderHeapUsedSize": 750496,
+        "backingStorageSize": 224557
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 342,
+        "jsEventListeners": 67
+      },
+      "afterHeap": {
+        "usedSize": 5174500,
+        "totalSize": 5881856,
+        "embedderHeapUsedSize": 507536,
+        "backingStorageSize": 226571
+      },
+      "firstApplicationRenderMs": 391.6000000014901,
+      "fcp": 28,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5.5,
+          "duration": 8.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.700000002980232,
+          "duration": 4.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 42.30000000447035,
+          "duration": 102
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 147.39999999850988,
+          "duration": 6.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 147.5,
+          "duration": 5.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 147.60000000149012,
+          "duration": 6.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 147.60000000149012,
+          "duration": 6.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 147.70000000298023,
+          "duration": 6.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 147.80000000447035,
+          "duration": 6.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 158.5,
+          "duration": 102.5
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 266.6000000014901,
+          "duration": 102.70000000298023
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 266.80000000447035,
+          "duration": 102.79999999701977
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 267,
+          "duration": 102.80000000447035
+        }
+      ],
+      "elements": 142,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 20,
+      "run": 3,
+      "readyMs": 834.3000000044703,
+      "heap": {
+        "usedSize": 4926772,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 750496,
+        "backingStorageSize": 224557
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 342,
+        "jsEventListeners": 67
+      },
+      "afterHeap": {
+        "usedSize": 5173960,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 507536,
+        "backingStorageSize": 226571
+      },
+      "firstApplicationRenderMs": 396.70000000298023,
+      "fcp": 32,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 4.899999998509884,
+          "duration": 3.7000000029802322
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 4.899999998509884,
+          "duration": 7.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 38.600000001490116,
+          "duration": 105.20000000298023
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 147,
+          "duration": 4.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 147,
+          "duration": 5.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 147.10000000149012,
+          "duration": 5.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 147.20000000298023,
+          "duration": 5.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 147.30000000447035,
+          "duration": 6.5999999940395355
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 147.39999999850988,
+          "duration": 6
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 157.5,
+          "duration": 102.5
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 263.8999999985099,
+          "duration": 102.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 264.1000000014901,
+          "duration": 102.39999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 264.30000000447035,
+          "duration": 102.5
+        }
+      ],
+      "elements": 142,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 20,
+      "run": 4,
+      "readyMs": 840.2999999970198,
+      "heap": {
+        "usedSize": 4926704,
+        "totalSize": 5881856,
+        "embedderHeapUsedSize": 750136,
+        "backingStorageSize": 224557
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 342,
+        "jsEventListeners": 67
+      },
+      "afterHeap": {
+        "usedSize": 5173892,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 507176,
+        "backingStorageSize": 226571
+      },
+      "firstApplicationRenderMs": 391.3999999985099,
+      "fcp": 52,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5.299999997019768,
+          "duration": 7.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.5,
+          "duration": 3.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 36.600000001490116,
+          "duration": 101.19999999552965
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 140.60000000149012,
+          "duration": 5.5999999940395355
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 140.69999999552965,
+          "duration": 4.9000000059604645
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 140.69999999552965,
+          "duration": 5.700000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 140.79999999701977,
+          "duration": 6.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 141,
+          "duration": 6.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 141.10000000149012,
+          "duration": 5.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 151,
+          "duration": 101.60000000149012
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 256.3999999985099,
+          "duration": 104.29999999701977
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 256.6000000014901,
+          "duration": 104.39999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 256.69999999552965,
+          "duration": 104.5
+        }
+      ],
+      "elements": 142,
+      "messages": 20,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 1000,
+      "run": 0,
+      "readyMs": 838,
+      "heap": {
+        "usedSize": 5724736,
+        "totalSize": 6406144,
+        "embedderHeapUsedSize": 1542808,
+        "backingStorageSize": 245605
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 1068,
+        "jsEventListeners": 69
+      },
+      "afterHeap": {
+        "usedSize": 5232200,
+        "totalSize": 5881856,
+        "embedderHeapUsedSize": 526040,
+        "backingStorageSize": 226619
+      },
+      "firstApplicationRenderMs": 416.29999999701977,
+      "fcp": 20,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 6.5,
+          "duration": 8.099999994039536
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 6.699999995529652,
+          "duration": 4.5
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 43.69999999552965,
+          "duration": 101.80000000447035
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 148.79999999701977,
+          "duration": 4.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 148.89999999850988,
+          "duration": 3.7999999970197678
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 149,
+          "duration": 5.5
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 149,
+          "duration": 5.5999999940395355
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 149.09999999403954,
+          "duration": 6.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 149.19999999552965,
+          "duration": 6
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 159.5,
+          "duration": 101.69999999552965
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 265,
+          "duration": 108.89999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 265.19999999552965,
+          "duration": 113.30000000447035
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 265.29999999701977,
+          "duration": 113.79999999701977
+        }
+      ],
+      "elements": 466,
+      "messages": 100,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 1000,
+      "run": 1,
+      "readyMs": 836.3999999985099,
+      "heap": {
+        "usedSize": 5724464,
+        "totalSize": 6668288,
+        "embedderHeapUsedSize": 1542808,
+        "backingStorageSize": 245605
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 1068,
+        "jsEventListeners": 69
+      },
+      "afterHeap": {
+        "usedSize": 5231788,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 526040,
+        "backingStorageSize": 226619
+      },
+      "firstApplicationRenderMs": 403,
+      "fcp": 24,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 4.899999998509884,
+          "duration": 7.700000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5,
+          "duration": 4.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 38.600000001490116,
+          "duration": 102.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 143.89999999850988,
+          "duration": 4.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 143.89999999850988,
+          "duration": 4.9000000059604645
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 144,
+          "duration": 5.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 144.10000000149012,
+          "duration": 5.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 144.20000000298023,
+          "duration": 5.699999995529652
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 144.30000000447035,
+          "duration": 5.5999999940395355
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 153.60000000149012,
+          "duration": 102.70000000298023
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 260.30000000447035,
+          "duration": 105.5
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 260.5,
+          "duration": 110.89999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 260.70000000298023,
+          "duration": 111.39999999850988
+        }
+      ],
+      "elements": 466,
+      "messages": 100,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 1000,
+      "run": 2,
+      "readyMs": 838.6999999955297,
+      "heap": {
+        "usedSize": 5724160,
+        "totalSize": 6930432,
+        "embedderHeapUsedSize": 1542808,
+        "backingStorageSize": 245605
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 1068,
+        "jsEventListeners": 69
+      },
+      "afterHeap": {
+        "usedSize": 5231564,
+        "totalSize": 6144000,
+        "embedderHeapUsedSize": 526040,
+        "backingStorageSize": 226619
+      },
+      "firstApplicationRenderMs": 404.69999999552965,
+      "fcp": 24,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5.399999998509884,
+          "duration": 8.299999997019768
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.600000001490116,
+          "duration": 4.199999995529652
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 42.899999998509884,
+          "duration": 101.10000000149012
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 147.39999999850988,
+          "duration": 5.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 147.5,
+          "duration": 5.199999995529652
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 147.5,
+          "duration": 6.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 147.69999999552965,
+          "duration": 5.4000000059604645
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 147.69999999552965,
+          "duration": 6.200000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 147.79999999701977,
+          "duration": 6.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 157.60000000149012,
+          "duration": 102.59999999403954
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 264.29999999701977,
+          "duration": 107.89999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 264.3999999985099,
+          "duration": 112.89999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 264.6000000014901,
+          "duration": 113.5
+        }
+      ],
+      "elements": 466,
+      "messages": 100,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 1000,
+      "run": 3,
+      "readyMs": 834.3999999985099,
+      "heap": {
+        "usedSize": 5725372,
+        "totalSize": 6668288,
+        "embedderHeapUsedSize": 1542808,
+        "backingStorageSize": 245605
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 1068,
+        "jsEventListeners": 69
+      },
+      "afterHeap": {
+        "usedSize": 5232696,
+        "totalSize": 5619712,
+        "embedderHeapUsedSize": 526040,
+        "backingStorageSize": 226619
+      },
+      "firstApplicationRenderMs": 411.20000000298023,
+      "fcp": 32,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5.200000002980232,
+          "duration": 7.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.299999997019768,
+          "duration": 4.300000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 38.399999998509884,
+          "duration": 104.20000000298023
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 147.70000000298023,
+          "duration": 6
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 147.79999999701977,
+          "duration": 5.800000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 147.89999999850988,
+          "duration": 7.899999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 148,
+          "duration": 8.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 148.20000000298023,
+          "duration": 8.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 148.20000000298023,
+          "duration": 8.599999994039536
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 161.29999999701977,
+          "duration": 102
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 267.5,
+          "duration": 106.39999999850988
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 267.8999999985099,
+          "duration": 112.20000000298023
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 268.1000000014901,
+          "duration": 112.5
+        }
+      ],
+      "elements": 466,
+      "messages": 100,
+      "errors": []
+    },
+    {
+      "frontend": "vue",
+      "count": 1000,
+      "run": 4,
+      "readyMs": 832.3999999985099,
+      "heap": {
+        "usedSize": 5724024,
+        "totalSize": 6668288,
+        "embedderHeapUsedSize": 1542808,
+        "backingStorageSize": 245605
+      },
+      "dom": {
+        "documents": 1,
+        "nodes": 1068,
+        "jsEventListeners": 69
+      },
+      "afterHeap": {
+        "usedSize": 5231428,
+        "totalSize": 6144000,
+        "embedderHeapUsedSize": 526040,
+        "backingStorageSize": 226619
+      },
+      "firstApplicationRenderMs": 400.3999999985099,
+      "fcp": 20,
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-lQEV8Zi8.js",
+          "start": 5.0999999940395355,
+          "duration": 7.800000004470348
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/index-C3ju0xIP.css",
+          "start": 5.199999995529652,
+          "duration": 4.399999998509884
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/session",
+          "start": 39.099999994039536,
+          "duration": 102
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ProjectView-Du23IdD2.js",
+          "start": 144.09999999403954,
+          "duration": 5.5
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ResourceState-2faWjMAA.js",
+          "start": 144.29999999701977,
+          "duration": 4.799999997019768
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/project-context-BqUD_Xy5.js",
+          "start": 144.29999999701977,
+          "duration": 5.600000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/use-action-DN0vR41R.js",
+          "start": 144.29999999701977,
+          "duration": 5.700000002980232
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/upload-BlCtIv71.js",
+          "start": 144.39999999850988,
+          "duration": 6.100000001490116
+        },
+        {
+          "url": "http://127.0.0.1:4173/vue/assets/ConversationView-8MKZe5oN.js",
+          "start": 144.39999999850988,
+          "duration": 6.199999995529652
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002",
+          "start": 154.09999999403954,
+          "duration": 103
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005",
+          "start": 261,
+          "duration": 107.29999999701977
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/messages",
+          "start": 261.19999999552965,
+          "duration": 113
+        },
+        {
+          "url": "http://127.0.0.1:4173/api/projects/00000000-0000-4000-8000-000000000002/conversations/00000000-0000-4000-8000-000000000005/attachments",
+          "start": 261.5,
+          "duration": 113.39999999850988
+        }
+      ],
+      "elements": 466,
+      "messages": 100,
+      "errors": []
+    }
+  ],
+  "next": [
+    {
+      "file": "apps/web/.next/static/chunks/0cz1d0mv5g_q7.js",
+      "bytes": 112594,
+      "gzip9": 39520
+    },
+    {
+      "file": "apps/web/.next/static/chunks/1-dcvrn57mi7c.js",
+      "bytes": 361862,
+      "gzip9": 84620
+    },
+    {
+      "file": "apps/web/.next/static/chunks/1sgcetnq4uvby.js",
+      "bytes": 16879,
+      "gzip9": 5920
+    },
+    {
+      "file": "apps/web/.next/static/chunks/262akway5md93.js",
+      "bytes": 183088,
+      "gzip9": 48252
+    },
+    {
+      "file": "apps/web/.next/static/chunks/263ynslmiwojj.js",
+      "bytes": 14384,
+      "gzip9": 3655
+    },
+    {
+      "file": "apps/web/.next/static/chunks/2w8cr9y56iucw.js",
+      "bytes": 229151,
+      "gzip9": 71472
+    },
+    {
+      "file": "apps/web/.next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+      "bytes": 10913,
+      "gzip9": 4289
+    },
+    {
+      "file": "apps/web/.next/static/m2Y0Tyk0vBxRRPO3t0Otk/_buildManifest.js",
+      "bytes": 219,
+      "gzip9": 154
+    },
+    {
+      "file": "apps/web/.next/static/m2Y0Tyk0vBxRRPO3t0Otk/_clientMiddlewareManifest.js",
+      "bytes": 96,
+      "gzip9": 66
+    },
+    {
+      "file": "apps/web/.next/static/m2Y0Tyk0vBxRRPO3t0Otk/_ssgManifest.js",
+      "bytes": 80,
+      "gzip9": 64
+    }
+  ],
+  "vue": [
+    {
+      "file": "apps/vue/dist/assets/chat-stream-C2aDLrug.js",
+      "bytes": 1448,
+      "gzip9": 805
+    },
+    {
+      "file": "apps/vue/dist/assets/ContextView-EI8YTZi-.js",
+      "bytes": 1467,
+      "gzip9": 795
+    },
+    {
+      "file": "apps/vue/dist/assets/ConversationsView-BAO8ZyFm.js",
+      "bytes": 1985,
+      "gzip9": 1100
+    },
+    {
+      "file": "apps/vue/dist/assets/ConversationView-8MKZe5oN.js",
+      "bytes": 20108,
+      "gzip9": 7035
+    },
+    {
+      "file": "apps/vue/dist/assets/HistoryView-3NXxSw90.js",
+      "bytes": 974,
+      "gzip9": 613
+    },
+    {
+      "file": "apps/vue/dist/assets/index-lQEV8Zi8.js",
+      "bytes": 195794,
+      "gzip9": 62909
+    },
+    {
+      "file": "apps/vue/dist/assets/LoginView-Dni9mTgT.js",
+      "bytes": 1088,
+      "gzip9": 672
+    },
+    {
+      "file": "apps/vue/dist/assets/MergeView-DlXVBbuI.js",
+      "bytes": 6054,
+      "gzip9": 2428
+    },
+    {
+      "file": "apps/vue/dist/assets/model-worker-e0AWQU8q.js",
+      "bytes": 78460,
+      "gzip9": 20732
+    },
+    {
+      "file": "apps/vue/dist/assets/ModelPreview-D0YSt4V8.js",
+      "bytes": 3668,
+      "gzip9": 1862
+    },
+    {
+      "file": "apps/vue/dist/assets/NotFoundView-5gb0rLhg.js",
+      "bytes": 341,
+      "gzip9": 271
+    },
+    {
+      "file": "apps/vue/dist/assets/project-context-BqUD_Xy5.js",
+      "bytes": 158,
+      "gzip9": 154
+    },
+    {
+      "file": "apps/vue/dist/assets/ProjectOverview-CCOOobap.js",
+      "bytes": 349,
+      "gzip9": 275
+    },
+    {
+      "file": "apps/vue/dist/assets/ProjectsView-DgC9ypGu.js",
+      "bytes": 1640,
+      "gzip9": 957
+    },
+    {
+      "file": "apps/vue/dist/assets/ProjectView-Du23IdD2.js",
+      "bytes": 2633,
+      "gzip9": 1347
+    },
+    {
+      "file": "apps/vue/dist/assets/ResourceState-2faWjMAA.js",
+      "bytes": 841,
+      "gzip9": 537
+    },
+    {
+      "file": "apps/vue/dist/assets/upload-BlCtIv71.js",
+      "bytes": 2305,
+      "gzip9": 1267
+    },
+    {
+      "file": "apps/vue/dist/assets/use-action-DN0vR41R.js",
+      "bytes": 455,
+      "gzip9": 325
+    }
+  ],
+  "htmlScripts": [
+    {
+      "url": "/_next/static/chunks/262akway5md93.js",
+      "nomodule": false
+    },
+    {
+      "url": "/_next/static/chunks/2w8cr9y56iucw.js",
+      "nomodule": false
+    },
+    {
+      "url": "/_next/static/chunks/turbopack-1p8ka0wxkf6-1.js",
+      "nomodule": false
+    },
+    {
+      "url": "/_next/static/chunks/263ynslmiwojj.js",
+      "nomodule": false
+    },
+    {
+      "url": "/_next/static/chunks/1-dcvrn57mi7c.js",
+      "nomodule": false
+    },
+    {
+      "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+      "nomodule": true
+    },
+    {
+      "url": "/_next/static/chunks/1sgcetnq4uvby.js",
+      "nomodule": false
+    }
+  ]
+}

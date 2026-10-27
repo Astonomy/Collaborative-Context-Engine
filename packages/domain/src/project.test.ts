@@ -14,8 +14,9 @@ function member(userId: ProjectMember["userId"], role: ProjectMember["role"]): P
 
 describe("Project invariants", () => {
   it("rejects removing or demoting the final project owner", () => {
-    expect(() => assertCanChangeMemberRole([member(aliceId, "owner")], aliceId, "editor"))
-      .toThrowError(DomainError);
+    expect(() =>
+      assertCanChangeMemberRole([member(aliceId, "owner")], aliceId, "editor"),
+    ).toThrowError(DomainError);
     expect(() => assertCanChangeMemberRole([member(aliceId, "owner")], aliceId, null)).toThrow(
       "at least one owner",
     );
@@ -50,4 +51,3 @@ describe("Project invariants", () => {
     expect(result.success).toBe(false);
   });
 });
-

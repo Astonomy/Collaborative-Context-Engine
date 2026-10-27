@@ -27,8 +27,12 @@ pnpm --filter @cce/database migrate
 pnpm --filter @cce/database seed
 ```
 
-The migration runner applies `migrations/0001_initial.sql` in a transaction, serializes concurrent
-runners with a PostgreSQL advisory lock, and records a SHA-256 checksum. The seed command requires
+The migration runner applies the ordered registry in `src/migrations.ts` (currently `0001` through
+`0006`) in one transaction, serializes concurrent runners with a PostgreSQL advisory lock, and
+records a SHA-256 checksum for each file. A failed migration rolls back the whole pending batch;
+restarting skips matching applied files and rejects changed checksums. Project foreign keys target
+`projects.project_id`; conversation and message references retain their composite project scope.
+The seed command requires
 `CCE_SEED_USER_EMAIL`, `CCE_SEED_USER_NAME`, and `CCE_SEED_API_TOKEN`; it stores only the token's
 SHA-256 digest and is idempotent for the same email and token.
 

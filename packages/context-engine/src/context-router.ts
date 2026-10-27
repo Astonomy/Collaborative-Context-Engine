@@ -3,13 +3,7 @@ import type { ContextItemVersion } from "@cce/domain";
 import type { ContextPack } from "./context-builder";
 
 export type ContextRoute =
-  | "chat"
-  | "extraction"
-  | "conflict"
-  | "coding"
-  | "research"
-  | "review"
-  | "manager";
+  "chat" | "extraction" | "conflict" | "coding" | "research" | "review" | "manager";
 
 export interface RoutedContextPack extends ContextPack {
   readonly route: ContextRoute;
@@ -47,4 +41,3 @@ export function routeContext(pack: ContextPack, route: ContextRoute): RoutedCont
       return { ...pack, route };
   }
 }
-

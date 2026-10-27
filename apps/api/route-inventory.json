@@ -1,0 +1,138 @@
+[
+  {
+    "path": "/api/health",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects",
+    "methods": ["GET", "POST"]
+  },
+  {
+    "path": "/api/session",
+    "methods": ["GET", "POST", "DELETE"]
+  },
+  {
+    "path": "/api/projects/[projectId]",
+    "methods": ["GET", "PATCH"]
+  },
+  {
+    "path": "/api/projects/[projectId]/audit",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/context",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/conversations",
+    "methods": ["GET", "POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/imports",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/members",
+    "methods": ["GET", "POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/merge-requests",
+    "methods": ["GET", "POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/agents/runs",
+    "methods": ["GET", "POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/attachments/[attachmentId]",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/context/commits",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/context/items",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/conversations/[conversationId]",
+    "methods": ["GET", "PATCH"]
+  },
+  {
+    "path": "/api/projects/[projectId]/imports/preview",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/imports/provider-previews",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/imports/provider-submissions",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/imports/[importId]",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/members/[userId]",
+    "methods": ["PUT"]
+  },
+  {
+    "path": "/api/projects/[projectId]/merge-requests/[mergeRequestId]",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/agents/runs/[runId]",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/attachments/[attachmentId]/content",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/attachments/[attachmentId]/inspection",
+    "methods": ["GET"]
+  },
+  {
+    "path": "/api/projects/[projectId]/conversations/[conversationId]/attachments",
+    "methods": ["GET", "POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/conversations/[conversationId]/chat",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/conversations/[conversationId]/deltas",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/conversations/[conversationId]/extract",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/conversations/[conversationId]/messages",
+    "methods": ["GET", "POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/merge-requests/[mergeRequestId]/finalize",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/agents/runs/[runId]/cancel",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/agents/runs/[runId]/reconcile",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/agents/runs/[runId]/resume",
+    "methods": ["POST"]
+  },
+  {
+    "path": "/api/projects/[projectId]/merge-requests/[mergeRequestId]/conflicts/[conflictId]/resolution",
+    "methods": ["PUT"]
+  }
+]

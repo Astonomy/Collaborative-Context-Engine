@@ -44,9 +44,7 @@ export interface DuplicateMergeChange {
 }
 
 export type MergeWarningCode =
-  | "STALE_BASE"
-  | "BRANCH_DID_NOT_CHANGE_VALUE"
-  | "TARGET_ALREADY_INACTIVE";
+  "STALE_BASE" | "BRANCH_DID_NOT_CHANGE_VALUE" | "TARGET_ALREADY_INACTIVE";
 
 export interface MergeWarning {
   readonly code: MergeWarningCode;
@@ -65,4 +63,3 @@ export interface MergePlan {
   readonly warnings: readonly MergeWarning[];
   readonly requiresHumanReview: boolean;
 }
-

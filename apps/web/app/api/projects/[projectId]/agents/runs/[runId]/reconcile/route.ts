@@ -1,20 +1,9 @@
-import {
-  agentRunPathParamsSchema,
-  agentRunResponseSchema,
-  reconcileAgentRunBodySchema,
-} from "@cce/api-contracts";
-import type { NextRequest } from "next/server";
-
-import {
-  apiRoute,
-  authenticateRequest,
-  jsonSuccess,
-  parseBody,
-  parsePath,
-} from "../../../../../../../../server/request";
+import { createHandlers } from "../../../../../../../../../api/handlers/projects/[projectId]/agents/runs/[runId]/reconcile/route";
 import { getWebRuntime } from "../../../../../../../../server/runtime";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+const handlers = createHandlers(getWebRuntime);
 
 interface RouteContext {
   readonly params: Promise<{
@@ -23,17 +12,6 @@ interface RouteContext {
   }>;
 }
 
-export function POST(request: NextRequest, context: RouteContext): Promise<Response> {
-  return apiRoute(async () => {
-    const actor = await authenticateRequest(request);
-    const [path] = await Promise.all([
-      context.params.then((params) => parsePath(params, agentRunPathParamsSchema)),
-      parseBody(request, reconcileAgentRunBodySchema),
-    ]);
-    const result = await getWebRuntime().agents.reconcile({
-      ...path,
-      actorUserId: actor.id,
-    });
-    return jsonSuccess(agentRunResponseSchema, result);
-  });
+export async function POST(request: Request, context: RouteContext): Promise<Response> {
+  return handlers.POST(request, { params: await context.params });
 }

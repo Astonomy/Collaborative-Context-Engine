@@ -29,6 +29,12 @@ For image, audio, video, document, and other multimodal material, assess whether
 
 In the summary, record an invoked plugin Skill with its namespaced Codex form `$plugin-name:skill-name`, not a Markdown link, attachment URI, or local cache path. Record this Skill exactly as `$cce-conversation-submission:submit-cce-conversation`. This normalization applies only to the generated summary or material inventory; preserve the original conversation text unchanged.
 
+## Local binary originals
+
+When an authorized invocation explicitly supplies a local binary path, read and upload the actual bytes using the bundled `scripts/cce-upload-attachments.mjs`. Supply a capture JSON with the resolved projectId and only authorized messages. On each corresponding source message, add `localAttachments` entries with `path`, `mimeType`, and a stable UUID `uploadId` for retries. The helper uses the client process environment for authentication and the standalone API origin; never read or print credential values yourself, and never put them in a prompt, this Skill, or capture JSON.
+
+Use the helper's returned `attachmentIds` on the original messages in the MCP preview. Keep original message text. Never replace a binary with `Attachment: filename`, synthesize a filename caption, or claim a provider reference uploaded bytes. Uploads are private staging records and create no evidence before confirmation. If no readable local binary is provided, preserve genuine host references and disclose that the bytes were unavailable. If upload fails, stop and report the failure; do not silently fall back to text. For Hosted ChatGPT, continue using the HTTPS/OAuth connection, never the local environment bearer flow.
+
 ## Resolve the destination
 
 1. Call `list_projects`. If the user named a project, pass that exact name as the filter.
@@ -48,7 +54,7 @@ For repeated submissions in the same provider conversation and CCE project, cont
 
 1. Call `preview_conversation_import` with the resolved `projectId`, generated `summary`, authorized messages, retained original material references, and `previousImportId` for a continuation. Use `chatgpt` as `source` on ChatGPT and `codex` on Codex. If the surface is genuinely unknown, ask the user instead of guessing.
 2. Explain that previewing stores a confidential, expiring validation record but creates no CCE Conversation, Message, or Context change.
-3. Show the user the exact project name and ID, conversation title, summary, message count, unsupported-content count, every warning, expiration time, and duplicate status. State whether this creates a conversation or appends a delta; for an append, show `targetConversationId` and label the count as new messages. If it is a duplicate, also show the existing import and conversation IDs.
+3. Show the user the exact project name and ID, conversation title, summary, message count, unsupported-content count, every warning, expiration time, duplicate status, and every uploaded attachment's filename, byte size, checksum and ID. State whether this creates a conversation or appends a delta; for an append, show `targetConversationId` and label the count as new messages. If it is a duplicate, also show the existing import and conversation IDs.
 4. Ask once for explicit confirmation to submit that preview. The invocation or initial submission request authorizes creating the preview but is not the write confirmation because the preview details were not yet known.
 5. When the user confirms the displayed preview, immediately call `submit_conversation_import` with that preview. Do not ask for another conversational confirmation, regenerate an unchanged preview, or repeat the preview disclosure before submitting. Do not bypass any confirmation enforced directly by the host platform.
 

@@ -8,14 +8,15 @@ export default defineConfig({
       "apps/**/*.test.tsx",
       "tests/unit/**/*.test.ts",
       "tests/unit/**/*.test.tsx",
-      "tests/evals/**/*.test.ts"
+      "tests/evals/**/*.test.ts",
     ],
     exclude: [
       "**/node_modules/**",
       "**/dist/**",
       "**/.next/**",
+      "apps/vue/**",
       "tests/integration/**",
-      "tests/e2e/**"
+      "tests/e2e/**",
     ],
     allowOnly: false,
     passWithNoTests: false,
@@ -26,8 +27,9 @@ export default defineConfig({
       exclude: [
         "**/*.test.ts",
         "**/index.ts",
+        "apps/vue/**",
         "packages/database/src/**",
-        "packages/test-support/src/**"
+        "packages/test-support/src/**",
       ],
       reportOnFailure: true,
       thresholds: {
@@ -39,27 +41,27 @@ export default defineConfig({
           lines: 90,
           functions: 90,
           statements: 90,
-          branches: 90
+          branches: 90,
         },
         "packages/context-engine/src/**": {
           lines: 90,
           functions: 95,
           statements: 90,
-          branches: 80
+          branches: 80,
         },
         "packages/application/src/**": {
           lines: 85,
           functions: 85,
           statements: 85,
-          branches: 60
+          branches: 60,
         },
         "packages/model-provider/src/**": {
           lines: 85,
           functions: 85,
           statements: 85,
-          branches: 80
-        }
-      }
-    }
-  }
+          branches: 80,
+        },
+      },
+    },
+  },
 });

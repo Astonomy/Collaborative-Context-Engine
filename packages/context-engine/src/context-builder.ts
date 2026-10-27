@@ -107,7 +107,9 @@ export function buildContextPack(input: BuildContextInput): ContextPack {
     }
   }
   const authoritative = activeItems.filter((item) => item.authority === "authoritative");
-  const alternatives = activeItems.filter((item) => item.authority === "alternative").sort(compareItems);
+  const alternatives = activeItems
+    .filter((item) => item.authority === "alternative")
+    .sort(compareItems);
 
   return {
     schemaVersion: 1,

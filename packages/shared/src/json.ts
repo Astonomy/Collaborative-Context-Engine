@@ -11,9 +11,7 @@ export const maximumContextValueNodes = 20_000;
 export const contextValueSchema = z
   .unknown()
   .superRefine((value, context) => {
-    const stack: Array<{ readonly value: unknown; readonly depth: number }> = [
-      { value, depth: 0 },
-    ];
+    const stack: Array<{ readonly value: unknown; readonly depth: number }> = [{ value, depth: 0 }];
     const visited = new WeakSet<object>();
     let nodes = 0;
     while (stack.length > 0) {

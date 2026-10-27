@@ -7,3 +7,4 @@ export * from "./http-contracts";
 export * from "./merge-contracts";
 export * from "./project-contracts";
 export * from "./session-contracts";
+export * from "./attachment-contracts";

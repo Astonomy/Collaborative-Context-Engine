@@ -20,11 +20,7 @@ import type {
 } from "./merge-types";
 import { sameContextSlot, scopeIdentity, scopesAreDisjoint } from "./scope";
 
-const compatibleExpansionKinds = new Set<ContextItemVersion["kind"]>([
-  "fact",
-  "artifact",
-  "risk",
-]);
+const compatibleExpansionKinds = new Set<ContextItemVersion["kind"]>(["fact", "artifact", "risk"]);
 
 interface MergeAccumulator {
   cleanChanges: CleanMergeChange[];
@@ -55,10 +51,7 @@ function findByLogicalItem(
   return items.find((item) => item.logicalItemId === logicalItemId) ?? null;
 }
 
-function sameProposalValue(
-  version: ContextItemVersion,
-  proposal: ContextItemProposal,
-): boolean {
+function sameProposalValue(version: ContextItemVersion, proposal: ContextItemProposal): boolean {
   return (
     version.kind === proposal.kind &&
     version.key === proposal.key &&
@@ -81,7 +74,8 @@ function conflictClassification(
   if (
     current.authority === "authoritative" &&
     proposal.authority === "authoritative" &&
-    (isHighRiskContextKind(current.kind) || scopeIdentity(current.scope) === scopeIdentity(proposal.scope))
+    (isHighRiskContextKind(current.kind) ||
+      scopeIdentity(current.scope) === scopeIdentity(proposal.scope))
   ) {
     return "C3";
   }
@@ -133,7 +127,9 @@ function mergeAdd(
 ): void {
   const sameKeyCandidates = currentItems.filter(
     (item) =>
-      item.lifecycle === "active" && item.kind === change.proposal.kind && item.key === change.proposal.key,
+      item.lifecycle === "active" &&
+      item.kind === change.proposal.kind &&
+      item.key === change.proposal.key,
   );
   const sameSlot = sameKeyCandidates.find((item) => sameContextSlot(item, change.proposal));
 
@@ -152,7 +148,14 @@ function mergeAdd(
       );
       return;
     }
-    addClean(accumulator, change, "C0", change.proposal, null, "No current item occupies this key and scope.");
+    addClean(
+      accumulator,
+      change,
+      "C0",
+      change.proposal,
+      null,
+      "No current item occupies this key and scope.",
+    );
     return;
   }
 
@@ -238,7 +241,14 @@ function mergeTargetedChange(
 
   if (change.operation === "deprecate") {
     if (currentVersion.id === change.expectedBaseVersionId) {
-      addClean(accumulator, change, "C4", null, currentVersion, "The current version can be explicitly deprecated.");
+      addClean(
+        accumulator,
+        change,
+        "C4",
+        null,
+        currentVersion,
+        "The current version can be explicitly deprecated.",
+      );
     } else {
       addConflict(
         accumulator,
@@ -336,10 +346,7 @@ export function createThreeWayMergePlan(
       "The supplied Base snapshot does not match the Delta base commit.",
     );
   }
-  if (
-    base.commitId !== current.commitId &&
-    !current.ancestorCommitIds.includes(base.commitId)
-  ) {
+  if (base.commitId !== current.commitId && !current.ancestorCommitIds.includes(base.commitId)) {
     throw new DomainError(
       "INVARIANT_VIOLATION",
       "The Delta base is not an ancestor of current canonical HEAD.",
@@ -392,4 +399,3 @@ export function createThreeWayMergePlan(
       accumulator.cleanChanges.some((change) => change.requiresHumanReview),
   };
 }
-

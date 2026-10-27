@@ -307,7 +307,7 @@ test("conversation evidence becomes an Owner-reviewed canonical commit", async (
     );
   });
 
-  await page.goto("/");
+  await page.goto("/legacy");
   await expect(page.getByRole("heading", { name: "Apollo" })).toBeVisible();
 
   await page.getByLabel("New conversation").fill("Architecture review");
@@ -364,7 +364,7 @@ test("Viewer controls remain read-only", async ({ page }) => {
     );
   });
 
-  await page.goto("/");
+  await page.goto("/legacy");
   await expect(page.getByText("Viewer access is read-only.")).toBeVisible();
   await expect(page.getByRole("button", { name: "Create conversation" })).toBeDisabled();
   await expect(page.getByLabel("Message")).toBeDisabled();

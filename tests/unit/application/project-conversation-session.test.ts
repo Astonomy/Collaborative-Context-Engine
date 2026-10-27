@@ -180,11 +180,7 @@ describe("Conversation and Context services", () => {
   it("allows viewers to read but not append conversation evidence", async () => {
     const fixture = createFixture("viewer");
     const { conversation } = seedConversation(fixture);
-    const conversations = new ConversationService(
-      fixture.unitOfWork,
-      idsFrom(100),
-      fixture.clock,
-    );
+    const conversations = new ConversationService(fixture.unitOfWork, idsFrom(100), fixture.clock);
 
     await expect(
       conversations.listMessages({
@@ -225,11 +221,7 @@ describe("Conversation and Context services", () => {
 
   it("creates a fixed-base Branch and lists its Conversation", async () => {
     const fixture = createFixture();
-    const conversations = new ConversationService(
-      fixture.unitOfWork,
-      idsFrom(100),
-      fixture.clock,
-    );
+    const conversations = new ConversationService(fixture.unitOfWork, idsFrom(100), fixture.clock);
 
     const conversation = await conversations.create({
       projectId: fixture.project.id,
@@ -249,11 +241,7 @@ describe("Conversation and Context services", () => {
   it("gets, renames, and archives a project-scoped Conversation atomically", async () => {
     const fixture = createFixture("editor");
     const { conversation } = seedConversation(fixture);
-    const conversations = new ConversationService(
-      fixture.unitOfWork,
-      idsFrom(100),
-      fixture.clock,
-    );
+    const conversations = new ConversationService(fixture.unitOfWork, idsFrom(100), fixture.clock);
 
     await expect(
       conversations.get({
@@ -303,11 +291,7 @@ describe("Conversation and Context services", () => {
   it("keeps Conversation mutations unavailable to Viewers", async () => {
     const fixture = createFixture("viewer");
     const { conversation } = seedConversation(fixture);
-    const conversations = new ConversationService(
-      fixture.unitOfWork,
-      idsFrom(100),
-      fixture.clock,
-    );
+    const conversations = new ConversationService(fixture.unitOfWork, idsFrom(100), fixture.clock);
 
     await expect(
       conversations.update({
@@ -323,11 +307,7 @@ describe("Conversation and Context services", () => {
   it("lists canonical commits/items and hides missing Conversations", async () => {
     const fixture = createFixture();
     const context = new ContextService(fixture.unitOfWork);
-    const conversations = new ConversationService(
-      fixture.unitOfWork,
-      idsFrom(100),
-      fixture.clock,
-    );
+    const conversations = new ConversationService(fixture.unitOfWork, idsFrom(100), fixture.clock);
 
     await expect(
       context.listCommits({ projectId: fixture.project.id, actorUserId: fixture.user.id }),

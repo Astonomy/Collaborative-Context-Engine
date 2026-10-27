@@ -1,3 +1,4 @@
+import { attachmentResponseSchema } from "./attachment-contracts";
 import {
   contextDeltaSchema,
   conversationIdSchema,
@@ -46,16 +47,20 @@ export const createContextDeltaBodySchema = z
   })
   .strict();
 
-export const conversationResponseSchema = conversationSchema;
+export const conversationResponseSchema = conversationSchema.extend({
+  attachments: z.array(attachmentResponseSchema).default([]),
+});
 export const conversationListResponseSchema = z.array(conversationSchema);
-export const messageResponseSchema = messageSchema;
-export const messageListResponseSchema = z.array(messageSchema);
+export const messageResponseSchema = messageSchema.extend({
+  attachments: z.array(attachmentResponseSchema).default([]),
+});
+export const messageListResponseSchema = z.array(messageResponseSchema);
 
 export const chatStreamEventSchema = z.discriminatedUnion("type", [
   z
     .object({
       type: z.literal("user_persisted"),
-      message: messageSchema,
+      message: messageResponseSchema,
     })
     .strict(),
   z
@@ -73,7 +78,7 @@ export const chatStreamEventSchema = z.discriminatedUnion("type", [
   z
     .object({
       type: z.literal("completed"),
-      message: messageSchema,
+      message: messageResponseSchema,
     })
     .strict(),
 ]);

@@ -36,12 +36,14 @@ function access(role: "owner" | "viewer") {
 describe("ProjectSidebar lifecycle controls", () => {
   it("lets an Owner rename and archive the selected project", async () => {
     const user = userEvent.setup();
-    const onUpdate = vi.fn<
-      (
-        projectId: typeof project.id,
-        update: { readonly name?: string; readonly archive?: true },
-      ) => Promise<void>
-    >().mockResolvedValue();
+    const onUpdate = vi
+      .fn<
+        (
+          projectId: typeof project.id,
+          update: { readonly name?: string; readonly archive?: true },
+        ) => Promise<void>
+      >()
+      .mockResolvedValue();
     render(
       <ProjectSidebar
         projects={[access("owner")]}

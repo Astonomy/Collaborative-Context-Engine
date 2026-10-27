@@ -42,4 +42,3 @@ export const actorSchema = z.discriminatedUnion("type", [
 ]);
 
 export type Actor = z.infer<typeof actorSchema>;
-

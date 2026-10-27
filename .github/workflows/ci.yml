@@ -82,6 +82,9 @@ jobs:
       - name: Build production application
         run: pnpm build
 
+      - name: Verify independent browser bundle
+        run: pnpm verify:frontend
+
       - name: Upload coverage report
         if: ${{ always() && hashFiles('coverage/**') != '' }}
         uses: actions/upload-artifact@v4
@@ -221,6 +224,8 @@ jobs:
             sleep 0.2
           done
           pnpm test:e2e
+          pnpm test:e2e:standalone
+          pnpm test:e2e:decoupling
 
       - name: Upload Playwright report on failure
         if: ${{ failure() && hashFiles('playwright-report/**') != '' }}
@@ -236,6 +241,9 @@ jobs:
     needs: quality
     runs-on: ubuntu-24.04
     timeout-minutes: 25
+    strategy:
+      matrix:
+        target: [api, frontend, migrator]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -248,8 +256,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          target: runner
+          target: ${{ matrix.target }}
           push: false
-          tags: cce:ci
+          tags: cce-${{ matrix.target }}:ci
           cache-from: type=gha
           cache-to: type=gha,mode=max

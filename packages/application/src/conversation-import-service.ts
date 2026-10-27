@@ -9,6 +9,9 @@ import {
   type ProviderConversationSubmission,
 } from "@cce/conversation-import";
 import {
+  attachmentIdSchema,
+  attachmentSchema,
+  attachmentEventSchema,
   auditEventIdSchema,
   branchIdSchema,
   branchSchema,
@@ -49,6 +52,12 @@ export interface ImportPreview {
 }
 
 export interface ProviderImportPreview {
+  readonly attachments: readonly {
+    attachmentId: string;
+    filename: string;
+    byteSize: number;
+    checksum: string;
+  }[];
   readonly id: string;
   readonly source: "chatgpt-plugin" | "codex-plugin";
   readonly targetProject: { readonly id: ProjectId; readonly name: string };
@@ -181,15 +190,22 @@ export class ConversationImportService {
         preview.conversation,
         duplicate?.id,
       );
+      const attachments = await this.validateAttachments(
+        repositories,
+        input.projectId,
+        input.actorUserId,
+        normalized.conversation,
+      );
       await repositories.imports.deleteExpiredPreviews(input.projectId, now.toISOString());
       await repositories.imports.insertPreview(preview);
-      return { access, duplicate, target };
+      return { access, duplicate, target, attachments };
     });
     return this.providerPreview(
       preview,
       result.access.project.name,
       result.duplicate,
       result.target?.conversation,
+      result.attachments,
     );
   }
 
@@ -264,6 +280,8 @@ export class ConversationImportService {
       );
       if (duplicate) return duplicate;
 
+      for (const external of input.conversations)
+        await this.validateAttachments(repositories, input.projectId, input.actorUserId, external);
       const importId = this.ids.next();
       const eventId = auditEventIdSchema.parse(this.ids.next());
       const now = this.clock.now().toISOString();
@@ -447,6 +465,35 @@ export class ConversationImportService {
       const content = this.text(node);
       if (node.role === "unknown" || content.length === 0) continue;
       const id = messageIdSchema.parse(this.ids.next());
+      for (const [ordinal, attachmentId] of (node.attachmentIds ?? []).entries()) {
+        const uploads = repositories.attachments;
+        if (!uploads) throw new ApplicationError("CONFLICT", "Attachment storage is unavailable.");
+        const staged = await uploads.findImportUpload(
+          projectId,
+          attachmentIdSchema.parse(attachmentId),
+        );
+        if (
+          !staged ||
+          staged.actorUserId !== actorUserId ||
+          Date.parse(staged.expiresAt) <= this.clock.now().getTime()
+        )
+          throw new ApplicationError("NOT_FOUND", "Import attachment is unavailable or expired.");
+        if (await uploads.find(projectId, staged.id))
+          throw new ApplicationError("CONFLICT", "Attachment is already bound to evidence.");
+        const evidence = attachmentSchema
+          .omit({ conversationId: true, messageId: true, ordinal: true, createdBy: true })
+          .strip()
+          .parse(staged);
+        await uploads.insert(
+          attachmentSchema.parse({
+            ...evidence,
+            conversationId,
+            messageId: id,
+            ordinal,
+            createdBy: { type: "human", userId: staged.actorUserId },
+          }),
+        );
+      }
       await repositories.conversations.insertMessage(
         messageSchema.parse({
           id,
@@ -469,6 +516,21 @@ export class ConversationImportService {
           completedAt: node.createdAt ?? now,
         }),
       );
+      for (const attachmentId of node.attachmentIds ?? []) {
+        await repositories.attachments?.appendEvent(
+          attachmentEventSchema.parse({
+            id: this.ids.next(),
+            projectId,
+            attachmentId,
+            sequence: 1,
+            processingStatus: "pending",
+            availability: "available",
+            reason: "Original binary bound by confirmed provider import.",
+            occurredAt: now,
+            actor: { type: "human", userId: actorUserId },
+          }),
+        );
+      }
       messageIds.push(id);
     }
     const externalConversationId =
@@ -480,14 +542,58 @@ export class ConversationImportService {
     };
   }
 
+  private async validateAttachments(
+    repositories: CceRepositories,
+    projectId: ProjectId,
+    actorUserId: UserId,
+    external: ExternalConversation,
+  ): Promise<ProviderImportPreview["attachments"]> {
+    const attachments: {
+      attachmentId: string;
+      filename: string;
+      byteSize: number;
+      checksum: string;
+    }[] = [];
+    const seen = new Set<string>();
+    for (const node of external.nodes) {
+      for (const id of node.attachmentIds ?? []) {
+        if (node.role === "unknown" || this.text(node).length === 0 || seen.has(id))
+          throw new ApplicationError(
+            "VALIDATION",
+            "Attachment must belong to exactly one supported message with original text.",
+          );
+        seen.add(id);
+        const upload = await repositories.attachments?.findImportUpload(
+          projectId,
+          attachmentIdSchema.parse(id),
+        );
+        if (
+          !upload ||
+          upload.actorUserId !== actorUserId ||
+          Date.parse(upload.expiresAt) <= this.clock.now().getTime()
+        )
+          throw new ApplicationError("NOT_FOUND", "Import attachment is unavailable or expired.");
+        attachments.push({
+          attachmentId: upload.id,
+          filename: upload.originalFilename,
+          byteSize: upload.byteSize,
+          checksum: upload.checksum.value,
+        });
+      }
+    }
+    return attachments;
+  }
+
   private providerPreview(
     preview: ConversationImportPreviewRecord,
     projectName: string,
     duplicate: ConversationImportRecord | null,
-    target?: Conversation,
+    target: Conversation | undefined,
+    attachments: ProviderImportPreview["attachments"],
   ): ProviderImportPreview {
     const duplicateConversationId = duplicate?.importedConversations[0]?.conversationId;
     return {
+      attachments,
       id: preview.id,
       source: preview.source,
       targetProject: { id: preview.projectId, name: projectName },

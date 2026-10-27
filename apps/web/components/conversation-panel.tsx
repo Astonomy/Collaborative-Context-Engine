@@ -131,8 +131,7 @@ export function ConversationPanel(props: ConversationPanelProps): ReactElement {
   const pendingAgentRunId = props.agentResult?.run.id;
   const canPropose = props.role !== "viewer";
   const canCreateConversation = canPropose && !props.projectArchived;
-  const canManageSelected =
-    canPropose && !props.projectArchived && selected?.status === "active";
+  const canManageSelected = canPropose && !props.projectArchived && selected?.status === "active";
 
   return (
     <section className="conversation-layout" aria-labelledby="conversation-title">
@@ -182,7 +181,9 @@ export function ConversationPanel(props: ConversationPanelProps): ReactElement {
           </button>
           {canCreateConversation ? null : (
             <small>
-              {props.projectArchived ? "Archived projects are read-only." : "Viewer access is read-only."}
+              {props.projectArchived
+                ? "Archived projects are read-only."
+                : "Viewer access is read-only."}
             </small>
           )}
         </form>
@@ -357,9 +358,7 @@ export function ConversationPanel(props: ConversationPanelProps): ReactElement {
                       <button
                         type="button"
                         disabled={
-                          props.busy ||
-                          !canManageSelected ||
-                          approvalRationale.trim().length === 0
+                          props.busy || !canManageSelected || approvalRationale.trim().length === 0
                         }
                         onClick={() =>
                           pendingAgentRunId === undefined

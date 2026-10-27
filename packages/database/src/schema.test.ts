@@ -1,5 +1,6 @@
 import { getTableColumns } from "drizzle-orm";
 import { describe, expect, it } from "vitest";
+import { attachments, attachmentEvents } from "./attachment-schema";
 
 import {
   agentRuns,
@@ -26,6 +27,8 @@ import {
 describe("project-scoped PostgreSQL schema", () => {
   it("carries project_id on every project-scoped table", () => {
     const projectScopedTables = [
+      attachments,
+      attachmentEvents,
       projects,
       projectMembers,
       contextCommits,

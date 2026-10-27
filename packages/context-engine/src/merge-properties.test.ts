@@ -47,7 +47,9 @@ function proposedFact(key: string, value: string) {
   });
 }
 
-function proposedDelta(entries: readonly { readonly id: string; readonly key: string; readonly value: string }[]) {
+function proposedDelta(
+  entries: readonly { readonly id: string; readonly key: string; readonly value: string }[],
+) {
   return contextDeltaSchema.parse({
     id: deltaId,
     projectId,

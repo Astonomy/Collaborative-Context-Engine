@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.package.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"],
+  "references": [
+    {
+      "path": "../application"
+    },
+    {
+      "path": "../agents"
+    },
+    {
+      "path": "../database"
+    },
+    {
+      "path": "../model-provider"
+    },
+    {
+      "path": "../shared"
+    },
+    {
+      "path": "../storage"
+    }
+  ]
+}

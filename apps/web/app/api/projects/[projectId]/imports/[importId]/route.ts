@@ -1,23 +1,14 @@
-import { conversationImportPathSchema, conversationImportResponseSchema } from "@cce/api-contracts";
-import type { NextRequest } from "next/server";
-import {
-  apiRoute,
-  authenticateRequest,
-  jsonSuccess,
-  parsePath,
-} from "../../../../../../server/request";
+import { createHandlers } from "../../../../../../../api/handlers/projects/[projectId]/imports/[importId]/route";
 import { getWebRuntime } from "../../../../../../server/runtime";
+
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+const handlers = createHandlers(getWebRuntime);
+
 interface Context {
   readonly params: Promise<{ readonly projectId: string; readonly importId: string }>;
 }
-export function GET(request: NextRequest, context: Context): Promise<Response> {
-  return apiRoute(async () => {
-    const actor = await authenticateRequest(request);
-    const path = parsePath(await context.params, conversationImportPathSchema);
-    return jsonSuccess(
-      conversationImportResponseSchema,
-      await getWebRuntime().conversationImports.get(path.projectId, actor.id, path.importId),
-    );
-  });
+
+export async function GET(request: Request, context: Context): Promise<Response> {
+  return handlers.GET(request, { params: await context.params });
 }

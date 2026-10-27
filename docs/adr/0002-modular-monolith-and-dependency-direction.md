@@ -5,7 +5,8 @@
 
 ## Decision
 
-Build one deployable Next.js application with independently tested workspace packages:
+Build one deployable application with independently tested workspace packages. [ADR 0010](0010-default-vue-ui.md)
+updates the browser choice to Vue while retaining Next as the HTTP host:
 
 ```text
 apps/web -> application -> domain

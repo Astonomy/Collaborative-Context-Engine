@@ -37,6 +37,14 @@ const migrations: readonly MigrationDefinition[] = [
     name: "0004_remove_zip_conversation_import.sql",
     resource: new URL("../migrations/0004_remove_zip_conversation_import.sql", import.meta.url),
   },
+  {
+    name: "0005_attachments.sql",
+    resource: new URL("../migrations/0005_attachments.sql", import.meta.url),
+  },
+  {
+    name: "0006_import_attachment_uploads.sql",
+    resource: new URL("../migrations/0006_import_attachment_uploads.sql", import.meta.url),
+  },
 ];
 
 function migrationChecksum(contents: string): string {

@@ -34,4 +34,3 @@ export class Sha256ContentHasher implements ContentHasher {
     return createHash("sha256").update(value).digest("hex");
   }
 }
-

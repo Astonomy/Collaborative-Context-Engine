@@ -1,0 +1,29 @@
+{
+  "name": "@cce/vue",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run --config vitest.config.ts",
+    "test:coverage": "vitest run --config vitest.config.ts --coverage",
+    "test:e2e": "playwright test --config playwright.config.ts",
+    "test:media": "playwright test --config playwright.media.config.ts"
+  },
+  "dependencies": {
+    "@cce/api-contracts": "workspace:*",
+    "vue": "3.5.43",
+    "vue-router": "4.6.4",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "6.0.9",
+    "eslint-plugin-vue": "10.11.1",
+    "vite": "8.3.1",
+    "vue-tsc": "3.3.11"
+  }
+}

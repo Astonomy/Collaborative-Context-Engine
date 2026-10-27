@@ -1,43 +1,14 @@
-import {
-  contextSnapshotResponseSchema,
-  getContextQuerySchema,
-  projectPathParamsSchema,
-} from "@cce/api-contracts";
-import type { NextRequest } from "next/server";
-
-import {
-  apiRoute,
-  authenticateRequest,
-  jsonSuccess,
-  parsePath,
-  parseQuery,
-} from "../../../../../server/request";
+import { createHandlers } from "../../../../../../api/handlers/projects/[projectId]/context/route";
 import { getWebRuntime } from "../../../../../server/runtime";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+const handlers = createHandlers(getWebRuntime);
 
 interface RouteContext {
   readonly params: Promise<{ readonly projectId: string }>;
 }
 
-export function GET(request: NextRequest, context: RouteContext): Promise<Response> {
-  return apiRoute(async () => {
-    const actor = await authenticateRequest(request);
-    const path = parsePath(await context.params, projectPathParamsSchema);
-    const query = parseQuery(request, getContextQuerySchema);
-    const runtime = getWebRuntime();
-    const snapshot = await runtime.contexts.getHeadSnapshot({
-      projectId: path.projectId,
-      actorUserId: actor.id,
-    });
-    const items = snapshot.items.filter(
-      (item) =>
-        (query.kind === undefined || item.kind === query.kind) &&
-        (query.lifecycle === undefined || item.lifecycle === query.lifecycle),
-    );
-    return jsonSuccess(contextSnapshotResponseSchema, {
-      commitId: snapshot.commitId,
-      items,
-    });
-  });
+export async function GET(request: Request, context: RouteContext): Promise<Response> {
+  return handlers.GET(request, { params: await context.params });
 }

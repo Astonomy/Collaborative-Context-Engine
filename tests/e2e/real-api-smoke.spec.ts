@@ -1,6 +1,8 @@
 import { randomUUID } from "node:crypto";
 
 import {
+  agentRunListResponseSchema,
+  agentRunResponseSchema,
   contextDeltaResponseSchema,
   contextSnapshotResponseSchema,
   conversationResponseSchema,
@@ -48,7 +50,7 @@ function requiredEditorApiToken(): string {
 const editorEmail = "e2e-bob@example.test";
 const viewerEmail = "e2e-viewer@example.test";
 
-test("real Next routes persist an Owner-to-Editor canonical conflict flow", async ({
+test("real API routes persist an Owner-to-Editor canonical conflict flow", async ({
   request,
   baseURL,
 }) => {
@@ -387,13 +389,44 @@ test("real Next routes persist an Owner-to-Editor canonical conflict flow", asyn
     data: { apiToken: requiredApiToken() },
   });
   expect(ownerLogin.status()).toBe(200);
+  const agentPath = `/api/projects/${project.id}/agents/runs`;
+  const startedAgent = await request.post(agentPath, {
+    headers: { origin },
+    data: {
+      conversationId: conversationC.id,
+      throughMessageSequence: Math.max(...conversationCMessages.map((message) => message.sequence)),
+      objective: "Review the supplied conversation evidence without changing canonical context.",
+    },
+  });
+  expect(startedAgent.status()).toBe(201);
+  const agent = agentRunResponseSchema.parse((await startedAgent.json()) as unknown);
+  expect(agent.run.status).toBe("completed");
+  expect(agent.proposal?.changes).toEqual([]);
+  const persistedAgent = await request.get(`${agentPath}/${agent.run.id}`);
+  expect(persistedAgent.status()).toBe(200);
+  expect(agentRunResponseSchema.parse((await persistedAgent.json()) as unknown)).toEqual(agent);
+  const agentList = await request.get(agentPath);
+  expect(agentList.status()).toBe(200);
+  expect(agentRunListResponseSchema.parse((await agentList.json()) as unknown)).toContainEqual(
+    agent.run,
+  );
+  const cancelCompleted = await request.post(`${agentPath}/${agent.run.id}/cancel`, {
+    headers: { origin },
+    data: { rationale: "A completed run must remain terminal." },
+  });
+  expect(cancelCompleted.status()).toBe(409);
+  const contextAfterAgent = await request.get(`/api/projects/${project.id}/context`);
+  expect(contextAfterAgent.status()).toBe(200);
+  expect(
+    contextSnapshotResponseSchema.parse((await contextAfterAgent.json()) as unknown).items,
+  ).toEqual([expect.objectContaining({ key: "database.engine", value: "MySQL" })]);
   const readConversation = await request.get(
     `/api/projects/${project.id}/conversations/${conversationC.id}`,
   );
   expect(readConversation.status()).toBe(200);
-  expect(
-    conversationResponseSchema.parse((await readConversation.json()) as unknown),
-  ).toEqual(conversationC);
+  expect(conversationResponseSchema.parse((await readConversation.json()) as unknown)).toEqual(
+    conversationC,
+  );
 
   const renameConversation = await request.patch(
     `/api/projects/${project.id}/conversations/${conversationC.id}`,
@@ -403,9 +436,9 @@ test("real Next routes persist an Owner-to-Editor canonical conflict flow", asyn
     },
   );
   expect(renameConversation.status()).toBe(200);
-  expect(
-    conversationResponseSchema.parse((await renameConversation.json()) as unknown).title,
-  ).toBe("Archived canonical-context follow-up");
+  expect(conversationResponseSchema.parse((await renameConversation.json()) as unknown).title).toBe(
+    "Archived canonical-context follow-up",
+  );
   const archiveConversation = await request.patch(
     `/api/projects/${project.id}/conversations/${conversationC.id}`,
     { headers: { origin }, data: { archive: true } },

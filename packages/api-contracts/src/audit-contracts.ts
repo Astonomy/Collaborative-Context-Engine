@@ -9,6 +9,4 @@ export const projectAuditHistoryResponseSchema = z
   })
   .strict();
 
-export type ProjectAuditHistoryResponse = z.infer<
-  typeof projectAuditHistoryResponseSchema
->;
+export type ProjectAuditHistoryResponse = z.infer<typeof projectAuditHistoryResponseSchema>;

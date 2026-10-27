@@ -1,31 +1,14 @@
-import {
-  createProjectBodySchema,
-  projectListResponseSchema,
-  projectResponseSchema,
-} from "@cce/api-contracts";
-import type { NextRequest } from "next/server";
-
-import { apiRoute, authenticateRequest, jsonSuccess, parseBody } from "../../../server/request";
+import { createHandlers } from "../../../../api/handlers/projects/route";
 import { getWebRuntime } from "../../../server/runtime";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+const handlers = createHandlers(getWebRuntime);
 
-export function GET(request: NextRequest): Promise<Response> {
-  return apiRoute(async () => {
-    const actor = await authenticateRequest(request);
-    const projects = await getWebRuntime().projects.list(actor.id);
-    return jsonSuccess(projectListResponseSchema, projects);
-  });
+export function GET(request: Request): Promise<Response> {
+  return handlers.GET(request);
 }
 
-export function POST(request: NextRequest): Promise<Response> {
-  return apiRoute(async () => {
-    const actor = await authenticateRequest(request);
-    const body = await parseBody(request, createProjectBodySchema);
-    const project = await getWebRuntime().projects.create({
-      name: body.name,
-      actorUserId: actor.id,
-    });
-    return jsonSuccess(projectResponseSchema, project, 201);
-  });
+export function POST(request: Request): Promise<Response> {
+  return handlers.POST(request);
 }

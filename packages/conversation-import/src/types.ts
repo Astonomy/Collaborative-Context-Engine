@@ -36,6 +36,7 @@ export const externalMessageNodeSchema = z
   .object({
     externalMessageId: z.string().min(1).max(500).optional(),
     parentExternalMessageId: z.string().min(1).max(500).optional(),
+    attachmentIds: z.array(z.uuid()).max(100).optional(),
     role: z.enum(["user", "assistant", "system", "tool", "unknown"]),
     content: z.array(externalContentBlockSchema),
     createdAt: z.string().datetime().optional(),

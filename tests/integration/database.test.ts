@@ -1,9 +1,16 @@
 import { createHash, randomUUID } from "node:crypto";
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { AttachmentService } from "@cce/application";
+import { LocalAttachmentStorage } from "@cce/storage";
 
 import { PostgreSqlContainer, type StartedPostgreSqlContainer } from "@testcontainers/postgresql";
 import { ConversationImportService, ProjectService } from "@cce/application";
 import {
   agentRunSchema,
+  attachmentSchema,
+  attachmentEventSchema,
   auditEventSchema,
   branchIdSchema,
   branchSchema,
@@ -322,12 +329,19 @@ async function createSemanticFixture(label: string): Promise<SemanticFixture> {
 }
 
 beforeAll(async () => {
-  container = await new PostgreSqlContainer("postgres:18.6-alpine3.24")
-    .withDatabase("cce_integration")
-    .withUsername("cce")
-    .withPassword("cce-integration")
-    .start();
-  pool = createPostgresPool(container.getConnectionUri(), { max: 8 });
+  const external = process.env["CCE_TEST_DATABASE_URL"];
+  if (external && !/^\/cce_test_[a-f0-9]{32}$/.test(new URL(external).pathname)) {
+    throw new Error("Integration database must be an isolated cce_test_<uuid> database.");
+  }
+  if (!external)
+    container = await new PostgreSqlContainer("postgres:18.6-alpine3.24")
+      .withDatabase("cce_integration")
+      .withUsername("cce")
+      .withPassword("cce-integration")
+      .start();
+  const databaseUrl = external ?? container?.getConnectionUri();
+  if (!databaseUrl) throw new Error("No test PostgreSQL available");
+  pool = createPostgresPool(databaseUrl, { max: 8 });
   unitOfWork = new PostgresUnitOfWork(pool);
   initialMigrations = await runMigrations(pool);
 }, 120_000);
@@ -341,13 +355,176 @@ afterAll(async () => {
   }
 });
 
-describe("PostgreSQL 18 persistence", () => {
+describe("PostgreSQL persistence", () => {
+  it("replaces a terminated idle PostgreSQL connection without losing persisted data", async () => {
+    const databaseUrl = process.env["CCE_TEST_DATABASE_URL"] ?? container?.getConnectionUri();
+    if (!databaseUrl) throw new Error("No test PostgreSQL available");
+    const { project } = await createProjectFixture("Idle connection recovery");
+    const recovering = createPostgresPool(databaseUrl, { max: 1 });
+    try {
+      expect(recovering.listenerCount("error")).toBeGreaterThan(0);
+      const first = await recovering.query<{ pid: number }>("SELECT pg_backend_pid() AS pid");
+      const pid = first.rows[0]?.pid;
+      if (!pid) throw new Error("Missing PostgreSQL backend PID");
+      // Only this test's own idle connection is terminated; no database or data is removed.
+      await databasePool().query("SELECT pg_terminate_backend($1)", [pid]);
+      await expect.poll(() => recovering.totalCount).toBe(0);
+      const next = await recovering.query<{ pid: number; project_id: string }>(
+        "SELECT pg_backend_pid() AS pid, project_id FROM projects WHERE project_id = $1",
+        [project.id],
+      );
+      expect(next.rows[0]?.pid).not.toBe(pid);
+      expect(next.rows[0]?.project_id).toBe(project.id);
+    } finally {
+      await recovering.end();
+    }
+  });
+
+  it("enforces both import upload foreign keys and upload identity on PostgreSQL", async () => {
+    const { project, user } = await createProjectFixture("Import upload FK contract");
+    const uploadId = randomUUID();
+    const insert = (projectId: string, userId: string, sourceUploadId = randomUUID()) =>
+      databasePool().query(
+        `INSERT INTO import_attachment_uploads
+         (project_id, id, actor_user_id, upload_id, detail) VALUES ($1, $2, $3, $4, '{}')`,
+        [projectId, randomUUID(), userId, sourceUploadId],
+      );
+    await expect(insert(project.id, user.id, uploadId)).resolves.toMatchObject({ rowCount: 1 });
+    await expect(insert(randomUUID(), user.id)).rejects.toMatchObject({
+      code: "23503",
+      constraint: "import_attachment_uploads_project_id_fkey",
+    });
+    await expect(insert(project.id, randomUUID())).rejects.toMatchObject({
+      code: "23503",
+      constraint: "import_attachment_uploads_actor_user_id_fkey",
+    });
+    await expect(insert(project.id, user.id, uploadId)).rejects.toMatchObject({ code: "23505" });
+  });
+
+  it("creates compatible foreign keys and indexes for attachment provenance", async () => {
+    const constraints = await databasePool().query<{ name: string; definition: string }>(`
+      SELECT conname AS name, pg_get_constraintdef(oid) AS definition
+      FROM pg_constraint WHERE conrelid IN
+        ('attachments'::regclass, 'attachment_events'::regclass,
+         'import_attachment_uploads'::regclass) AND contype = 'f'
+      ORDER BY conname
+    `);
+    expect(constraints.rows).toEqual([
+      {
+        name: "attachment_events_project_id_attachment_id_fkey",
+        definition:
+          "FOREIGN KEY (project_id, attachment_id) REFERENCES attachments(project_id, id) ON DELETE RESTRICT",
+      },
+      {
+        name: "attachments_message_fk",
+        definition:
+          "FOREIGN KEY (project_id, conversation_id, message_id) REFERENCES messages(project_id, conversation_id, id) ON DELETE RESTRICT DEFERRABLE INITIALLY DEFERRED",
+      },
+      {
+        name: "import_attachment_uploads_actor_user_id_fkey",
+        definition: "FOREIGN KEY (actor_user_id) REFERENCES users(id) ON DELETE RESTRICT",
+      },
+      {
+        name: "import_attachment_uploads_project_id_fkey",
+        definition: "FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE RESTRICT",
+      },
+    ]);
+    const incompatible = await databasePool().query(`
+      SELECT c.conname FROM pg_constraint c
+      CROSS JOIN LATERAL unnest(c.conkey, c.confkey) AS key(source, target)
+      JOIN pg_attribute s ON s.attrelid = c.conrelid AND s.attnum = key.source
+      JOIN pg_attribute t ON t.attrelid = c.confrelid AND t.attnum = key.target
+      WHERE c.contype = 'f' AND c.connamespace = 'public'::regnamespace
+        AND s.atttypid <> t.atttypid
+    `);
+    expect(incompatible.rows).toEqual([]);
+    const indexes = await databasePool().query<{ indexdef: string }>(`
+      SELECT indexdef FROM pg_indexes WHERE schemaname = 'public'
+        AND tablename IN ('attachments', 'import_attachment_uploads')
+    `);
+    expect(indexes.rows.map(({ indexdef }) => indexdef)).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("ON public.attachments USING btree (project_id, conversation_id)"),
+        expect.stringMatching(
+          /^CREATE UNIQUE INDEX .* ON public.attachments USING btree \(project_id, message_id, ordinal\)$/,
+        ),
+        expect.stringMatching(
+          /^CREATE UNIQUE INDEX .* ON public.attachments USING btree \(storage_provider, storage_key, storage_version\)$/,
+        ),
+        expect.stringMatching(
+          /^CREATE UNIQUE INDEX .* ON public.import_attachment_uploads USING btree \(project_id, actor_user_id, upload_id\)$/,
+        ),
+      ]),
+    );
+  });
+
+  it("uploads binary evidence with its new message atomically and streams the stored range", async () => {
+    const fixture = await createProjectFixture("S2 binary lifecycle");
+    const { conversation, message } = await createConversationFixture(fixture);
+    const root = await mkdtemp(join(tmpdir(), "cce-pg-attachment-"));
+    try {
+      const service = new AttachmentService(
+        databaseUnitOfWork(),
+        new LocalAttachmentStorage(root),
+        { next: randomUUID },
+        { now: () => new Date() },
+      );
+      const input = {
+        projectId: fixture.project.id,
+        conversationId: conversation.id,
+        actorUserId: fixture.user.id,
+        clientMessageId: randomUUID(),
+        filename: "data.bin",
+        declaredMimeType: "application/octet-stream",
+      };
+      async function* source() {
+        yield new Uint8Array([1, 2, 3, 4]);
+      }
+      const attachment = await service.upload(input, source());
+      expect(attachment.messageId).not.toBe(message.id);
+      expect(await service.upload(input, source())).toEqual(attachment);
+      expect(
+        await service.list({
+          projectId: input.projectId,
+          conversationId: input.conversationId,
+          actorUserId: input.actorUserId,
+        }),
+      ).toEqual([attachment]);
+      const download = await service.download({
+        projectId: input.projectId,
+        attachmentId: attachment.id,
+        actorUserId: input.actorUserId,
+        range: "bytes=1-2",
+      });
+      const received: number[] = [];
+      for await (const chunk of download.bytes) received.push(...chunk);
+      expect(received).toEqual([2, 3]);
+      await databaseUnitOfWork().runWithAttachments(async (repositories) => {
+        expect(await repositories.attachments.find(input.projectId, attachment.id)).toEqual(
+          attachment,
+        );
+        expect(
+          await repositories.conversations.listMessages(input.projectId, conversation.id),
+        ).toHaveLength(2);
+        expect((await repositories.projects.findById(input.projectId))?.headCommitId).toBe(
+          fixture.genesis.id,
+        );
+        expect(
+          await repositories.attachments.listEvents(input.projectId, attachment.id),
+        ).toMatchObject([{ availability: "available" }]);
+      });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
   it("migrates an empty PostgreSQL 18.6 database and records an immutable checksum", async () => {
     expect(initialMigrations).toEqual([
       { name: "0001_initial.sql", status: "applied" },
       { name: "0002_conversation_imports.sql", status: "applied" },
       { name: "0003_provider_conversation_previews.sql", status: "applied" },
       { name: "0004_remove_zip_conversation_import.sql", status: "applied" },
+      { name: "0005_attachments.sql", status: "applied" },
+      { name: "0006_import_attachment_uploads.sql", status: "applied" },
     ]);
     const version = await databasePool().query<{ readonly server_version: string }>(
       "SHOW server_version",
@@ -369,6 +546,8 @@ describe("PostgreSQL 18 persistence", () => {
         "0002_conversation_imports.sql",
         "0003_provider_conversation_previews.sql",
         "0004_remove_zip_conversation_import.sql",
+        "0005_attachments.sql",
+        "0006_import_attachment_uploads.sql",
       ].map((name) => ({ name, status: "already_applied" })),
     );
   });
@@ -1095,4 +1274,148 @@ describe("PostgreSQL 18 persistence", () => {
       ]),
     ).rejects.toMatchObject({ code: "55000" });
   });
+});
+
+it("persists immutable attachments with new messages, scoped reads and append-only lifecycle", async () => {
+  const fixture = await createProjectFixture("Attachments");
+  const other = await createProjectFixture("Other attachments");
+  const { conversation, message } = await createConversationFixture(fixture);
+  const newMessage = messageSchema.parse({
+    ...message,
+    id: randomUUID(),
+    clientMessageId: randomUUID(),
+    sequence: 2,
+  });
+  const attachment = attachmentSchema.parse({
+    id: randomUUID(),
+    projectId: fixture.project.id,
+    conversationId: conversation.id,
+    messageId: newMessage.id,
+    ordinal: 0,
+    originalFilename: "part.glb",
+    mediaKind: "model",
+    declaredMimeType: "model/gltf-binary",
+    detectedMimeType: "application/octet-stream",
+    byteSize: 12,
+    checksum: { algorithm: "sha256", value: "a".repeat(64) },
+    storage: { provider: "test", key: `objects/${randomUUID()}`, version: "1" },
+    createdAt: timestamp(),
+    createdBy: { type: "human", userId: fixture.user.id },
+    metadata: { format: "glb" },
+  });
+  const event = attachmentEventSchema.parse({
+    id: randomUUID(),
+    projectId: attachment.projectId,
+    attachmentId: attachment.id,
+    sequence: 1,
+    processingStatus: "pending",
+    availability: "quarantined",
+    reason: "Awaiting scan",
+    occurredAt: timestamp(),
+    actor: attachment.createdBy,
+  });
+  await databaseUnitOfWork().runWithAttachments(async (repositories) => {
+    await repositories.attachments.insert(attachment);
+    await repositories.attachments.appendEvent(event);
+    await repositories.conversations.insertMessage(newMessage);
+  });
+  await databaseUnitOfWork().runWithAttachments(async ({ attachments }) => {
+    expect(await attachments.find(attachment.projectId, attachment.id)).toEqual(attachment);
+    expect(await attachments.find(other.project.id, attachment.id)).toBeNull();
+    expect(await attachments.listForMessage(other.project.id, newMessage.id)).toEqual([]);
+    expect(await attachments.listForMessage(attachment.projectId, newMessage.id)).toEqual([
+      attachment,
+    ]);
+    expect(await attachments.listEvents(attachment.projectId, attachment.id)).toEqual([event]);
+    expect(await attachments.listEvents(other.project.id, attachment.id)).toEqual([]);
+  });
+  for (const table of ["attachments", "attachment_events"]) {
+    await expect(
+      databasePool().query(`DELETE FROM ${table} WHERE project_id = $1`, [attachment.projectId]),
+    ).rejects.toMatchObject({ code: "55000" });
+    await expect(
+      databasePool().query(`UPDATE ${table} SET id = id WHERE project_id = $1`, [
+        attachment.projectId,
+      ]),
+    ).rejects.toMatchObject({ code: "55000" });
+  }
+  await expect(
+    databaseUnitOfWork().runWithAttachments(({ attachments }) =>
+      attachments.insert({
+        ...attachment,
+        id: attachmentSchema.shape.id.parse(randomUUID()),
+        ordinal: 1,
+      }),
+    ),
+  ).rejects.toMatchObject({ code: "WRITE_CONFLICT" });
+  await expect(
+    databaseUnitOfWork().runWithAttachments(({ attachments }) =>
+      attachments.appendEvent({ ...event, id: attachmentEventSchema.shape.id.parse(randomUUID()) }),
+    ),
+  ).rejects.toMatchObject({ code: "WRITE_CONFLICT" });
+  const orphan = attachmentSchema.parse({
+    ...attachment,
+    id: randomUUID(),
+    messageId: randomUUID(),
+    storage: { ...attachment.storage, key: `objects/${randomUUID()}` },
+  });
+  await expect(
+    databaseUnitOfWork().runWithAttachments(({ attachments }) => attachments.insert(orphan)),
+  ).rejects.toMatchObject({ code: "WRITE_CONFLICT" });
+  expect(
+    await databaseUnitOfWork().runWithAttachments(({ attachments }) =>
+      attachments.find(orphan.projectId, orphan.id),
+    ),
+  ).toBeNull();
+  // A checksum is evidence, not identity: equal bytes may have distinct authorized bindings.
+  const nextMessage = messageSchema.parse({
+    ...newMessage,
+    id: randomUUID(),
+    clientMessageId: randomUUID(),
+    sequence: 3,
+  });
+  const nextAttachment = attachmentSchema.parse({ ...orphan, messageId: nextMessage.id });
+  await databaseUnitOfWork().runWithAttachments(async (repositories) => {
+    await repositories.attachments.insert(nextAttachment);
+    await repositories.conversations.insertMessage(nextMessage);
+  });
+  const badMessage = messageSchema.parse({
+    ...nextMessage,
+    id: randomUUID(),
+    clientMessageId: randomUUID(),
+    sequence: 4,
+  });
+  await expect(
+    databaseUnitOfWork().runWithAttachments(async (repositories) => {
+      await repositories.attachments.insert({
+        ...nextAttachment,
+        id: attachmentSchema.shape.id.parse(randomUUID()),
+        messageId: badMessage.id,
+      });
+      await repositories.conversations.insertMessage(badMessage);
+    }),
+  ).rejects.toMatchObject({ code: "WRITE_CONFLICT" });
+  const wrongConversation = await createConversationFixture(fixture);
+  await expect(
+    databaseUnitOfWork().runWithAttachments(async (repositories) => {
+      await repositories.attachments.insert({
+        ...orphan,
+        messageId: badMessage.id,
+        conversationId: wrongConversation.conversation.id,
+        storage: { ...orphan.storage, key: `objects/${randomUUID()}` },
+      });
+      await repositories.conversations.insertMessage(badMessage);
+    }),
+  ).rejects.toMatchObject({ code: "WRITE_CONFLICT" });
+  await expect(
+    databaseUnitOfWork().runWithAttachments(async (repositories) => {
+      await repositories.attachments.insert({
+        ...orphan,
+        projectId: other.project.id,
+        messageId: badMessage.id,
+        storage: { ...orphan.storage, key: `objects/${randomUUID()}` },
+      });
+      await repositories.conversations.insertMessage(badMessage);
+    }),
+  ).rejects.toMatchObject({ code: "WRITE_CONFLICT" });
 });

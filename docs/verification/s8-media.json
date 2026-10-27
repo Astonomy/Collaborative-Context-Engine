@@ -1,0 +1,66 @@
+{
+  "production": true,
+  "timings": {
+    "imageReadyMs": 65.60349999999994,
+    "videoReadyMs": 162.76679999999988,
+    "modelReadyMs": 192.34280000000012
+  },
+  "beforeHeap": {
+    "usedSize": 5889736,
+    "totalSize": 7192576,
+    "embedderHeapUsedSize": 1966520,
+    "backingStorageSize": 230062
+  },
+  "afterHeap": {
+    "usedSize": 5927068,
+    "totalSize": 6406144,
+    "embedderHeapUsedSize": 1725136,
+    "backingStorageSize": 230590
+  },
+  "beforeResources": {
+    "urlsCreated": 4,
+    "urlsRevoked": 2,
+    "workersCreated": 4,
+    "workersTerminated": 4
+  },
+  "afterResources": {
+    "urlsCreated": 4,
+    "urlsRevoked": 4,
+    "workersCreated": 4,
+    "workersTerminated": 4
+  },
+  "contentRequests": [
+    {
+      "filename": "pixel.png"
+    },
+    {
+      "filename": "pixel.png"
+    },
+    {
+      "filename": "pixel.png"
+    },
+    {
+      "filename": "clip.mp4",
+      "range": "bytes=0-"
+    },
+    {
+      "filename": "triangle.glb"
+    },
+    {
+      "filename": "triangle.glb"
+    },
+    {
+      "filename": "triangle.glb"
+    },
+    {
+      "filename": "triangle.glb"
+    }
+  ],
+  "loadedModels": [
+    "http://127.0.0.1:5180/vue/assets/ModelPreview-D0YSt4V8.js",
+    "http://127.0.0.1:5180/vue/assets/model-worker-e0AWQU8q.js",
+    "http://127.0.0.1:5180/vue/assets/model-worker-e0AWQU8q.js",
+    "http://127.0.0.1:5180/vue/assets/model-worker-e0AWQU8q.js",
+    "http://127.0.0.1:5180/vue/assets/model-worker-e0AWQU8q.js"
+  ]
+}

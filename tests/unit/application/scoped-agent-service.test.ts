@@ -192,9 +192,7 @@ describe("ScopedAgentService", () => {
       }),
     ).resolves.toEqual(completed);
     expect(fixture.unitOfWork.view().deltas).toEqual([completed.proposal]);
-    expect(fixture.unitOfWork.view().auditEvents.at(-1)?.action).toBe(
-      "agent_run.reconciled",
-    );
+    expect(fixture.unitOfWork.view().auditEvents.at(-1)?.action).toBe("agent_run.reconciled");
   });
 
   it("does not let a Viewer invoke AgentRun reconciliation", async () => {
@@ -267,9 +265,7 @@ describe("ScopedAgentService", () => {
 
     expect(cancelled.run.status).toBe("cancelled");
     expect(fixture.unitOfWork.view().deltas).toEqual([]);
-    expect(fixture.unitOfWork.view().auditEvents.at(-1)?.action).toBe(
-      "agent_run.cancelled",
-    );
+    expect(fixture.unitOfWork.view().auditEvents.at(-1)?.action).toBe("agent_run.cancelled");
   });
 
   it("rejects a viewer before invoking either manager or worker", async () => {
@@ -349,10 +345,9 @@ describe("ScopedAgentService", () => {
       supersedesVersionId: null,
       createdAt: message.createdAt,
     });
-    fixture.unitOfWork.view().projection.set(
-      `${fixture.project.id}:${current.logicalItemId}`,
-      current,
-    );
+    fixture.unitOfWork
+      .view()
+      .projection.set(`${fixture.project.id}:${current.logicalItemId}`, current);
     const provider = new ScriptedModelProvider();
     provider.enqueueResponse(
       response({ specialty: "extractor", reason: "Review the current decision" }),

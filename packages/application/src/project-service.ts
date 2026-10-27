@@ -107,7 +107,10 @@ export class ProjectService {
     readonly archive?: true;
   }): Promise<Project> {
     if (input.name === undefined && input.archive !== true) {
-      throw new ApplicationError("VALIDATION", "A project update requires a name or archive action.");
+      throw new ApplicationError(
+        "VALIDATION",
+        "A project update requires a name or archive action.",
+      );
     }
     const now = this.clock.now().toISOString();
     const eventId = auditEventIdSchema.parse(this.ids.next());

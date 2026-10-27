@@ -1,21 +1,9 @@
-import {
-  appendMessageBodySchema,
-  conversationPathParamsSchema,
-  messageListResponseSchema,
-  messageResponseSchema,
-} from "@cce/api-contracts";
-import type { NextRequest } from "next/server";
-
-import {
-  apiRoute,
-  authenticateRequest,
-  jsonSuccess,
-  parseBody,
-  parsePath,
-} from "../../../../../../../server/request";
+import { createHandlers } from "../../../../../../../../api/handlers/projects/[projectId]/conversations/[conversationId]/messages/route";
 import { getWebRuntime } from "../../../../../../../server/runtime";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+const handlers = createHandlers(getWebRuntime);
 
 interface RouteContext {
   readonly params: Promise<{
@@ -24,30 +12,10 @@ interface RouteContext {
   }>;
 }
 
-export function GET(request: NextRequest, context: RouteContext): Promise<Response> {
-  return apiRoute(async () => {
-    const actor = await authenticateRequest(request);
-    const path = parsePath(await context.params, conversationPathParamsSchema);
-    const messages = await getWebRuntime().conversations.listMessages({
-      ...path,
-      actorUserId: actor.id,
-    });
-    return jsonSuccess(messageListResponseSchema, messages);
-  });
+export async function GET(request: Request, context: RouteContext): Promise<Response> {
+  return handlers.GET(request, { params: await context.params });
 }
 
-export function POST(request: NextRequest, context: RouteContext): Promise<Response> {
-  return apiRoute(async () => {
-    const actor = await authenticateRequest(request);
-    const [path, body] = await Promise.all([
-      context.params.then((params) => parsePath(params, conversationPathParamsSchema)),
-      parseBody(request, appendMessageBodySchema),
-    ]);
-    const message = await getWebRuntime().conversations.appendUserMessage({
-      ...path,
-      actorUserId: actor.id,
-      ...body,
-    });
-    return jsonSuccess(messageResponseSchema, message, 201);
-  });
+export async function POST(request: Request, context: RouteContext): Promise<Response> {
+  return handlers.POST(request, { params: await context.params });
 }

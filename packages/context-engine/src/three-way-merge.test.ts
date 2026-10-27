@@ -334,9 +334,9 @@ describe("deterministic semantic three-way merge", () => {
       provenance: proposal().provenance,
     });
     const base = snapshot(ids.baseCommit, [before]);
-    expect(createThreeWayMergePlan(delta([deprecate]), base, base).cleanChanges[0]?.classification).toBe(
-      "C4",
-    );
+    expect(
+      createThreeWayMergePlan(delta([deprecate]), base, base).cleanChanges[0]?.classification,
+    ).toBe("C4");
 
     const inactive = item({ lifecycle: "deprecated" });
     const repeated = createThreeWayMergePlan(
@@ -347,7 +347,11 @@ describe("deterministic semantic three-way merge", () => {
     expect(repeated.duplicates).toHaveLength(1);
     expect(repeated.warnings[0]?.code).toBe("TARGET_ALREADY_INACTIVE");
 
-    const moved = item({ id: ids.currentVersion, commitId: ids.headCommit, value: "PostgreSQL 18" });
+    const moved = item({
+      id: ids.currentVersion,
+      commitId: ids.headCommit,
+      value: "PostgreSQL 18",
+    });
     const stale = createThreeWayMergePlan(
       delta([deprecate]),
       base,

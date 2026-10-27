@@ -76,10 +76,7 @@ export class ConversationService {
     });
   }
 
-  public async list(
-    projectId: ProjectId,
-    actorUserId: UserId,
-  ): Promise<readonly Conversation[]> {
+  public async list(projectId: ProjectId, actorUserId: UserId): Promise<readonly Conversation[]> {
     return this.unitOfWork.run(async (repositories) => {
       const access = await repositories.projects.findAccess(projectId, actorUserId);
       authorizeProjectMember(access?.member ?? null, actorUserId, "project:read");

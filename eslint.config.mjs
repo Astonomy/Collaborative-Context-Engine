@@ -3,6 +3,7 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTypeScript from "eslint-config-next/typescript";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+import { vueConfig } from "./apps/vue/eslint.vue.mjs";
 
 export default tseslint.config(
   {
@@ -10,6 +11,7 @@ export default tseslint.config(
       "**/.next/**",
       "**/coverage/**",
       "**/dist/**",
+      "apps/web/public/vue/**",
       "**/node_modules/**",
       "**/playwright-report/**",
       "**/test-results/**",
@@ -18,6 +20,31 @@ export default tseslint.config(
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
+  ...vueConfig,
+  {
+    files: ["apps/vue/src/**/*.{ts,vue}"],
+    languageOptions: { globals: { ...globals.browser } },
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            "node:*",
+            "@cce/application",
+            "@cce/database*",
+            "@cce/storage*",
+            "@cce/model-provider",
+            "@cce/mcp-server",
+            "next*",
+            "react*",
+            "**/apps/web/**",
+            "**/apps/api/**",
+          ],
+        },
+      ],
+      "no-restricted-globals": ["error", "process", "Buffer", "require"],
+    },
+  },
   {
     ...tseslint.configs.disableTypeChecked,
     files: ["**/*.{js,cjs,mjs}"],
@@ -70,10 +97,41 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    files: ["packages/server-runtime/**/*.ts"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            "next",
+            "next/*",
+            "vue",
+            "vue/*",
+            "react",
+            "react/*",
+            "**/apps/**",
+            "@cce/api-contracts",
+            "@cce/mcp-server",
+          ],
+        },
+      ],
+      "no-restricted-globals": ["error", "window", "document", "localStorage", "navigator"],
+    },
+  },
   ...nextVitals.map((config) => ({
     ...config,
     files: ["apps/web/**/*.{ts,tsx}"],
   })),
+  {
+    files: ["apps/api/**/*.ts", "packages/application/**/*.ts"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        { patterns: ["next", "next/*", "react", "react/*", "**/apps/web/**"] },
+      ],
+    },
+  },
   ...nextTypeScript.map((config) => ({
     ...config,
     files: ["apps/web/**/*.{ts,tsx}"],

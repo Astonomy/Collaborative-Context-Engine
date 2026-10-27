@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  contextValueSchema,
-  maximumContextValueBytes,
-  maximumContextValueDepth,
-} from "./json";
+import { contextValueSchema, maximumContextValueBytes, maximumContextValueDepth } from "./json";
 
 describe("bounded Context JSON", () => {
   it("accepts ordinary JSON values", () => {
@@ -15,9 +11,7 @@ describe("bounded Context JSON", () => {
   });
 
   it("rejects excessive serialized size and depth before recursive parsing", () => {
-    expect(contextValueSchema.safeParse("x".repeat(maximumContextValueBytes)).success).toBe(
-      false,
-    );
+    expect(contextValueSchema.safeParse("x".repeat(maximumContextValueBytes)).success).toBe(false);
     let nested: unknown = "leaf";
     for (let index = 0; index <= maximumContextValueDepth; index += 1) {
       nested = { child: nested };

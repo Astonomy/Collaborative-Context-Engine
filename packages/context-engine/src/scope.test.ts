@@ -7,9 +7,9 @@ describe("structured Context scope", () => {
     expect(scopeIdentity({ environment: "production", tags: ["b", "a"] })).toBe(
       scopeIdentity({ tags: ["a", "b"], environment: "production" }),
     );
-    expect(
-      scopeIdentity({ effectiveFrom: "2026-01-01T10:00:00+10:00", tags: [] }),
-    ).toBe(scopeIdentity({ effectiveFrom: "2026-01-01T00:00:00Z", tags: [] }));
+    expect(scopeIdentity({ effectiveFrom: "2026-01-01T10:00:00+10:00", tags: [] })).toBe(
+      scopeIdentity({ effectiveFrom: "2026-01-01T00:00:00Z", tags: [] }),
+    );
   });
 
   it("detects distinct dimensions and non-overlapping effective periods", () => {

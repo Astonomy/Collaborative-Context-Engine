@@ -1,0 +1,5865 @@
+{
+  "scope": "Entire workspace source/configuration including hidden tracked configuration; excludes dependencies, generated outputs, real env secrets and binary files.",
+  "categoryNote": "A/B/C/D classify Next-related hits. Legitimate standalone /api and /mcp strings have an explicit allowed disposition: they are neither legacy Next code nor forbidden dependencies.",
+  "counts": {
+    "A": 148,
+    "B": 388,
+    "C": 193,
+    "D": 0,
+    "allowed-standalone": 107
+  },
+  "hits": [
+    {
+      "file": "AGENTS.md",
+      "line": 17,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/api/handlers/http-contract.test.ts",
+      "line": 36,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/handlers/http-contract.test.ts",
+      "line": 37,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/handlers/http-contract.test.ts",
+      "line": 40,
+      "terms": ["next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/handlers/http-contract.test.ts",
+      "line": 69,
+      "terms": ["/api\""],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/handlers/http-contract.test.ts",
+      "line": 371,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/handlers/mcp/route.ts",
+      "line": 1,
+      "terms": ["/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/http-server.test.ts",
+      "line": 5,
+      "terms": ["next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/http-server.test.ts",
+      "line": 28,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/http-server.test.ts",
+      "line": 37,
+      "terms": ["/api\""],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/http-server.test.ts",
+      "line": 69,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/http-server.test.ts",
+      "line": 85,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/http-server.test.ts",
+      "line": 120,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/http-server.ts",
+      "line": 161,
+      "terms": ["/api\""],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/main.ts",
+      "line": 11,
+      "terms": ["/api\""],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/package.json",
+      "line": 2,
+      "terms": ["/api\""],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/package.json",
+      "line": 10,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/package.json",
+      "line": 18,
+      "terms": ["/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 3,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 7,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 11,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 15,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 19,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 23,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 27,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 31,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 35,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 39,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 43,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 47,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 51,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 55,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 59,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 63,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 67,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 71,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 75,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 79,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 83,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 87,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 91,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 95,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 99,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 103,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 107,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 111,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 115,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 119,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 123,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 127,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 131,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 135,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 139,
+      "terms": ["/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/route-inventory.json",
+      "line": 143,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 2,
+      "terms": ["/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 42,
+      "terms": ["/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 44,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 52,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 54,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 61,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 69,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 82,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 91,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 100,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 113,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 122,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 135,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 148,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 161,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 172,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 181,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 190,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 207,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 216,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 225,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 234,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 243,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 252,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 263,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 272,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 283,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 294,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 317,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 328,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 339,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 353,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 376,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 390,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 399,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 408,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/router.ts",
+      "line": 417,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/api/server/attachment-routes.test.ts",
+      "line": 18,
+      "terms": ["next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/server/request.test.ts",
+      "line": 6,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/server/request.test.ts",
+      "line": 17,
+      "terms": ["localhost:3000"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/server/request.test.ts",
+      "line": 19,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/server/request.test.ts",
+      "line": 21,
+      "terms": ["localhost:3000"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/server/request.test.ts",
+      "line": 33,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/server/runtime.test.ts",
+      "line": 34,
+      "terms": ["/api\""],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/api/server/runtime.test.ts",
+      "line": 35,
+      "terms": ["apps/web"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/ATTACHMENTS.md",
+      "line": 11,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/ATTACHMENTS.md",
+      "line": 69,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/build/api-boundary.test.ts",
+      "line": 12,
+      "terms": ["localhost:3000", "NEXT_PUBLIC_"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/build/browser-boundary.test.ts",
+      "line": 7,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/README.md",
+      "line": 32,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/README.md",
+      "line": 89,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/README.md",
+      "line": 91,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/README.md",
+      "line": 93,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/README.md",
+      "line": 111,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/README.md",
+      "line": 119,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/README.md",
+      "line": 120,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/vue/src/api/projects.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/attachments/presentation.ts",
+      "line": 94,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/attachments/read-content.test.ts",
+      "line": 9,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/attachments/read-content.test.ts",
+      "line": 12,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/attachments/read-content.test.ts",
+      "line": 32,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/attachments/read-content.test.ts",
+      "line": 37,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/attachments/upload.test.ts",
+      "line": 39,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/attachments/upload.test.ts",
+      "line": 51,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/attachments/upload.test.ts",
+      "line": 81,
+      "terms": ["/api\""],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/attachments/upload.ts",
+      "line": 38,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/components/MergeReview.vue",
+      "line": 20,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/components/MergeReview.vue",
+      "line": 42,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/components/MergeReview.vue",
+      "line": 91,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 13,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 17,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 19,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 24,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 26,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 27,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 28,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 45,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 56,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 60,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 66,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 77,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 80,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 91,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 95,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 96,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 104,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 105,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 117,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.test.ts",
+      "line": 121,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/api-client.ts",
+      "line": 11,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/data/chat-stream.test.ts",
+      "line": 29,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/chat-stream.test.ts",
+      "line": 37,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/chat-stream.test.ts",
+      "line": 65,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/chat-stream.test.ts",
+      "line": 84,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/chat-stream.test.ts",
+      "line": 97,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/chat-stream.test.ts",
+      "line": 107,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/chat-stream.test.ts",
+      "line": 129,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/chat-stream.test.ts",
+      "line": 142,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/session.ts",
+      "line": 36,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/data/session.ts",
+      "line": 59,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/data/session.ts",
+      "line": 67,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/data/use-resource.test.ts",
+      "line": 14,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/use-resource.test.ts",
+      "line": 24,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/data/use-resource.test.ts",
+      "line": 40,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/src/views/AttachmentView.vue",
+      "line": 2,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/ContextView.vue",
+      "line": 2,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/ConversationsView.vue",
+      "line": 2,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/ConversationView.vue",
+      "line": 2,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/ConversationView.vue",
+      "line": 3,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/ConversationView.vue",
+      "line": 4,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/HistoryView.vue",
+      "line": 2,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/MergeView.vue",
+      "line": 2,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/ProjectsView.vue",
+      "line": 2,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/src/views/ProjectView.vue",
+      "line": 2,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 28,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 36,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 44,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 52,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 58,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 103,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 126,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 145,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 150,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 154,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 157,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 159,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 212,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/attachment-lifecycle.spec.ts",
+      "line": 220,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/default-deployment.spec.ts",
+      "line": 46,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/default-deployment.spec.ts",
+      "line": 58,
+      "terms": ["/mcp"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/default-deployment.spec.ts",
+      "line": 59,
+      "terms": ["/mcp"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/migration.spec.ts",
+      "line": 178,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/migration.spec.ts",
+      "line": 181,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/migration.spec.ts",
+      "line": 187,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/multimedia.spec.ts",
+      "line": 90,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/multimedia.spec.ts",
+      "line": 91,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/multimedia.spec.ts",
+      "line": 93,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/multimedia.spec.ts",
+      "line": 108,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/session.spec.ts",
+      "line": 13,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/session.spec.ts",
+      "line": 36,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/session.spec.ts",
+      "line": 61,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/session.spec.ts",
+      "line": 72,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/tests/session.spec.ts",
+      "line": 83,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/vue/vite.config.ts",
+      "line": 25,
+      "terms": ["/api\"", "/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "apps/vue/vitest.config.ts",
+      "line": 13,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/AGENTS.md",
+      "line": 13,
+      "terms": ["next/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/web/AGENTS.md",
+      "line": 15,
+      "terms": ["next/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "apps/web/app/api/health/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/agents/runs/[runId]/cancel/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/agents/runs/[runId]/reconcile/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/agents/runs/[runId]/resume/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/agents/runs/[runId]/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/agents/runs/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/attachments/[attachmentId]/content/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/attachments/[attachmentId]/inspection/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/attachments/[attachmentId]/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/audit/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/context/commits/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/context/items/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/context/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/conversations/[conversationId]/attachments/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/conversations/[conversationId]/chat/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/conversations/[conversationId]/deltas/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/conversations/[conversationId]/extract/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/conversations/[conversationId]/messages/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/conversations/[conversationId]/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/conversations/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/imports/[importId]/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/imports/preview/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/imports/provider-previews/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/imports/provider-submissions/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/imports/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/members/[userId]/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/members/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/merge-requests/[mergeRequestId]/conflicts/[conflictId]/resolution/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/merge-requests/[mergeRequestId]/finalize/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/merge-requests/[mergeRequestId]/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/merge-requests/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/[projectId]/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/projects/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/api/session/route.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/mcp/route.ts",
+      "line": 1,
+      "terms": ["/api/", "/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/app/page.test.ts",
+      "line": 2,
+      "terms": ["next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/app/page.test.ts",
+      "line": 5,
+      "terms": ["next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/app/page.tsx",
+      "line": 1,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 87,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 90,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 118,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 122,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 125,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 129,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 162,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 193,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 200,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 205,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 213,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 224,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 238,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 261,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 278,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 322,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 351,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 366,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 382,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 399,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 416,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 429,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 430,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 432,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 455,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/components/cce-workbench.tsx",
+      "line": 483,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/lib/api-client.test.ts",
+      "line": 32,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/lib/api-client.test.ts",
+      "line": 51,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/lib/api-client.test.ts",
+      "line": 84,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/next-env.d.ts",
+      "line": 2,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/next-env.d.ts",
+      "line": 3,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/next-env.d.ts",
+      "line": 4,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/package.json",
+      "line": 7,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/package.json",
+      "line": 9,
+      "terms": ["next/", "apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/package.json",
+      "line": 19,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/server/attachment-content.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 4,
+      "terms": ["NextRequest", "next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 6,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 7,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 8,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 9,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 67,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 86,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 103,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 115,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 120,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 128,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 147,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 154,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 175,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 196,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/attachment-routes.test.ts",
+      "line": 210,
+      "terms": ["NextRequest"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/request.test.ts",
+      "line": 24,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/request.test.ts",
+      "line": 35,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/request.test.ts",
+      "line": 49,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "apps/web/server/request.ts",
+      "line": 1,
+      "terms": ["NextRequest", "next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/server/request.ts",
+      "line": 3,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/server/request.ts",
+      "line": 5,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/server/request.ts",
+      "line": 6,
+      "terms": ["NextRequest"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/server/runtime.ts",
+      "line": 5,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/server/session-cookie.ts",
+      "line": 1,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "apps/web/tsconfig.json",
+      "line": 12,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1553,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1554,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1556,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1557,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1559,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1560,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1562,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1564,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1565,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Collaborative Context Engine：基于 OpenAI + Codex 的团队上下文合并平台项目计划书.md",
+      "line": 1567,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "Dockerfile",
+      "line": 37,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "Dockerfile",
+      "line": 39,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "docs/adr/0002-modular-monolith-and-dependency-direction.md",
+      "line": 12,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 28,
+      "terms": ["/api/", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 40,
+      "terms": ["apps/web", "/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 48,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 49,
+      "terms": ["NextRequest", "NextResponse"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 54,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 57,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 84,
+      "terms": ["/api/", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 98,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/adr/0009-browser-api-boundary-and-vue-migration.md",
+      "line": 99,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 4,
+      "terms": ["/api/", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 12,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 13,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 14,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 15,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 16,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 17,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 18,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 19,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 20,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 21,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 22,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 23,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 24,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 25,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 26,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 27,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 28,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 29,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 30,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 31,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 32,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 33,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 34,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 35,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 36,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 45,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 51,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 52,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 81,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 89,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/api-contracts.md",
+      "line": 118,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/architecture.md",
+      "line": 3,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/architecture.md",
+      "line": 4,
+      "terms": ["/mcp", "apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/architecture.md",
+      "line": 22,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/architecture.md",
+      "line": 59,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/architecture.md",
+      "line": 90,
+      "terms": ["/mcp", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/architecture.md",
+      "line": 94,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/attachment-binary-lifecycle.md",
+      "line": 13,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/attachment-binary-lifecycle.md",
+      "line": 20,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/attachment-binary-lifecycle.md",
+      "line": 22,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/attachment-binary-lifecycle.md",
+      "line": 90,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/auth-runtime-audit.md",
+      "line": 7,
+      "terms": ["next/", "NextRequest", "NextResponse"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/auth-runtime-audit.md",
+      "line": 9,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/deployment.md",
+      "line": 23,
+      "terms": ["/api`", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/deployment.md",
+      "line": 40,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/deployment.md",
+      "line": 46,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/deployment.md",
+      "line": 81,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/deployment.md",
+      "line": 90,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/deployment.md",
+      "line": 102,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/development.md",
+      "line": 79,
+      "terms": ["localhost:3000", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/media-inspection.md",
+      "line": 3,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/multimedia-attachment-contract.md",
+      "line": 59,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/multimedia-attachment-contract.md",
+      "line": 63,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/multimedia-attachment-contract.md",
+      "line": 67,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/multimedia-attachment-contract.md",
+      "line": 68,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/operations.md",
+      "line": 9,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/operations.md",
+      "line": 22,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/plugins/cce-plugin.md",
+      "line": 10,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/plugins/cce-plugin.md",
+      "line": 14,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/plugins/cce-plugin.md",
+      "line": 34,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/plugins/cce-plugin.md",
+      "line": 56,
+      "terms": ["/mcp", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/plugins/cce-plugin.md",
+      "line": 62,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/plugins/cce-plugin.md",
+      "line": 70,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/plugins/cce-plugin.md",
+      "line": 80,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 15,
+      "terms": ["apps/web", "/api/", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 20,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 30,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 33,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 34,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 35,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 36,
+      "terms": ["NextResponse"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 42,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 50,
+      "terms": ["next/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 108,
+      "terms": ["apps/web", "next/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 109,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s0-architecture-performance-baseline.md",
+      "line": 125,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 5,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 7,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 9,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 11,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 13,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 17,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 21,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 22,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 23,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 24,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 25,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 26,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 27,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 28,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 29,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 30,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 31,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 32,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 33,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 34,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 35,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 36,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 37,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 38,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 39,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 40,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 41,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 42,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 43,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 44,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 45,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 46,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 47,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 48,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 49,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 50,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 51,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 52,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 53,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 54,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 55,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 57,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 63,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 65,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 66,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 68,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 69,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 76,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 80,
+      "terms": ["NextRequest"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s4-server-boundary.md",
+      "line": 86,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s6-ui-migration.md",
+      "line": 3,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s8-integration-verification.md",
+      "line": 159,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s8-integration-verification.md",
+      "line": 161,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s8-integration-verification.md",
+      "line": 177,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s8-integration-verification.md",
+      "line": 178,
+      "terms": ["apps/web", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s8-integration-verification.md",
+      "line": 209,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/s8-integration-verification.md",
+      "line": 210,
+      "terms": ["next/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/server-runtime-composition.md",
+      "line": 7,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/server-runtime-composition.md",
+      "line": 9,
+      "terms": ["/api"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/server-runtime-composition.md",
+      "line": 34,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/server-runtime-composition.md",
+      "line": 35,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/server-runtime-composition.md",
+      "line": 52,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/server-runtime-composition.md",
+      "line": 55,
+      "terms": ["/api/", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachment-delivery.md",
+      "line": 3,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachment-delivery.md",
+      "line": 35,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachment-delivery.md",
+      "line": 36,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachment-delivery.md",
+      "line": 37,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachment-delivery.md",
+      "line": 38,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachment-delivery.md",
+      "line": 39,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachments.md",
+      "line": 3,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachments.md",
+      "line": 11,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachments.md",
+      "line": 20,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachments.md",
+      "line": 21,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachments.md",
+      "line": 22,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachments.md",
+      "line": 23,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-attachments.md",
+      "line": 24,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 10,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 11,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 12,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 13,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 14,
+      "terms": ["/mcp", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 48,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 50,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 58,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 60,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/standalone-streaming.md",
+      "line": 69,
+      "terms": ["localhost:3000"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/testing.md",
+      "line": 82,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/testing.md",
+      "line": 89,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/testing.md",
+      "line": 123,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 14,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 22,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 34,
+      "terms": ["next/", "NextRequest", "NextResponse", "NEXT_PUBLIC_"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 35,
+      "terms": ["localhost:3000", "apps/web", "/api`", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 41,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 46,
+      "terms": ["/api`", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 50,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 65,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 67,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 89,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 92,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 126,
+      "terms": ["/api`", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 168,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 170,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 174,
+      "terms": ["apps/web", "/api/", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 175,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 177,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 178,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-decoupling.md",
+      "line": 180,
+      "terms": ["apps/web", "next/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 8,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 14,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 15,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 16,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 17,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 18,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 19,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 20,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 21,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 22,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 23,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 24,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 25,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 26,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 27,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 28,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 29,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 30,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 31,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 32,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 33,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 44,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 45,
+      "terms": ["apps/web", "/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-api-endpoints.md",
+      "line": 55,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 14,
+      "terms": ["/api`", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 21,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 28,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 29,
+      "terms": ["apps/web", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 30,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 31,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 38,
+      "terms": ["localhost:3000", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 39,
+      "terms": ["apps/web", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 40,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 47,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 49,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 52,
+      "terms": ["apps/web", "next/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 54,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 62,
+      "terms": ["apps/web", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 63,
+      "terms": ["apps/web", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 64,
+      "terms": ["apps/web", "/api/", "NextRequest"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 65,
+      "terms": ["apps/web", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 66,
+      "terms": ["apps/web", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 67,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 68,
+      "terms": ["apps/web", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 69,
+      "terms": ["/api/", "apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 70,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 71,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 72,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 73,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 74,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 75,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 79,
+      "terms": ["apps/web", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 83,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 84,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 85,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 86,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 87,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 88,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 89,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 90,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 91,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 92,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 93,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 94,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 95,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 96,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 97,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 98,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 99,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 100,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 101,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 102,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 103,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 104,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 105,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 106,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 107,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 108,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 109,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 110,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 111,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 112,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 113,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 114,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 115,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 116,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 118,
+      "terms": ["/api/", "apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 120,
+      "terms": ["/mcp", "apps/web", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 126,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 130,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 132,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 133,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 154,
+      "terms": ["localhost:3000", "/api`", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 156,
+      "terms": ["NEXT_PUBLIC_", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 157,
+      "terms": ["localhost:3000", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 158,
+      "terms": ["localhost:3000"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 162,
+      "terms": ["localhost:3000", "/mcp", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 167,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 178,
+      "terms": ["apps/web", "/mcp", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 180,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 191,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 203,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 206,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 216,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 221,
+      "terms": ["next/", "NextRequest", "NextResponse", "/api/", "apps/web", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 227,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 228,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 229,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 238,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 239,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 243,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 245,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 253,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 259,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 267,
+      "terms": ["/api/", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 283,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 284,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 285,
+      "terms": ["/api/", "apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 286,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 287,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 288,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 292,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 294,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 298,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 299,
+      "terms": ["apps/web", "/mcp", "/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 301,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 302,
+      "terms": ["next/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "docs/vue-next-decoupling-audit.md",
+      "line": 303,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 2,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 3,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 11,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 14,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 37,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 40,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 41,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 87,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 108,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 115,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 124,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 127,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 131,
+      "terms": ["next/", "apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 137,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 140,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "eslint.config.mjs",
+      "line": 145,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "package.json",
+      "line": 22,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "package.json",
+      "line": 35,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "package.json",
+      "line": 40,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "package.json",
+      "line": 45,
+      "terms": ["/api/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "package.json",
+      "line": 58,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "packages/mcp-server/package.json",
+      "line": 2,
+      "terms": ["/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "packages/mcp-server/src/index.ts",
+      "line": 8,
+      "terms": ["/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "playwright.config.ts",
+      "line": 5,
+      "terms": ["localhost:3000"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "plugins/cce-conversation-submission/.mcp.json",
+      "line": 5,
+      "terms": ["/mcp"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "plugins/cce-conversation-submission/scripts/cce-upload-attachments.mjs",
+      "line": 46,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "plugins/cce-conversation-submission/scripts/cce-upload-attachments.test.mjs",
+      "line": 39,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 35,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 37,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 122,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 124,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 163,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 180,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 182,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 321,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1012,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1015,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1018,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1024,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1030,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1037,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1044,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1051,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1058,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 1064,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 2053,
+      "terms": ["/api'"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 2090,
+      "terms": ["/api'"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 3092,
+      "terms": ["/api'"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 3099,
+      "terms": ["/api'"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 3888,
+      "terms": ["/api'"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 3902,
+      "terms": ["/api'"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4581,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4583,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4590,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4593,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4596,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4599,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4602,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4605,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4608,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 4611,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 5787,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6704,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6713,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6714,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6715,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6716,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6717,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6718,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6719,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "line": 6720,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "README.md",
+      "line": 27,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 29,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 45,
+      "terms": ["apps/web"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 46,
+      "terms": ["/api`"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 55,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 128,
+      "terms": ["/api`", "/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 131,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 197,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 198,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 199,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 200,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 201,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 202,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 203,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 204,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 205,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 206,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 207,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 208,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 209,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 210,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 211,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 212,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 213,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 214,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 215,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 216,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 217,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 218,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 219,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 220,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 221,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 222,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 223,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 224,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 229,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 235,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 238,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 279,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 302,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 314,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 317,
+      "terms": ["/api/"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "README.md",
+      "line": 347,
+      "terms": ["/mcp"],
+      "category": "B",
+      "reason": "documentation"
+    },
+    {
+      "file": "scripts/audit-browser-bundles.mjs",
+      "line": 33,
+      "terms": ["apps/web", "next/"],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/audit-runtime-dependencies.mjs",
+      "line": 33,
+      "terms": ["/api\""],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/audit-runtime-dependencies.mjs",
+      "line": 36,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/audit-runtime-dependencies.mjs",
+      "line": 38,
+      "terms": ["/api\""],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/audit-runtime-dependencies.mjs",
+      "line": 39,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/audit-runtime-dependencies.mjs",
+      "line": 44,
+      "terms": ["apps/web"],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/audit-runtime-dependencies.mjs",
+      "line": 47,
+      "terms": ["apps/web"],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/audit-runtime-dependencies.mjs",
+      "line": 57,
+      "terms": ["/mcp"],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/audit-runtime-dependencies.mjs",
+      "line": 58,
+      "terms": ["/mcp"],
+      "category": "C",
+      "reason": "negative dependency guard/audit rule"
+    },
+    {
+      "file": "scripts/compare-frontends.mts",
+      "line": 57,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "scripts/compare-frontends.mts",
+      "line": 60,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "scripts/compare-frontends.mts",
+      "line": 70,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "scripts/compare-frontends.mts",
+      "line": 71,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "scripts/compare-frontends.mts",
+      "line": 156,
+      "terms": ["apps/web", "next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "scripts/compare-frontends.mts",
+      "line": 158,
+      "terms": ["apps/web", "next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "scripts/dev-standalone.mjs",
+      "line": 34,
+      "terms": ["/api/"],
+      "category": "allowed-standalone",
+      "reason": "API route/transport/gateway/plugin URL; no Next host edge"
+    },
+    {
+      "file": "scripts/dev.mjs",
+      "line": 32,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "scripts/dev.mjs",
+      "line": 36,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "scripts/stage-vue.mjs",
+      "line": 5,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "scripts/stage-web-runtime.mjs",
+      "line": 3,
+      "terms": ["apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "scripts/stage-web-runtime.mjs",
+      "line": 4,
+      "terms": ["next/", "apps/web"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "scripts/stage-web-runtime.mjs",
+      "line": 5,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "tests/e2e/golden-flow.spec.ts",
+      "line": 172,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/golden-flow.spec.ts",
+      "line": 178,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/golden-flow.spec.ts",
+      "line": 181,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/golden-flow.spec.ts",
+      "line": 338,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/golden-flow.spec.ts",
+      "line": 340,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/golden-flow.spec.ts",
+      "line": 343,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/provider-delta.spec.ts",
+      "line": 16,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/provider-delta.spec.ts",
+      "line": 22,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 58,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 66,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 74,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 84,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 89,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 95,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 104,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 119,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 127,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 137,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 147,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 161,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 185,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 200,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 208,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 220,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 226,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 233,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 242,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 257,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 271,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 290,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 303,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 320,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 329,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 337,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 347,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 362,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 369,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 375,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 380,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 387,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 392,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 418,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 424,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 432,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 443,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/e2e/real-api-smoke.spec.ts",
+      "line": 451,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/database.test.ts",
+      "line": 57,
+      "terms": ["/mcp"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/standalone-mcp.test.ts",
+      "line": 15,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/standalone-mcp.test.ts",
+      "line": 16,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/standalone-mcp.test.ts",
+      "line": 17,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/standalone-mcp.test.ts",
+      "line": 19,
+      "terms": ["next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/standalone-mcp.test.ts",
+      "line": 34,
+      "terms": ["/mcp"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/standalone-mcp.test.ts",
+      "line": 302,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/standalone-mcp.test.ts",
+      "line": 338,
+      "terms": ["/mcp"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/integration/standalone-mcp.test.ts",
+      "line": 362,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/unit/application/extraction-aggregation.test.ts",
+      "line": 107,
+      "terms": ["apps/web"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/unit/application/extraction-aggregation.test.ts",
+      "line": 113,
+      "terms": ["apps/web"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/unit/media-browser-boundary.test.ts",
+      "line": 78,
+      "terms": ["apps/web"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/unit/media-browser-boundary.test.ts",
+      "line": 83,
+      "terms": ["next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/unit/server-runtime.test.ts",
+      "line": 4,
+      "terms": ["/api/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tests/unit/server-runtime.test.ts",
+      "line": 21,
+      "terms": ["apps/web"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    },
+    {
+      "file": "tsconfig.json",
+      "line": 23,
+      "terms": ["/mcp"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "tsconfig.tools.json",
+      "line": 17,
+      "terms": ["next/"],
+      "category": "A",
+      "reason": "retained legacy source, tooling or locked workspace dependency"
+    },
+    {
+      "file": "vitest.config.ts",
+      "line": 16,
+      "terms": ["next/"],
+      "category": "C",
+      "reason": "test fixture/configuration; legacy suites remain explicit"
+    }
+  ]
+}

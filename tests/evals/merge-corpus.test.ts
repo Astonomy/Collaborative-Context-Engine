@@ -83,9 +83,7 @@ function existingVersion(
   });
 }
 
-function proposal(
-  raw: z.infer<typeof fixtureSchema>[number]["proposal"],
-): ContextItemProposal {
+function proposal(raw: z.infer<typeof fixtureSchema>[number]["proposal"]): ContextItemProposal {
   return contextItemProposalSchema.parse({
     kind: raw.kind,
     key: raw.key,
@@ -137,9 +135,7 @@ describe("versioned deterministic merge evaluation corpus", () => {
       const classification =
         actual !== undefined && "classification" in actual ? actual.classification : null;
       expect(classification).toBe(fixture.expectedClassification);
-      expect(
-        plan.cleanChanges.length + plan.conflicts.length + plan.duplicates.length,
-      ).toBe(1);
+      expect(plan.cleanChanges.length + plan.conflicts.length + plan.duplicates.length).toBe(1);
     });
   }
 });

@@ -16,4 +16,3 @@ export class DomainError extends Error {
     this.code = code;
   }
 }
-

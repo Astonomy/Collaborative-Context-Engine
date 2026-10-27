@@ -1,3 +1,4 @@
+import type { AttachmentRepository } from "./attachment-repository";
 import type {
   AgentRun,
   AgentRunId,
@@ -200,6 +201,7 @@ export interface AuditRepository {
 }
 
 export interface CceRepositories {
+  readonly attachments?: AttachmentRepository;
   readonly identity: IdentityRepository;
   readonly projects: ProjectRepository;
   readonly conversations: ConversationRepository;

@@ -4,12 +4,7 @@ import { z } from "zod";
 import { dateTimeSchema } from "./datetime";
 import { agentRunIdSchema, conversationIdSchema, modelRunIdSchema, projectIdSchema } from "./ids";
 
-export const modelRunStatusSchema = z.enum([
-  "running",
-  "completed",
-  "failed",
-  "interrupted",
-]);
+export const modelRunStatusSchema = z.enum(["running", "completed", "failed", "interrupted"]);
 
 export const modelRunSchema = z
   .object({

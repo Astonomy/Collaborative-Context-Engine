@@ -1,0 +1,23 @@
+{
+  "name": "@cce/server-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "browser": null,
+      "types": "./src/index.ts",
+      "node": "./src/index.ts"
+    }
+  },
+  "dependencies": {
+    "@cce/domain": "workspace:*",
+    "@cce/application": "workspace:*",
+    "@cce/agents": "workspace:*",
+    "@cce/database": "workspace:*",
+    "@cce/model-provider": "workspace:*",
+    "@cce/shared": "workspace:*",
+    "@cce/storage": "workspace:*",
+    "zod": "4.4.3"
+  }
+}

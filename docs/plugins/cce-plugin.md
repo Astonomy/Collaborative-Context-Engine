@@ -27,7 +27,7 @@ No cited capability grants a third-party plugin privileged access to a user's ra
 
 The Skill prepares a concise evidence summary covering the authorized conversation and the contents of supplied files it can actually inspect. The summary is stored separately from the original messages and is displayed in the preview; it never replaces or rewrites the source text. Invoked plugin Skills are named in that summary with their namespaced Codex form, for example `$cce-conversation-submission:submit-cce-conversation`, without leaking a local cache path.
 
-Text becomes CCE `Message` evidence. The Skill assesses whether supplied multimodal material is important to requirements, decisions, implementation, errors, expected results, or verification. Important `file_reference` and `image_reference` blocks are copied without changing their reference or metadata and remain in the append-only import manifest. CCE has no artifact store, so a host that supplies no stable original reference cannot be made lossless by the plugin. Provider conversation/message IDs and timestamps are persisted only when the caller supplies genuine values. CCE records the authenticated importing user separately.
+Text becomes CCE `Message` evidence. The Skill assesses whether supplied multimodal material is important to requirements, decisions, implementation, errors, expected results, or verification. Important `file_reference` and `image_reference` blocks are copied without changing their reference or metadata and remain in the append-only import manifest. Local binaries use the staged attachment upload described below. A provider reference alone is retained as a reference and does not claim that CCE received the original bytes. Provider conversation/message IDs and timestamps are persisted only when the caller supplies genuine values. CCE records the authenticated importing user separately.
 
 ## Tool workflow
 
@@ -49,36 +49,29 @@ The preview reports `operation: append`, `targetConversationId`, the existing co
 
 Existing successful provider imports are valid predecessors even when no provider conversation ID was available. The Skill uses the result already visible in that same conversation; titles and similar content are not identity. If the submitted boundary is unavailable after context compaction, it needs the missing boundary instead of guessing. There is no automatic retroactive merging of previously separate Conversations.
 
-Deploy the updated server together with the updated Skill. This change uses existing manifest/preview JSON and requires no database migration. Reinstall the plugin from its local marketplace after updating the Skill.
+Deploy the updated server together with the updated Skill. Binary submission additionally requires migration `0006_import_attachment_uploads.sql`. Reinstall the plugin from its local marketplace after updating the Skill.
 
 ## Local Codex setup
 
-The checked-in plugin `.mcp.json` targets `http://localhost:3000/mcp` and uses Codex's native `http_headers_helper`. The bundled helper reads the CCE bearer header from a persistent credential document outside the install cache:
+The checked-in plugin [.mcp.json](../../plugins/cce-conversation-submission/.mcp.json) targets `http://localhost:3001/mcp`. The transport adapter lives in `apps/api/handlers/mcp/route.ts` and the Node HTTP router mounts it directly. `packages/mcp-server` and application use cases have no Next dependency. The legacy Next route delegates to the same adapter for compatibility.
 
-```text
-<Codex home>/plugin-data/cce-conversation-submission/.mcp.json
-```
+1. Install with `pnpm install --frozen-lockfile`, migrate PostgreSQL with `pnpm db:migrate`, and provision a CCE user token through the existing identity flow.
+2. Start only the API with `pnpm dev:api`. `CCE_API_PORT` defaults to `3001`; Next.js is not required. The API still requires its database, session secret and model runtime configuration; submitting evidence makes no model call.
+3. Supply the CCE-issued token as `CCE_MCP_ACCESS_TOKEN` in the Codex **process environment**, using your local secret tooling. Restart Codex after changing its environment. Never paste the token into prompts, Skills, the repository, or plugin JSON. The header helper reads only this environment variable, not a private credential file.
+4. Install/reinstall the repository plugin and verify `list_projects`, `preview_conversation_import`, and `submit_conversation_import` are available.
+5. If you change the API port, change the local MCP URL to `http://localhost:<CCE_API_PORT>/mcp` and set `CCE_API_URL` to the same origin for the attachment helper. Both transports must target this standalone API.
 
-The credential document has this shape:
+The server authenticates each bearer token through the existing hashed CCE token store and resolves its user before application/database RBAC. The API does not treat a shared environment token as authorization or grant a default project/actor. Invalid tokens and unauthorized projects fail closed.
 
-```json
-{
-  "mcpServers": {
-    "cce": {
-      "http_headers": {
-        "Authorization": "Bearer <CCE-issued token>"
-      }
-    }
-  }
-}
-```
+### Local binary attachments
 
-1. Install dependencies, migrate and seed PostgreSQL, and start CCE with `pnpm dev`.
-2. Create the credential document under the Codex home used by the client and insert a token issued for the intended CCE user. Do not commit this file or paste its contents into prompts or conversations.
-3. Add this repository as a local/plugin marketplace and install `cce-conversation-submission` using the plugin controls available in the current Codex client.
-4. Start a new thread after installing, then inspect `/mcp` or the MCP server settings and verify the `cce` tools are present.
+Use `scripts/cce-upload-attachments.mjs` with an explicitly authorized capture JSON file. Its only input files are paths explicitly listed on the capture's messages; it never discovers transcripts or workspace files. Each message can supply `localAttachments` entries with `path`, `mimeType`, and a stable UUID `uploadId`. That UUID is an upload retry key, never a fabricated provider message ID.
 
-The helper does not read `CCE_MCP_ACCESS_TOKEN` or any other token environment variable. Reinstalling the plugin replaces the cache but leaves the credential document intact. The server hashes API tokens at rest and applies normal project-scoped RBAC on every tool operation.
+The helper reads actual file bytes and posts them to `POST /api/projects/{projectId}/imports/attachments` on `CCE_API_URL` (default `http://localhost:3001`). It receives a server-issued `attachmentId`, removes local paths, and returns the original submission with message `attachmentIds`. Then pass this returned capture to MCP preview, display the server's attachment inventory (filename, size, checksum, ID), request confirmation, and submit the exact preview. An attachment requires a supported source message with original non-empty text; do not synthesize a filename caption to meet that requirement.
+
+Uploads are private, project/user scoped staging records, expire for binding after 24 hours, and create no Conversation or Message. Confirmation atomically binds their immutable storage identities to new original Messages, persists the provenance manifest and attachment lifecycle event, and leaves Project Context unchanged. One attachment binds once; identical upload retries return the same ID, changed bytes or metadata conflict, and identical submission retries return the existing import. Upload failure stops the submission. No filename-only text substitution is allowed.
+
+Staging records are append-only. Failed/ambiguous transactions or retries may leave inaccessible storage objects; no object deletion is attempted where a commit may have succeeded. Deployment storage retention/reconciliation applies to these objects too; expiry is an authorization limit, not deletion of evidence. Migration `0006_import_attachment_uploads.sql` is required.
 
 ## Hosted ChatGPT deployment gate
 
@@ -90,7 +83,7 @@ The repository does not contain a public deployment URL, OAuth issuer, or regist
 4. update the packaged MCP URL to the real HTTPS endpoint and complete the OpenAI plugin connection/review flow;
 5. rerun authorization, privacy, and cross-project tests against that deployment.
 
-Long-lived CCE API tokens are suitable for the documented local Codex credential-file flow, not for a hosted ChatGPT plugin. This is an explicit deployment limitation, not a hidden fallback to unauthenticated access.
+Long-lived CCE API tokens are suitable for the documented local Codex process-environment flow, not for a hosted ChatGPT plugin. This is an explicit deployment limitation, not a hidden fallback to unauthenticated access.
 
 ## Manual smoke procedure
 

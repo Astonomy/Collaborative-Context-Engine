@@ -4,6 +4,7 @@ import {
   conversationListResponseSchema,
   messageListResponseSchema,
   projectResponseSchema,
+  projectAccessResponseSchema,
   providerConversationImportPreviewResponseSchema,
 } from "@cce/api-contracts";
 import { expect, test } from "@playwright/test";
@@ -72,7 +73,7 @@ test("provider deltas append through real HTTP routes to one conversation", asyn
   ]);
   const projectResponse = await request.get(root, { headers });
   expect(projectResponse.status()).toBe(200);
-  expect(projectResponseSchema.parse(await projectResponse.json()).headCommitId).toBe(
+  expect(projectAccessResponseSchema.parse(await projectResponse.json()).project.headCommitId).toBe(
     project.headCommitId,
   );
 });

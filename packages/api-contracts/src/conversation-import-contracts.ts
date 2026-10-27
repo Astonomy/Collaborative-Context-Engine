@@ -58,6 +58,14 @@ export const providerConversationImportPreviewResponseSchema = z
     summary: z.string().trim().min(1).max(8_000).optional(),
     messageCount: z.int().positive(),
     unsupportedContentCount: z.int().nonnegative(),
+    attachments: z.array(
+      z.object({
+        attachmentId: z.uuid(),
+        filename: z.string(),
+        byteSize: z.int().positive(),
+        checksum: z.string(),
+      }),
+    ),
     warnings: z.array(z.string().max(500)),
     duplicateStatus: z.enum(["none", "duplicate"]),
     duplicateImportId: z.uuid().optional(),

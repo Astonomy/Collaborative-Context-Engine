@@ -90,7 +90,10 @@ export function ProjectSidebar({
         </div>
       </form>
       {selected?.member.role === "owner" ? (
-        <section className="project-settings" key={`${selected.project.id}:${selected.project.name}`}>
+        <section
+          className="project-settings"
+          key={`${selected.project.id}:${selected.project.name}`}
+        >
           <form onSubmit={(event) => void renameSelected(event)}>
             <label htmlFor="selected-project-name">Project name</label>
             <div className="inline-form">
@@ -102,10 +105,7 @@ export function ProjectSidebar({
                 required
                 disabled={busy || selected.project.archivedAt !== null}
               />
-              <button
-                type="submit"
-                disabled={busy || selected.project.archivedAt !== null}
-              >
+              <button type="submit" disabled={busy || selected.project.archivedAt !== null}>
                 Rename
               </button>
             </div>

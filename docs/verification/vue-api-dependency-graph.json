@@ -1,0 +1,2411 @@
+{
+  "packageEdges": [
+    {
+      "from": "@cce/api",
+      "to": "@cce/agents"
+    },
+    {
+      "from": "@cce/agents",
+      "to": "@cce/application"
+    },
+    {
+      "from": "@cce/application",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "@cce/conversation-import",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/application",
+      "to": "@cce/context-engine"
+    },
+    {
+      "from": "@cce/context-engine",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/domain",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "@cce/shared",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/domain",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/context-engine",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "@cce/application",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/application",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "@cce/application",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/agents",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/agents",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/api",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "@cce/api-contracts",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "@cce/api-contracts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/api-contracts",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/api",
+      "to": "@cce/application"
+    },
+    {
+      "from": "@cce/api",
+      "to": "@cce/database"
+    },
+    {
+      "from": "@cce/database",
+      "to": "@cce/application"
+    },
+    {
+      "from": "@cce/database",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "@cce/database",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/database",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "@cce/database",
+      "to": "drizzle-orm"
+    },
+    {
+      "from": "@cce/database",
+      "to": "pg"
+    },
+    {
+      "from": "@cce/database",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/api",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/api",
+      "to": "@cce/mcp-server"
+    },
+    {
+      "from": "@cce/mcp-server",
+      "to": "@cce/application"
+    },
+    {
+      "from": "@cce/mcp-server",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "@cce/mcp-server",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/mcp-server",
+      "to": "@modelcontextprotocol/sdk"
+    },
+    {
+      "from": "@cce/mcp-server",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/api",
+      "to": "@cce/server-runtime"
+    },
+    {
+      "from": "@cce/server-runtime",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/server-runtime",
+      "to": "@cce/application"
+    },
+    {
+      "from": "@cce/server-runtime",
+      "to": "@cce/agents"
+    },
+    {
+      "from": "@cce/server-runtime",
+      "to": "@cce/database"
+    },
+    {
+      "from": "@cce/server-runtime",
+      "to": "@cce/model-provider"
+    },
+    {
+      "from": "@cce/model-provider",
+      "to": "@cce/application"
+    },
+    {
+      "from": "@cce/model-provider",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/model-provider",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/server-runtime",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "@cce/server-runtime",
+      "to": "@cce/storage"
+    },
+    {
+      "from": "@cce/storage",
+      "to": "@cce/application"
+    },
+    {
+      "from": "@cce/storage",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "@cce/server-runtime",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/api",
+      "to": "tsx"
+    },
+    {
+      "from": "@cce/api",
+      "to": "zod"
+    },
+    {
+      "from": "@cce/vue",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "@cce/vue",
+      "to": "vue"
+    },
+    {
+      "from": "@cce/vue",
+      "to": "vue-router"
+    },
+    {
+      "from": "@cce/vue",
+      "to": "zod"
+    }
+  ],
+  "sourceEdges": [
+    {
+      "from": "packages/domain/src/ids.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/actor.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/actor.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/shared/src/api-token.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/shared/src/json.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/shared/src/index.ts",
+      "to": "./api-token"
+    },
+    {
+      "from": "packages/shared/src/index.ts",
+      "to": "./identity"
+    },
+    {
+      "from": "packages/shared/src/index.ts",
+      "to": "./json"
+    },
+    {
+      "from": "packages/domain/src/datetime.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/audit.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/domain/src/audit.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/audit.ts",
+      "to": "./actor"
+    },
+    {
+      "from": "packages/domain/src/audit.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/audit.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/context-item.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/domain/src/context-item.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/context-item.ts",
+      "to": "./actor"
+    },
+    {
+      "from": "packages/domain/src/context-item.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/context-item.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/domain/src/context-item.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/context-commit.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/context-commit.ts",
+      "to": "./actor"
+    },
+    {
+      "from": "packages/domain/src/context-commit.ts",
+      "to": "./context-item"
+    },
+    {
+      "from": "packages/domain/src/context-commit.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/context-commit.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/context-delta.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/context-delta.ts",
+      "to": "./actor"
+    },
+    {
+      "from": "packages/domain/src/context-delta.ts",
+      "to": "./context-item"
+    },
+    {
+      "from": "packages/domain/src/context-delta.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/context-delta.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/conversation.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/conversation.ts",
+      "to": "./actor"
+    },
+    {
+      "from": "packages/domain/src/conversation.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/conversation.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/domain/src/conversation.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/merge.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/merge.ts",
+      "to": "./actor"
+    },
+    {
+      "from": "packages/domain/src/merge.ts",
+      "to": "./context-item"
+    },
+    {
+      "from": "packages/domain/src/merge.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/merge.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/domain/src/merge.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/project.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/project.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/project.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/domain/src/project.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/runs.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/domain/src/runs.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/runs.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/runs.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/attachment.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/domain/src/attachment.ts",
+      "to": "./actor"
+    },
+    {
+      "from": "packages/domain/src/attachment.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/attachment.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./actor"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./audit"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./context-commit"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./context-delta"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./context-item"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./conversation"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./datetime"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./ids"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./merge"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./project"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./runs"
+    },
+    {
+      "from": "packages/domain/src/index.ts",
+      "to": "./attachment"
+    },
+    {
+      "from": "packages/application/src/authorization.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/authorization.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/import-attachment.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/import-attachment.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/application/src/attachment-repository.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/attachment-repository.ts",
+      "to": "./import-attachment"
+    },
+    {
+      "from": "packages/application/src/attachment-repository.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/context-engine/src/canonical-json.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/context-engine/src/scope.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/context-engine/src/context-builder.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/context-engine/src/context-builder.ts",
+      "to": "./canonical-json"
+    },
+    {
+      "from": "packages/context-engine/src/context-builder.ts",
+      "to": "./scope"
+    },
+    {
+      "from": "packages/context-engine/src/context-router.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/context-engine/src/context-router.ts",
+      "to": "./context-builder"
+    },
+    {
+      "from": "packages/context-engine/src/merge-types.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/context-engine/src/semantic-classifier.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/context-engine/src/semantic-classifier.ts",
+      "to": "./merge-types"
+    },
+    {
+      "from": "packages/context-engine/src/three-way-merge.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/context-engine/src/three-way-merge.ts",
+      "to": "./canonical-json"
+    },
+    {
+      "from": "packages/context-engine/src/three-way-merge.ts",
+      "to": "./merge-types"
+    },
+    {
+      "from": "packages/context-engine/src/three-way-merge.ts",
+      "to": "./scope"
+    },
+    {
+      "from": "packages/context-engine/src/index.ts",
+      "to": "./canonical-json"
+    },
+    {
+      "from": "packages/context-engine/src/index.ts",
+      "to": "./context-builder"
+    },
+    {
+      "from": "packages/context-engine/src/index.ts",
+      "to": "./context-router"
+    },
+    {
+      "from": "packages/context-engine/src/index.ts",
+      "to": "./merge-types"
+    },
+    {
+      "from": "packages/context-engine/src/index.ts",
+      "to": "./scope"
+    },
+    {
+      "from": "packages/context-engine/src/index.ts",
+      "to": "./semantic-classifier"
+    },
+    {
+      "from": "packages/context-engine/src/index.ts",
+      "to": "./three-way-merge"
+    },
+    {
+      "from": "packages/conversation-import/src/types.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/conversation-import/src/chatgpt.ts",
+      "to": "./types"
+    },
+    {
+      "from": "packages/conversation-import/src/provider-submission.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/conversation-import/src/provider-submission.ts",
+      "to": "./types"
+    },
+    {
+      "from": "packages/conversation-import/src/index.ts",
+      "to": "./types"
+    },
+    {
+      "from": "packages/conversation-import/src/index.ts",
+      "to": "./chatgpt"
+    },
+    {
+      "from": "packages/conversation-import/src/index.ts",
+      "to": "./provider-submission"
+    },
+    {
+      "from": "packages/application/src/repositories.ts",
+      "to": "./attachment-repository"
+    },
+    {
+      "from": "packages/application/src/repositories.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/repositories.ts",
+      "to": "@cce/context-engine"
+    },
+    {
+      "from": "packages/application/src/repositories.ts",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "packages/application/src/audit-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/audit-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/audit-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/context-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/context-service.ts",
+      "to": "@cce/context-engine"
+    },
+    {
+      "from": "packages/application/src/context-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/context-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/context-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/conversation-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/conversation-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/conversation-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/conversation-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/conversation-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/model-provider.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "./context-service"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "./conversation-service"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "./model-provider"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "./model-provider"
+    },
+    {
+      "from": "packages/application/src/chat-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/conversation-import-service.ts",
+      "to": "node:crypto"
+    },
+    {
+      "from": "packages/application/src/conversation-import-service.ts",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "packages/application/src/conversation-import-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/conversation-import-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/conversation-import-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/conversation-import-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/conversation-import-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "@cce/context-engine"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "./model-provider"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "./model-provider"
+    },
+    {
+      "from": "packages/application/src/extraction-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/merge-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/merge-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/merge-service.ts",
+      "to": "@cce/context-engine"
+    },
+    {
+      "from": "packages/application/src/merge-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/merge-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/merge-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/project-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/project-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/project-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/project-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/project-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/session-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/session-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/session-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/session-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/attachment-storage.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/attachment-policy.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/attachment-policy.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/attachment-policy.ts",
+      "to": "./attachment-storage"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "./import-attachment"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "./attachment-repository"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "./attachment-storage"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/attachment-service.ts",
+      "to": "./attachment-policy"
+    },
+    {
+      "from": "packages/application/src/media-inspection.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/media-inspection.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/application/src/media-processing-service.ts",
+      "to": "./attachment-service"
+    },
+    {
+      "from": "packages/application/src/media-processing-service.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/media-processing-service.ts",
+      "to": "./media-inspection"
+    },
+    {
+      "from": "packages/application/src/project-queries.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/project-queries.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/project-queries.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./authorization"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./audit-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./chat-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./context-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./conversation-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./conversation-import-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./errors"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./extraction-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./merge-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./model-provider"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./project-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./session-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./attachment-repository"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./import-attachment"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./attachment-storage"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./attachment-policy"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./attachment-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./media-inspection"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./media-processing-service"
+    },
+    {
+      "from": "packages/application/src/index.ts",
+      "to": "./project-queries"
+    },
+    {
+      "from": "packages/mcp-server/src/index.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/mcp-server/src/index.ts",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "packages/mcp-server/src/index.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/mcp-server/src/index.ts",
+      "to": "@modelcontextprotocol/sdk/server/mcp.js"
+    },
+    {
+      "from": "packages/mcp-server/src/index.ts",
+      "to": "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js"
+    },
+    {
+      "from": "packages/mcp-server/src/index.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/agent-run-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/agent-run-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/audit-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/audit-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/context-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/context-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/attachment-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/attachment-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/conversation-contracts.ts",
+      "to": "./attachment-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/conversation-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/conversation-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/conversation-import-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/conversation-import-contracts.ts",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "packages/api-contracts/src/conversation-import-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/http-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/merge-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/merge-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/project-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/project-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/session-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/api-contracts/src/session-contracts.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/api-contracts/src/session-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./agent-run-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./audit-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./context-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./conversation-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./conversation-import-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./http-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./merge-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./project-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./session-contracts"
+    },
+    {
+      "from": "packages/api-contracts/src/index.ts",
+      "to": "./attachment-contracts"
+    },
+    {
+      "from": "packages/database/src/database-values.ts",
+      "to": "./database-error"
+    },
+    {
+      "from": "packages/database/src/schema.ts",
+      "to": "drizzle-orm"
+    },
+    {
+      "from": "packages/database/src/schema.ts",
+      "to": "drizzle-orm/pg-core"
+    },
+    {
+      "from": "packages/database/src/schema.ts",
+      "to": "drizzle-orm/pg-core"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "@cce/conversation-import"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "drizzle-orm"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "drizzle-orm/node-postgres"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "./database-error"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "./database-values"
+    },
+    {
+      "from": "packages/database/src/repositories.ts",
+      "to": "./schema"
+    },
+    {
+      "from": "packages/database/src/attachment-schema.ts",
+      "to": "drizzle-orm"
+    },
+    {
+      "from": "packages/database/src/attachment-schema.ts",
+      "to": "drizzle-orm/pg-core"
+    },
+    {
+      "from": "packages/database/src/attachment-schema.ts",
+      "to": "./schema"
+    },
+    {
+      "from": "packages/database/src/attachment-repository.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/database/src/attachment-repository.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/database/src/attachment-repository.ts",
+      "to": "drizzle-orm"
+    },
+    {
+      "from": "packages/database/src/attachment-repository.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/database/src/attachment-repository.ts",
+      "to": "./attachment-schema"
+    },
+    {
+      "from": "packages/database/src/attachment-repository.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "drizzle-orm/node-postgres"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "drizzle-orm"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "pg"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "./repositories"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "./schema"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "./database-error"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/database/src/connection.ts",
+      "to": "./attachment-repository"
+    },
+    {
+      "from": "packages/database/src/runtime.ts",
+      "to": "./connection"
+    },
+    {
+      "from": "packages/database/src/runtime.ts",
+      "to": "./database-error"
+    },
+    {
+      "from": "packages/agents/src/workflow-contracts.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/agents/src/workflow-contracts.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/agents/src/context-delta-workflow.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/agents/src/context-delta-workflow.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/agents/src/context-delta-workflow.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/agents/src/context-delta-workflow.ts",
+      "to": "./workflow-contracts"
+    },
+    {
+      "from": "packages/agents/src/scoped-agent-service.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/agents/src/scoped-agent-service.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/agents/src/scoped-agent-service.ts",
+      "to": "./context-delta-workflow"
+    },
+    {
+      "from": "packages/agents/src/scoped-agent-service.ts",
+      "to": "./workflow-contracts"
+    },
+    {
+      "from": "packages/agents/src/index.ts",
+      "to": "./context-delta-workflow"
+    },
+    {
+      "from": "packages/agents/src/index.ts",
+      "to": "./scoped-agent-service"
+    },
+    {
+      "from": "packages/agents/src/index.ts",
+      "to": "./workflow-contracts"
+    },
+    {
+      "from": "packages/storage/src/local-attachment-storage.ts",
+      "to": "node:crypto"
+    },
+    {
+      "from": "packages/storage/src/local-attachment-storage.ts",
+      "to": "node:fs/promises"
+    },
+    {
+      "from": "packages/storage/src/local-attachment-storage.ts",
+      "to": "node:path"
+    },
+    {
+      "from": "packages/storage/src/local-attachment-storage.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/storage/src/local-attachment-storage.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/storage/src/index.ts",
+      "to": "./local-attachment-storage"
+    },
+    {
+      "from": "packages/storage/src/media-inspector.server.ts",
+      "to": "node:buffer"
+    },
+    {
+      "from": "packages/storage/src/media-inspector.server.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/model-provider/src/configuration.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/model-provider/src/fake-model-provider.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/model-provider/src/openai-compatible-provider.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/model-provider/src/openai-compatible-provider.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/model-provider/src/openai-compatible-provider.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/model-provider/src/openai-compatible-provider.ts",
+      "to": "./configuration"
+    },
+    {
+      "from": "packages/model-provider/src/index.ts",
+      "to": "./configuration"
+    },
+    {
+      "from": "packages/model-provider/src/index.ts",
+      "to": "./fake-model-provider"
+    },
+    {
+      "from": "packages/model-provider/src/index.ts",
+      "to": "./openai-compatible-provider"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "node:crypto"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "node:path"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "@cce/storage"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "@cce/storage/media-server"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "@cce/agents"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "@cce/database/runtime"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "@cce/model-provider"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/server-runtime/src/runtime.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/server-runtime/src/session-cookie.ts",
+      "to": "node:crypto"
+    },
+    {
+      "from": "packages/server-runtime/src/session-cookie.ts",
+      "to": "@cce/shared"
+    },
+    {
+      "from": "packages/server-runtime/src/session-cookie.ts",
+      "to": "zod"
+    },
+    {
+      "from": "packages/server-runtime/src/http-authentication.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "packages/server-runtime/src/http-authentication.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "packages/server-runtime/src/http-authentication.ts",
+      "to": "./session-cookie"
+    },
+    {
+      "from": "packages/server-runtime/src/index.ts",
+      "to": "./runtime"
+    },
+    {
+      "from": "packages/server-runtime/src/index.ts",
+      "to": "./http-authentication"
+    },
+    {
+      "from": "packages/server-runtime/src/index.ts",
+      "to": "./session-cookie"
+    },
+    {
+      "from": "apps/api/server/session-cookie.ts",
+      "to": "@cce/server-runtime"
+    },
+    {
+      "from": "apps/api/server/services.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/server/services.ts",
+      "to": "@cce/agents"
+    },
+    {
+      "from": "apps/api/server/services.ts",
+      "to": "./session-cookie"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "node:crypto"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "@cce/database/runtime"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "zod"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "./services"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "@cce/server-runtime"
+    },
+    {
+      "from": "apps/api/server/request.ts",
+      "to": "@cce/server-runtime"
+    },
+    {
+      "from": "apps/api/handlers/mcp/route.ts",
+      "to": "@cce/mcp-server"
+    },
+    {
+      "from": "apps/api/handlers/mcp/route.ts",
+      "to": "../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/mcp/route.ts",
+      "to": "../../server/services"
+    },
+    {
+      "from": "apps/api/server/attachment-content.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/server/attachment-content.ts",
+      "to": "./request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/attachments/route.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/attachments/route.ts",
+      "to": "zod"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/attachments/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/attachments/route.ts",
+      "to": "../../../../../server/attachment-content"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/attachments/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/health/route.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/handlers/health/route.ts",
+      "to": "zod"
+    },
+    {
+      "from": "apps/api/handlers/health/route.ts",
+      "to": "../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/health/route.ts",
+      "to": "../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/route.ts",
+      "to": "../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/route.ts",
+      "to": "../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/session/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/session/route.ts",
+      "to": "../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/session/route.ts",
+      "to": "../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/session/route.ts",
+      "to": "../../server/session-cookie"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/route.ts",
+      "to": "../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/route.ts",
+      "to": "../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/audit/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/audit/route.ts",
+      "to": "../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/audit/route.ts",
+      "to": "../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/route.ts",
+      "to": "../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/route.ts",
+      "to": "../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/route.ts",
+      "to": "../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/route.ts",
+      "to": "../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/route.ts",
+      "to": "../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/route.ts",
+      "to": "../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/members/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/members/route.ts",
+      "to": "../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/members/route.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/members/route.ts",
+      "to": "../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/route.ts",
+      "to": "../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/route.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/route.ts",
+      "to": "../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/commits/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/commits/route.ts",
+      "to": "@cce/domain"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/commits/route.ts",
+      "to": "zod"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/commits/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/commits/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/items/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/items/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/context/items/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/preview/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/preview/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/preview/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/provider-previews/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/provider-previews/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/provider-previews/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/provider-submissions/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/provider-submissions/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/provider-submissions/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/[importId]/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/[importId]/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/imports/[importId]/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/members/[userId]/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/members/[userId]/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/members/[userId]/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/route.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/route.ts",
+      "to": "../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/route.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/route.ts",
+      "to": "../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/content/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/content/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/content/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/content/route.ts",
+      "to": "../../../../../../server/attachment-content"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/inspection/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/inspection/route.ts",
+      "to": "@cce/application/media-inspection"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/inspection/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/attachments/[attachmentId]/inspection/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/attachments/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/attachments/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/attachments/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/attachments/route.ts",
+      "to": "../../../../../../server/attachment-content"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/chat/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/chat/route.ts",
+      "to": "@cce/application"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/chat/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/chat/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/deltas/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/deltas/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/deltas/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/extract/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/extract/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/extract/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/messages/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/messages/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/messages/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/conversations/[conversationId]/messages/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/finalize/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/finalize/route.ts",
+      "to": "../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/finalize/route.ts",
+      "to": "../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/cancel/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/cancel/route.ts",
+      "to": "../../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/cancel/route.ts",
+      "to": "../../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/reconcile/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/reconcile/route.ts",
+      "to": "../../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/reconcile/route.ts",
+      "to": "../../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/resume/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/resume/route.ts",
+      "to": "../../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/agents/runs/[runId]/resume/route.ts",
+      "to": "../../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/conflicts/[conflictId]/resolution/route.ts",
+      "to": "@cce/api-contracts"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/conflicts/[conflictId]/resolution/route.ts",
+      "to": "../../../../../../../../server/request"
+    },
+    {
+      "from": "apps/api/handlers/projects/[projectId]/merge-requests/[mergeRequestId]/conflicts/[conflictId]/resolution/route.ts",
+      "to": "../../../../../../../../server/services"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "zod"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/mcp/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/imports/attachments/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./server/services"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/health/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/session/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/audit/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/context/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/conversations/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/imports/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/members/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/merge-requests/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/agents/runs/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/attachments/[attachmentId]/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/context/commits/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/context/items/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/conversations/[conversationId]/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/imports/preview/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/imports/provider-previews/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/imports/provider-submissions/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/imports/[importId]/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/members/[userId]/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/merge-requests/[mergeRequestId]/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/agents/runs/[runId]/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/attachments/[attachmentId]/content/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/attachments/[attachmentId]/inspection/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/conversations/[conversationId]/attachments/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/conversations/[conversationId]/chat/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/conversations/[conversationId]/deltas/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/conversations/[conversationId]/extract/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/conversations/[conversationId]/messages/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/merge-requests/[mergeRequestId]/finalize/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/agents/runs/[runId]/cancel/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/agents/runs/[runId]/reconcile/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/agents/runs/[runId]/resume/route"
+    },
+    {
+      "from": "apps/api/router.ts",
+      "to": "./handlers/projects/[projectId]/merge-requests/[mergeRequestId]/conflicts/[conflictId]/resolution/route"
+    },
+    {
+      "from": "apps/api/server/runtime.ts",
+      "to": "@cce/server-runtime"
+    },
+    {
+      "from": "apps/api/server/runtime.ts",
+      "to": "zod"
+    },
+    {
+      "from": "apps/api/server/runtime.ts",
+      "to": "./session-cookie"
+    },
+    {
+      "from": "apps/api/http-server.ts",
+      "to": "node:path"
+    },
+    {
+      "from": "apps/api/http-server.ts",
+      "to": "node:http"
+    },
+    {
+      "from": "apps/api/http-server.ts",
+      "to": "node:stream"
+    },
+    {
+      "from": "apps/api/http-server.ts",
+      "to": "node:stream/promises"
+    },
+    {
+      "from": "apps/api/http-server.ts",
+      "to": "zod"
+    },
+    {
+      "from": "apps/api/http-server.ts",
+      "to": "./router"
+    },
+    {
+      "from": "apps/api/http-server.ts",
+      "to": "./server/runtime"
+    },
+    {
+      "from": "apps/api/main.ts",
+      "to": "node:path"
+    },
+    {
+      "from": "apps/api/main.ts",
+      "to": "./http-server"
+    },
+    {
+      "from": "apps/api/main.ts",
+      "to": "./server/runtime"
+    }
+  ],
+  "vueModules": [
+    "\u0000plugin-vue:export-helper",
+    "\u0000rolldown/runtime.js",
+    "\u0000vite/modulepreload-polyfill.js",
+    "\u0000vite/preload-helper.js",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/index.html",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/App.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/App.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/api/agents.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/api/attachments.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/api/client.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/api/context.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/api/conversations.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/api/messages.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/api/projects.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/AttachmentCollection.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/AttachmentCollection.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/AttachmentRenderer.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/AttachmentRenderer.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/AttachmentUpload.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/AttachmentUpload.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/FileCard.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/FileCard.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/ImagePreview.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/ImagePreview.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/ModelPreview.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/ModelPreview.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/VideoPreview.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/VideoPreview.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/model-worker-client.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/presentation.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/preview-path.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/read-content.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/attachments/upload.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/components/ConflictReview.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/components/ConflictReview.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/components/MergeReview.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/components/MergeReview.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/components/MessageList.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/components/MessageList.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/components/ResourceState.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/components/ResourceState.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/config.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/context.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/data/api-client.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/data/chat-stream.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/data/session.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/data/use-action.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/data/use-resource.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/errors.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/main.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/project-context.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/router.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/styles/base.css",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/AttachmentView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/AttachmentView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ContextView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ContextView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ConversationView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ConversationView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ConversationsView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ConversationsView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/HistoryView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/HistoryView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/LoginView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/LoginView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/MergeView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/MergeView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/NotFoundView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/NotFoundView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ProjectOverview.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ProjectView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ProjectView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ProjectsView.vue",
+    "/mnt/d/code/Collaborative-Context-Engine/apps/vue/src/views/ProjectsView.vue?vue&type=script&setup=true&lang.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/@vue+reactivity@3.5.43/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/@vue+runtime-core@3.5.43/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/@vue+runtime-dom@3.5.43/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/@vue+shared@3.5.43/node_modules/@vue/shared/dist/shared.esm-bundler.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/vue-router@4.6.4_vue@3.5.43_typescript@6.0.3_/node_modules/vue-router/dist/devtools-EWN81iOl.mjs",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/vue-router@4.6.4_vue@3.5.43_typescript@6.0.3_/node_modules/vue-router/dist/vue-router.mjs",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/classic/errors.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/classic/iso.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/classic/parse.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/classic/schemas.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/api.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/checks.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/core.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/doc.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/errors.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/json-schema-processors.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/parse.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/regexes.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/registries.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/schemas.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/to-json-schema.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/util.js",
+    "/mnt/d/code/Collaborative-Context-Engine/node_modules/.pnpm/zod@4.4.3/node_modules/zod/v4/core/versions.js",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/agent-run-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/attachment-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/audit-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/context-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/conversation-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/conversation-import-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/http-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/index.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/merge-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/project-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/api-contracts/src/session-contracts.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/conversation-import/src/chatgpt.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/conversation-import/src/index.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/conversation-import/src/provider-submission.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/conversation-import/src/types.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/actor.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/attachment.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/audit.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/context-commit.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/context-delta.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/context-item.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/conversation.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/datetime.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/ids.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/index.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/merge.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/project.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/domain/src/runs.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/shared/src/api-token.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/shared/src/index.ts",
+    "/mnt/d/code/Collaborative-Context-Engine/packages/shared/src/json.ts"
+  ],
+  "pluginEndpoint": "http://localhost:3001/mcp",
+  "forbiddenNextEdges": 0,
+  "scope": "API entry source graph, transitive workspace production manifests, Vue build modules, plugin default endpoint. External package internals are validated by the isolated production deployment smoke test."
+}

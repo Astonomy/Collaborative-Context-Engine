@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { branchSchema, messageSchema, assertBranchTransition, assertMessageTransition } from "./conversation";
+import {
+  branchSchema,
+  messageSchema,
+  assertBranchTransition,
+  assertMessageTransition,
+} from "./conversation";
 
 const ids = {
   project: "00000000-0000-4000-8000-000000000001",
@@ -28,9 +33,7 @@ describe("Conversation evidence invariants", () => {
 
   it("allows only open branches to transition to a terminal state", () => {
     expect(() => assertBranchTransition("open", "merged")).not.toThrow();
-    expect(() => assertBranchTransition("merged", "abandoned")).toThrow(
-      "cannot transition",
-    );
+    expect(() => assertBranchTransition("merged", "abandoned")).toThrow("cannot transition");
     expect(() => assertBranchTransition("open", "open")).toThrow("cannot transition");
   });
 
@@ -84,9 +87,6 @@ describe("Conversation evidence invariants", () => {
   it("prevents changing immutable terminal messages", () => {
     expect(() => assertMessageTransition("pending", "streaming")).not.toThrow();
     expect(() => assertMessageTransition("streaming", "interrupted")).not.toThrow();
-    expect(() => assertMessageTransition("completed", "streaming")).toThrow(
-      "cannot transition",
-    );
+    expect(() => assertMessageTransition("completed", "streaming")).toThrow("cannot transition");
   });
 });
-

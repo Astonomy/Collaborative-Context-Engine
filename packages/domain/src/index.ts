@@ -11,3 +11,4 @@ export * from "./merge";
 export * from "./project";
 export * from "./runs";
 
+export * from "./attachment";

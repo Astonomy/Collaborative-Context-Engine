@@ -2,6 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 const inCi = process.env["CI"] !== undefined;
 const useExternalServer = process.env["CCE_E2E_EXTERNAL_SERVER"] !== undefined;
+const baseURL = process.env["CCE_E2E_BASE_URL"] ?? "http://localhost:3000";
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -12,17 +13,20 @@ export default defineConfig({
   ...(inCi ? { workers: 1 } : {}),
   reporter: inCi ? [["github"], ["html", { open: "never" }]] : "list",
   use: {
-    baseURL: process.env["CCE_E2E_BASE_URL"] ?? "http://127.0.0.1:3000",
+    baseURL,
     trace: "on-first-retry",
-    screenshot: "only-on-failure"
+    screenshot: "only-on-failure",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   ...(useExternalServer
     ? {}
-    : { webServer: {
-        command: "pnpm --filter @cce/web dev",
-        url: "http://127.0.0.1:3000",
-        reuseExistingServer: !inCi,
-        timeout: 120_000
-      } })
+    : {
+        webServer: {
+          command:
+            process.env["CCE_E2E_PRODUCTION"] === "1" ? "pnpm start:legacy" : "pnpm dev:legacy",
+          url: baseURL,
+          reuseExistingServer: false,
+          timeout: 120_000,
+        },
+      }),
 });
