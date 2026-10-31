@@ -41,7 +41,11 @@ export class PostgresUnitOfWork implements UnitOfWork {
       repositories: CceRepositories & { readonly attachments: AttachmentRepository },
     ) => Promise<T>,
   ): Promise<T> {
-    const client = await this.pool.connect();
+    const client = await this.pool.connect().catch((error: unknown) => {
+      throw new DatabaseError("UNAVAILABLE", "The database connection could not be established.", {
+        cause: error,
+      });
+    });
     try {
       await client.query("BEGIN");
       await client.query("SET CONSTRAINTS ALL DEFERRED");

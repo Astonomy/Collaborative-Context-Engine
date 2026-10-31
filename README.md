@@ -125,8 +125,17 @@ pnpm dev:api
 pnpm dev:frontend
 ```
 
-Vite forwards `/api` and `/mcp` to port 3001. Set `CCE_API_PROXY_TARGET` in the frontend
-process for a custom API port. The legacy host is available separately with `pnpm dev:legacy`.
+Vite forwards `/api` and `/mcp` to the development API. `pnpm dev` loads the root `.env`
+before starting both processes, so setting `CCE_API_PORT=3002` moves the API and its proxy
+together when Docker or another process already uses 3001. For independently started
+frontends, set `CCE_API_PROXY_TARGET` in the frontend process to match the API port.
+The legacy host is available separately with `pnpm dev:legacy`.
+
+If sign-in fails because CCE cannot connect to its database, the API returns HTTP 503
+with a message asking you to retry and have an administrator check PostgreSQL and the
+connection settings. In local development, run `docker compose up -d --wait postgres`
+and check `DATABASE_URL` in `.env`. Unexpected failures return HTTP 500 with retry and
+request-ID guidance; raw database errors and credentials are never returned to the browser.
 Sign in with `CCE_SEED_API_TOKEN`; the raw token is never stored in the
 database. `GET /api/health` is the database-aware readiness endpoint. Stop the development database with
 `docker compose down`. Add `--volumes` only when intentionally deleting all local CCE database data.

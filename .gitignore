@@ -18,3 +18,4 @@ apps/web/public/vue/
 
 # Agent files
 agent/
+.arc/

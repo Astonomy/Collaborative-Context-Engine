@@ -1,5 +1,6 @@
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import "./load-root-environment.mts";
 
 const root = new URL("../", import.meta.url);
 const children = [];

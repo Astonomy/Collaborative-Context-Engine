@@ -154,7 +154,7 @@ export function errorResponse(error: unknown, requestId: string = randomUUID()):
   const payload = apiErrorResponseSchema.parse({
     error: {
       code: mapped.code,
-      message: mapped.message,
+      message: mapped.status >= 500 ? `${mapped.message} Request ID: ${requestId}` : mapped.message,
       details: { ...mapped.details, requestId },
     },
   });
@@ -223,6 +223,15 @@ function mapError(error: unknown): MappedError {
     };
   }
   if (error instanceof DatabaseError) {
+    if (error.code === "UNAVAILABLE") {
+      return {
+        status: 503,
+        code: "DEPENDENCY_UNAVAILABLE",
+        message:
+          "CCE cannot connect to its database right now. Please try again shortly. If this continues, ask your administrator to check that PostgreSQL is running and the database connection settings are correct.",
+        details: {},
+      };
+    }
     const status = error.code === "WRITE_CONFLICT" ? 409 : error.code === "NOT_FOUND" ? 404 : 500;
     return {
       status,
@@ -245,7 +254,8 @@ function mapError(error: unknown): MappedError {
   return {
     status: 500,
     code: "INTERNAL_ERROR",
-    message: "An unexpected server error occurred.",
+    message:
+      "CCE could not complete your request. Please try again. If this continues, contact your administrator and include the request ID below.",
     details: {},
   };
 }

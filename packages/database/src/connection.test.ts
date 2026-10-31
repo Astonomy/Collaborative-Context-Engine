@@ -2,7 +2,21 @@ import { describe, expect, it, vi } from "vitest";
 import { DrizzleQueryError } from "drizzle-orm";
 
 import { DatabaseError } from "./database-error";
-import { createPostgresPool, normalizePostgresError } from "./connection";
+import { createPostgresPool, normalizePostgresError, PostgresUnitOfWork } from "./connection";
+
+it("reports connection failures as an unavailable database", async () => {
+  const pool = createPostgresPool("postgresql://user:private-password@127.0.0.1:1/test", {
+    connectionTimeoutMillis: 1000,
+  });
+  try {
+    await expect(new PostgresUnitOfWork(pool).run(async () => undefined)).rejects.toMatchObject({
+      name: "DatabaseError",
+      code: "UNAVAILABLE",
+    });
+  } finally {
+    await pool.end();
+  }
+});
 
 it("handles idle pool errors without crashing or logging connection secrets", async () => {
   const report = vi.spyOn(console, "error").mockImplementation(() => undefined);

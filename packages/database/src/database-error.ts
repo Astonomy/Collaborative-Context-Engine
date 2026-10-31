@@ -1,4 +1,4 @@
-export type DatabaseErrorCode = "CORRUPT_DATA" | "NOT_FOUND" | "WRITE_CONFLICT";
+export type DatabaseErrorCode = "CORRUPT_DATA" | "NOT_FOUND" | "WRITE_CONFLICT" | "UNAVAILABLE";
 
 export class DatabaseError extends Error {
   public readonly code: DatabaseErrorCode;

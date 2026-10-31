@@ -1,5 +1,33 @@
-import { describe, expect, it } from "vitest";
-import { assertSameOrigin } from "./request";
+import { describe, expect, it, vi } from "vitest";
+import { DatabaseError } from "@cce/database/runtime";
+import { apiErrorResponseSchema } from "@cce/api-contracts";
+import { assertSameOrigin, errorResponse } from "./request";
+
+it("explains database outages without exposing internal connection details", async () => {
+  const report = vi.spyOn(console, "error").mockImplementation(() => undefined);
+  try {
+    const response = errorResponse(
+      new DatabaseError("UNAVAILABLE", "private-password"),
+      "request-test",
+    );
+    expect(response.status).toBe(503);
+    const body = apiErrorResponseSchema.parse(await response.json());
+    expect(body.error.code).toBe("DEPENDENCY_UNAVAILABLE");
+    expect(body.error.message).toContain("database");
+    expect(body.error.message).toContain("administrator");
+    expect(body.error.message).toContain("Request ID: request-test");
+    expect(JSON.stringify(body)).not.toContain("private-password");
+    expect(body.error.details["requestId"]).toBe("request-test");
+    const unknown = apiErrorResponseSchema.parse(
+      await errorResponse(new Error("secret"), "unknown-request").json(),
+    );
+    expect(unknown.error.message).toContain("try again");
+    expect(unknown.error.message).toContain("request ID");
+    expect(JSON.stringify(unknown)).not.toContain("secret");
+  } finally {
+    report.mockRestore();
+  }
+});
 
 describe("same-origin requests behind the standalone listener", () => {
   it("uses the HTTP host rather than the internal listening address", () => {
